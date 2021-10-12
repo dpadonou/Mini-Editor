@@ -1,52 +1,60 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package istic.aco.editor;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class EngineTest {
-
+public class EngineTest {
     private Engine engine;
 
-    @org.junit.jupiter.api.BeforeEach
+    public EngineTest() {
+    }
+
+    @BeforeEach
     void setUp() {
-        engine = new EngineImpl();
+        this.engine = new EngineImpl();
     }
 
     private void todo() {
-        fail("Unimplemented test");
+        Assertions.fail("Unimplemented test");
     }
+
     @Test
     @DisplayName("Buffer must be empty after initialisation")
     void getSelection() {
-        Selection selection = engine.getSelection();
-        assertEquals(selection.getBufferBeginIndex(),selection.getBeginIndex());
-        assertEquals("",engine.getBufferContents());
+        Selection selection = this.engine.getSelection();
+        Assertions.assertEquals(selection.getBufferBeginIndex(), selection.getBeginIndex());
+        Assertions.assertEquals("", this.engine.getBufferContents());
     }
 
     @Test
     void getBufferContents() {
-        todo();
+        this.todo();
     }
 
     @Test
     void getClipboardContents() {
-        todo();
+        this.todo();
     }
 
     @Test
     void cutSelectedText() {
-        todo();
+        this.todo();
     }
 
     @Test
     void copySelectedText() {
-        todo();
+        this.todo();
     }
 
     @Test
     void pasteClipboard() {
-        todo();
+        this.todo();
     }
 }
