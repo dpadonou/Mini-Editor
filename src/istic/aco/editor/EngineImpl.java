@@ -1,4 +1,4 @@
-package aco_v1;
+package istic.aco.editor;
 
 public class EngineImpl implements Engine {
 	private StringBuilder buffer;
