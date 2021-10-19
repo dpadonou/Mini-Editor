@@ -6,24 +6,29 @@ public class EngineImpl implements Engine {
 	private Selection selection;
 	
 	/**
-	 * Constructeur par defaut
+	 * default constructor
 	 */
 	public EngineImpl() {
 	}
     /**
-     * Constructeur initialisant les  paramètres
-     * @param buffer
-     * @param clipboard
+     * Constructor for initialize Engine's parameters
+     * @param buffer  the Engine buffer
+     * @param s the Engine selection
      */
 	public EngineImpl(StringBuilder buffer,Selection s) {
 		this.buffer = buffer;
 		this.selection=s;
 	}
-
+    /**
+     * Provides access to the buffer
+     * @return the buffer object
+     */
 	public StringBuilder getBuffer() {
 		return buffer;
 	}
-
+	/**
+     * set the buffer
+     */
 	public void setBuffer(StringBuilder buffer) {
 		this.buffer = buffer;
 	}
@@ -39,8 +44,8 @@ public class EngineImpl implements Engine {
         return this.selection;
     }
     /**
-     * recuperer le contenu de la selection
-     * @return
+     * Provides the content of the selection 
+     * @return the selection content
      */
     public String getSelectionContents() {
     	return this.buffer.substring(this.selection.getBeginIndex(), this.selection.getEndIndex()+1);
@@ -104,13 +109,18 @@ public class EngineImpl implements Engine {
     }
 
     /**
-     * Inserts a string in the buffer, which replaces the contents of the selection
+     * Inserts a string in the buffer,  which replaces the contents of the selection
      *
      * @param s the text to insert
      */
     @Override
     public void insert(String s) {
-    	this.buffer.replace(this.selection.getBeginIndex(), this.selection.getEndIndex(), s);
+    	if(!(s.isEmpty())){
+    		this.buffer.replace(this.selection.getBeginIndex(), this.selection.getEndIndex(), s);
+    	}else {
+    		  throw new NullPointerException("Le texte ne doit pas etre nul");
+    	}
+    	
     }
 
     /**
