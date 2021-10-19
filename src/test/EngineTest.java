@@ -3,8 +3,11 @@
 // (powered by FernFlower decompiler)
 //
 
-package istic.aco.editor;
+package test;
 
+import istic.aco.editor.Engine;
+import istic.aco.editor.EngineImpl;
+import istic.aco.editor.Selection;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
