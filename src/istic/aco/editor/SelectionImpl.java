@@ -1,11 +1,17 @@
 package istic.aco.editor;
 
 public class SelectionImpl implements Selection {
-	
-    private int beginIndex;
+	private int beginIndex;
     private int endIndex;
     private StringBuilder buffer;
      static int BUFFER_BEGIN_INDEX = 0;
+     
+    /**
+	 * 
+	 */
+	public SelectionImpl() {
+		super();
+	}
     
 	/**
 	 * set the buffer who will contains the selection
