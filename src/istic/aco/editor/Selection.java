@@ -1,20 +1,52 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package istic.aco.editor;
 
 public interface Selection {
+	  /**
+     * Provides the index of the first character designated
+     * by the selection.
+     *
+     * @return
+     */
     int getBeginIndex();
 
+    /**
+     * Provides the index of the first character
+     * after the last character designated
+     * by the selection.
+     *
+     * @return the end index
+     */
     int getEndIndex();
 
+    /**
+     * Provides the index of the first character in the buffer
+     *
+     * @return the buffer's begin index
+     */
     int getBufferBeginIndex();
 
+    /**
+     * Provides the index of the first "virtual" character
+     * after the end of the buffer
+     *
+     * @return the post end buffer index
+     */
     int getBufferEndIndex();
 
-    void setBeginIndex(int var1);
+    /**
+     * Changes the value of the begin index of the selection
+     *
+     * @param beginIndex, must be within the buffer index range
+     * @throws IndexOutOfBoundsException if the beginIndex is out of bounds
+     */
+    void setBeginIndex(int beginIndex);
 
-    void setEndIndex(int var1);
+    /**
+     * Changes the value of the end index of the selection
+     *
+     * @param endIndex, must be within the buffer index range
+     * @throws IndexOutOfBoundsException if the beginIndex is out of bounds
+     */
+    void setEndIndex(int endIndex);
+
 }
