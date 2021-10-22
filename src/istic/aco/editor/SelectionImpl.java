@@ -1,6 +1,7 @@
 package istic.aco.editor;
 
 public class SelectionImpl implements Selection {
+
 	private int beginIndex;
     private int endIndex;
     private StringBuilder buffer;
@@ -11,6 +12,18 @@ public class SelectionImpl implements Selection {
 	 */
 	public SelectionImpl() {
 		super();
+	}
+	
+	/**
+	 * @param beginIndex
+	 * @param endIndex
+	 * @param buffer
+	 */
+	public SelectionImpl(int beginIndex, int endIndex, StringBuilder buffer) {
+		super();
+		this.beginIndex = beginIndex;
+		this.endIndex = endIndex;
+		this.buffer = buffer;
 	}
     
 	/**
