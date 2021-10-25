@@ -82,14 +82,11 @@ public class SelectionImpl implements Selection {
 	@Override
 	public void setBeginIndex(int beginIndex) {
 		// TODO Auto-generated method stub
-		Integer i = Integer.valueOf(beginIndex);
 		if (beginIndex <= this.buffer.length()) {
             if (beginIndex < 0){
                 throw new IllegalArgumentException("L'index de début doit être supérieure ou égale à 0.");
             }else if(beginIndex > this.endIndex) {
                 throw new IllegalArgumentException("L'index de début doit être inférieure ou égale à l'index de fin.");
-            } else if(i != null){
-            	throw new NullPointerException("L'index de début ne doit pas être nul");	
             } else this.beginIndex = beginIndex;
         }else {
             throw new IndexOutOfBoundsException("L'index de début est hors du buffer.");
@@ -106,15 +103,11 @@ public class SelectionImpl implements Selection {
 	@Override
 	public void setEndIndex(int endIndex) {
 		// TODO Auto-generated method stub
-		Integer i = Integer.valueOf(endIndex);	
 		 if (endIndex <= this.buffer.length()) {
 	            if (endIndex <= 0){
 	                throw new IllegalArgumentException("L'index de fin doit être supérieure à 0.");
 	            }else if(endIndex < this.beginIndex) {
 	                throw new IllegalArgumentException("L'index de fin doit être supérieure ou égale à l'index de début.");
-	            } else if(i!= null) {
-					throw new NullPointerException("L'index de fin ne doit pas être nul");
-
 	            } else this.endIndex = endIndex;
 	        }else {
 	            throw new IndexOutOfBoundsException("L'index de fin est hors du buffer.");
