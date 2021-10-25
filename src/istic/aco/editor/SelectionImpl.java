@@ -20,10 +20,12 @@ public class SelectionImpl implements Selection {
 	 * @param buffer
 	 */
 	public SelectionImpl(int beginIndex, int endIndex, StringBuilder buffer) {
-		super();
-		this.beginIndex = beginIndex;
-		this.endIndex = endIndex;
-		this.buffer = buffer;
+		if(test(beginIndex,endIndex,buffer)) {
+			this.beginIndex = beginIndex;
+			this.endIndex = endIndex;
+			this.buffer = buffer;
+		}
+		
 	}
     
 	/**
@@ -81,16 +83,18 @@ public class SelectionImpl implements Selection {
 	public void setBeginIndex(int beginIndex) {
 		// TODO Auto-generated method stub
 		Integer i = Integer.valueOf(beginIndex);
-		if(beginIndex<=endIndex && beginIndex>=BUFFER_BEGIN_INDEX && beginIndex<this.getBufferEndIndex()) {
-			if(i != null) {
-				this.beginIndex=beginIndex;
-			}else {
-				throw new NullPointerException("L'index de début ne doit pas être nul");
-			}
-			
-		}else{
-			throw new IndexOutOfBoundsException();
-		}
+		if (beginIndex <= this.buffer.length()) {
+            if (beginIndex < 0){
+                throw new IllegalArgumentException("L'index de début doit être supérieure ou égale à 0.");
+            }else if(beginIndex > this.endIndex) {
+                throw new IllegalArgumentException("L'index de début doit être inférieure ou égale à l'index de fin.");
+            } else if(i != null){
+            	throw new NullPointerException("L'index de début ne doit pas être nul");	
+            } else this.beginIndex = beginIndex;
+        }else {
+            throw new IndexOutOfBoundsException("L'index de début est hors du buffer.");
+        }
+
 		
 		
 	}
@@ -102,17 +106,45 @@ public class SelectionImpl implements Selection {
 	@Override
 	public void setEndIndex(int endIndex) {
 		// TODO Auto-generated method stub
-		Integer i = Integer.valueOf(endIndex);
-		if(endIndex>= beginIndex && endIndex>=BUFFER_BEGIN_INDEX && endIndex<=this.getBufferEndIndex()) {
-			if(i!= null) {
-				this.endIndex= endIndex;
-			}else {
-				throw new NullPointerException("L'index de fin ne doit pas être nul");
-			}	
-		}else{
-			throw new IndexOutOfBoundsException();
-		}
-		
+		Integer i = Integer.valueOf(endIndex);	
+		 if (endIndex <= this.buffer.length()) {
+	            if (endIndex <= 0){
+	                throw new IllegalArgumentException("L'index de fin doit être supérieure à 0.");
+	            }else if(endIndex < this.beginIndex) {
+	                throw new IllegalArgumentException("L'index de fin doit être supérieure ou égale à l'index de début.");
+	            } else if(i!= null) {
+					throw new NullPointerException("L'index de fin ne doit pas être nul");
+
+	            } else this.endIndex = endIndex;
+	        }else {
+	            throw new IndexOutOfBoundsException("L'index de fin est hors du buffer.");
+	        }
+
 	}
+	   /**
+	    * 
+	    * @param begin
+	    * @param end
+	    * @param bf
+	    * @return true if all parameters are good
+	    */
+	  public boolean test(int begin, int end, StringBuilder bf){
+	        if (end <= bf.length()) {
+	            if (end <= 0){
+	                throw new IllegalArgumentException("L'index de fin doit être supérieure à 0.");
+	            }else if(end < begin) {
+	                throw new IllegalArgumentException("L'index de fin doit être supérieure ou égale à l'index de début.");
+	            } else if (begin < 0){
+	                throw new IllegalArgumentException("L'index de début doit être supérieure ou égale à 0.");
+	            }else {
+	                return true;
+	            }
+	        }else {
+	            throw new IndexOutOfBoundsException("L'index de fin est hors du buffer.");
+	        }
+	    }
+
+	
+	
 
 }
