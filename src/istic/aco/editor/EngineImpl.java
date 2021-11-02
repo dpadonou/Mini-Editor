@@ -11,11 +11,15 @@ public class EngineImpl implements Engine {
     private Selection selection;
 
     public EngineImpl() {
+        this.buffer = new StringBuilder("");
+        this.selection = new SelectionImpl();
     }
 
     public EngineImpl(StringBuilder buffer, Selection s) {
-        this.buffer = buffer;
-        this.selection = s;
+        if(test(buffer, s)){
+            this.buffer = buffer;
+            this.selection = s;
+        }
     }
 
     public StringBuilder getBuffer() {
@@ -63,5 +67,13 @@ public class EngineImpl implements Engine {
 
     public void delete() {
         this.buffer.delete(this.selection.getBeginIndex(), this.selection.getBeginIndex());
+    }
+
+    public boolean test(StringBuilder buffer, Selection selection){
+        if (buffer == null){
+            throw new NullPointerException("Le buffer ne peut être nul.");
+        }else if (selection == null){
+            throw new NullPointerException("La selection ne peut être nulle.");
+        }else return true;
     }
 }

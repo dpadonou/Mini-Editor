@@ -19,6 +19,10 @@ public class SelectionImpl implements Selection {
         }
     }
 
+    public SelectionImpl() {
+
+    }
+
     public int getBeginIndex() {
         return this.beginIndex;
     }

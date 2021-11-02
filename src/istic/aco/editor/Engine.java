@@ -21,4 +21,6 @@ public interface Engine {
     void insert(String var1);
 
     void delete();
+
+    StringBuilder getBuffer();
 }
