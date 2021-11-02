@@ -71,7 +71,7 @@ class SelectionImplTest {
     @Test
     @DisplayName("getBufferEndIndex should return the buffer's end index")
     void getBufferEndIndex() {
-        assert (67 == sp.getBufferEndIndex());
+        assert (68 == sp.getBufferEndIndex());
     }
 
     @Test
