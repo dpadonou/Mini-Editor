@@ -1,0 +1,4 @@
+# Created at 2021-11-03T00:57:27.115
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Workspace\TPs\IdeaProjects\ACO_Editor\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+
