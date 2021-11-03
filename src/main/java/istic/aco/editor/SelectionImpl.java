@@ -1,10 +1,11 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
 
-package istic.aco.editor;
-
+package main.java.istic.aco.editor;
+/**
+ * Selection Interface implementation, SelectionImpl
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donné Padonou
+ *
+ */
 public class SelectionImpl implements Selection {
     private int beginIndex;
     private int endIndex;
