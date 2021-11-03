@@ -1,22 +1,16 @@
-package test.java.editor;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+package istic.aco.editor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import main.java.istic.aco.editor.Engine;
-import main.java.istic.aco.editor.EngineImpl;
-import main.java.istic.aco.editor.Selection;
-import main.java.istic.aco.editor.SelectionImpl;
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * EngineImplTest for Engine test
- * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
  *
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donn Padonou
  */
 public class EngineImplTest {
 
@@ -100,12 +94,12 @@ public class EngineImplTest {
         engine2.insert(s);
         assertEquals(msg, engine2.getBufferContents());
     }
-    
+
     @Test
     @DisplayName("It shouldn't be possible to set empty string to insert.")
     void canSetEmptyStringToInsert() {
-    	 String s = "";
-         engine2.setSelection(new SelectionImpl(3, 19, stringBuilder)); 
+        String s = "";
+        engine2.setSelection(new SelectionImpl(3, 19, stringBuilder));
         assertThrows(IllegalArgumentException.class, () -> engine2.insert(s));
     }
 

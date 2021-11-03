@@ -1,11 +1,13 @@
 
-package main.java.istic.aco.editor;
+package istic.aco.editor;
+
 /**
  * Selection Interface implementation, SelectionImpl
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donn Padonou
  *
  */
+
 public class SelectionImpl implements Selection {
     private int beginIndex;
     private int endIndex;
@@ -47,21 +49,21 @@ public class SelectionImpl implements Selection {
     public void setBeginIndex(int beginIndex) {
         if (beginIndex <= this.buffer.length()) {
             if (beginIndex < 0){
-                throw new IllegalArgumentException("L'index de dÃ©but doit Ãªtre supÃ©rieure ou Ã©gale Ã  0.");
+                throw new IllegalArgumentException("L'index de début doit être supérieure ou égale à 0.");
             }else if(beginIndex > this.endIndex) {
-                throw new IllegalArgumentException("L'index de dÃ©but doit Ãªtre infÃ©rieure ou Ã©gale Ã  l'index de fin.");
+                throw new IllegalArgumentException("L'index de début doit être inférieure ou égale à l'index de fin.");
             } else this.beginIndex = beginIndex;
         }else {
-            throw new IndexOutOfBoundsException("L'index de dÃ©but est hors du buffer.");
+            throw new IndexOutOfBoundsException("L'index de début est hors du buffer.");
         }
     }
 
     public void setEndIndex(int endIndex) {
         if (endIndex <= this.buffer.length()) {
             if (endIndex < 0){
-                throw new IllegalArgumentException("L'index de fin doit Ãªtre supÃ©rieure ou Ã©gale Ã  0.");
+                throw new IllegalArgumentException("L'index de fin doit être supérieure ou égale à 0.");
             }else if(endIndex < this.beginIndex) {
-                throw new IllegalArgumentException("L'index de fin doit Ãªtre supÃ©rieure ou Ã©gale Ã  l'index de dÃ©but.");
+                throw new IllegalArgumentException("L'index de fin doit être supérieure ou égale à l'index de début.");
             } else this.endIndex = endIndex;
         }else {
             throw new IndexOutOfBoundsException("L'index de fin est hors du buffer.");
@@ -71,11 +73,11 @@ public class SelectionImpl implements Selection {
     public boolean test(int begin, int end, StringBuilder bf){
         if (end <= bf.length()) {
             if (end < 0){
-                throw new IllegalArgumentException("L'index de fin doit Ãªtre supÃ©rieure ou Ã©gale Ã  0.");
+                throw new IllegalArgumentException("L'index de fin doit être supérieure ou égale à 0.");
             }else if(end < begin) {
-                throw new IllegalArgumentException("L'index de fin doit Ãªtre supÃ©rieure ou Ã©gale Ã  l'index de dÃ©but.");
+                throw new IllegalArgumentException("L'index de fin doit être supérieure ou égale à l'index de début.");
             } else if (begin < 0){
-                throw new IllegalArgumentException("L'index de dÃ©but doit Ãªtre supÃ©rieure ou Ã©gale Ã  0.");
+                throw new IllegalArgumentException("L'index de début doit être supérieure ou égale à 0.");
             }else {
                 return true;
             }

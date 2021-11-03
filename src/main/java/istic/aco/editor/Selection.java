@@ -1,4 +1,4 @@
-package main.java.istic.aco.editor;
+package istic.aco.editor;
 /**
  * Selection Interface
  * @author Arnauld Djedjemel
@@ -44,7 +44,7 @@ public interface Selection {
      * @throws IndexOutOfBoundsException if the beginIndex is out of bounds
      * @throws IllegalArgumentException if the beginIndex is negative
      */
-    void setBeginIndex(int var1) throws IndexOutOfBoundsException,IllegalArgumentException;
+    void setBeginIndex(int beginIndex) throws IndexOutOfBoundsException,IllegalArgumentException;
    
     /**
      * Changes the value of the end index of the selection
@@ -53,7 +53,7 @@ public interface Selection {
      * @throws IndexOutOfBoundsException if the endIndex is out of bounds
      * @throws IllegalArgumentException if the endIndex is negative
      */
-    void setEndIndex(int var1) throws IndexOutOfBoundsException,IllegalArgumentException;
+    void setEndIndex(int endIndex) throws IndexOutOfBoundsException,IllegalArgumentException;
 
     /**
      * Provides the buffer who contains this selection
