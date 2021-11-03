@@ -1,13 +1,12 @@
-package test.java.editor;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package istic.aco.editor;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import main.java.istic.aco.editor.SelectionImpl;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * SelectionImplTest for Selection test
  * @author Arnauld Djedjemel
@@ -20,7 +19,7 @@ class SelectionImplTest {
     SelectionImpl sp;
 
     @BeforeEach
-    void initializer(){
+    void initializer() {
         testBf = new StringBuilder("Buffer créer pour faire des test sur les getters et getters setters.");
         sp = new SelectionImpl(2, 12, testBf);
     }
@@ -82,7 +81,7 @@ class SelectionImplTest {
     @Test
     @DisplayName("getBufferEndIndex should return the buffer's end index")
     void getBufferEndIndex() {
-        assert (68 == sp.getBufferEndIndex());
+        assert (67 == sp.getBufferEndIndex());
     }
 
     @Test
