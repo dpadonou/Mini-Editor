@@ -1,5 +1,5 @@
 
-package istic.aco.editor;
+package main.java.istic.aco.editor;
 /**
  * Engine Interface
  * @author Arnauld Djedjemel
@@ -42,7 +42,7 @@ public interface Engine {
     /**
      * Inserts a string in the buffer, which replaces the contents of the selection
      * @param s the text to insert
-     * @throws IllegalArgumentException if the string is empty
+     * @throws IllegalArgumentException if the string is null
      */
     void insert(String s) throws IllegalArgumentException;
     

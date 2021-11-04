@@ -1,5 +1,5 @@
 
-package istic.aco.editor;
+package main.java.istic.aco.editor;
 
 /**
  * Engine Interface Implementation, EngineImpl
@@ -80,7 +80,7 @@ public class EngineImpl implements Engine {
 
     @Override
     public void insert(String s) {
-        if (s.isEmpty()) {
+        if (s == null) {
             throw new IllegalArgumentException("Vous devez passer une varaible non vide");
         } else {
             this.buffer.replace(this.selection.getBeginIndex(), this.selection.getEndIndex(), s);

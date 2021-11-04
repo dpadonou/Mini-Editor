@@ -1,5 +1,5 @@
 
-package istic.aco.editor;
+package main.java.istic.aco.editor;
 
 /**
  * Selection Interface implementation, SelectionImpl

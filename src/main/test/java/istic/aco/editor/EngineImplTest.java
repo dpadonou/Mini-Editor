@@ -1,8 +1,13 @@
-package istic.aco.editor;
+package main.test.java.istic.aco.editor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import main.java.istic.aco.editor.Engine;
+import main.java.istic.aco.editor.EngineImpl;
+import main.java.istic.aco.editor.Selection;
+import main.java.istic.aco.editor.SelectionImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -97,10 +102,9 @@ public class EngineImplTest {
 
     @Test
     @DisplayName("It shouldn't be possible to set empty string to insert.")
-    void canSetEmptyStringToInsert() {
-        String s = "";
-        engine2.setSelection(new SelectionImpl(3, 19, stringBuilder));
-        assertThrows(IllegalArgumentException.class, () -> engine2.insert(s));
+    void canSetNullStringToInsert() {
+        //engine2.setSelection(new SelectionImpl(3, 19, stringBuilder));
+        assertThrows(IllegalArgumentException.class, () -> engine2.insert(null));
     }
 
     @Test
