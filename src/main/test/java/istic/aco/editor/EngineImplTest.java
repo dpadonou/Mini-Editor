@@ -27,7 +27,7 @@ public class EngineImplTest {
         this.engine = new EngineImpl();
         this.stringBuilder = new StringBuilder("Un buffer de string dans les tests.");
         this.selection = new SelectionImpl(3, 20, stringBuilder);
-        engine2 = new EngineImpl(stringBuilder, selection);
+        this.engine2 = new EngineImpl(stringBuilder, selection);
     }
 
     @Test

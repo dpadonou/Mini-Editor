@@ -1,36 +1,39 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
 
-import main.java.istic.aco.editor.Selection;
-import main.java.istic.aco.editor.Invoker.Invoker;
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Memento.selectionChangeMemento;
-import main.java.istic.aco.editor.Recorder.Record;
+import istic.aco.editor.Invoker.Invoker;
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Memento.SelectionChangeMemento;
+import istic.aco.editor.Recorder.Record;
+import istic.aco.editor.Selection;
+
 /**
  * Concrete Command, selectionChangeCommand
+ *
  * @author Arnauld Djedjemel
  * @author Dieu-Donné Padonou
- *
  */
-public class selectionChangeCommand implements Command{
-	
+public class SelectionChangeCommand implements Command {
+
 	private Selection selection;
-    private Invoker inv;
-    private Record recorder;
-    private int beginIndex;
-    private int endIndex;
+	private Invoker inv;
+	private Record recorder;
+	private int beginIndex;
+	private int endIndex;
+
 	/**
 	 * @param selection The receiver where are the functions
-	 * @param inv The invoker who call this concrete command
-	 * @param recorder for record this command
+	 * @param inv       The invoker who call this concrete command
+	 * @param recorder  for record this command
 	 */
-	public selectionChangeCommand(Selection selection, Invoker inv,Record recorder) {
-		if(test(selection,inv,recorder)) {
+	public SelectionChangeCommand(Selection selection, Invoker inv, Record recorder) {
+		if (test(selection, inv, recorder)) {
 			this.selection = selection;
 			this.inv = inv;
-			this.recorder= recorder;
+			this.recorder = recorder;
 		}
-		
+
 	}
+
 	/**
 	 * Get the end and the begin index through the invoker
 	 * set at the selection new begin and end index
@@ -46,9 +49,10 @@ public class selectionChangeCommand implements Command{
 	}
 	@Override
 	public Memento save() {
-		return new selectionChangeMemento(this.beginIndex,this.endIndex);
+		return new SelectionChangeMemento(this.beginIndex, this.endIndex);
 		
 	}
+
 	/**
 	 * Set in this object properties the memento values
 	 */
@@ -61,25 +65,24 @@ public class selectionChangeCommand implements Command{
 			 this.beginIndex = Integer.parseInt(t[0].toString());
 			 this.endIndex = Integer.parseInt(t[1].toString());
 		 }
-		
-		
 	}
-	
+
 	/**
 	 * Lift an error if the parameters are null and send true if not.
-	 * @param engine
+	 *
 	 * @param recorder
-	 * @param inv
-	 * @return
+	 * @param invoker
+	 * @param selection
+	 * @return boolean
 	 * @throws IllegalArgumentException if the method parameters are null
 	 */
-	 public boolean test(Selection selection,Invoker invoker,Record recorder) throws IllegalArgumentException {
-	       if( selection.equals(null) || recorder.equals(null) || invoker.equals(null)) {
-	    	   throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
-	       }else {
-	    	   return true;
-	       }
-	    
-	 }
-    
+	public boolean test(Selection selection, Invoker invoker, Record recorder) throws IllegalArgumentException {
+		if (selection.equals(null) || recorder.equals(null) || invoker.equals(null)) {
+			throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
+		} else {
+			return true;
+		}
+
+	}
+
 }

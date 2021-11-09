@@ -1,34 +1,34 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
 
-import main.java.istic.aco.editor.Engine;
-import main.java.istic.aco.editor.Invoker.Invoker;
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Memento.insertMemento;
-import main.java.istic.aco.editor.Recorder.Record;
+import istic.aco.editor.Engine;
+import istic.aco.editor.Invoker.Invoker;
+import istic.aco.editor.Memento.InsertMemento;
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Recorder.Record;
+
 /**
  * Concrete Command, insertCommand
- * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
  *
+ * @author Arnauld Djedjemel
+ * @author Dieu-DonnÃ© Padonou
  */
-public class insertCommand implements Command {
+public class InsertCommand implements Command {
 	private Engine engine;
-    private Invoker inv;
-    private Record recorder;
-    private String s;
-     /**
-	 * @param engine The Receiver where are the functions
-	 * @param inv The invoker who call this concrete command
+	private Invoker inv;
+	private Record recorder;
+	private String s;
+
+	/**
+	 * @param engine   The Receiver where are the functions
+	 * @param inv      The invoker who call this concrete command
 	 * @param recorder The recorder for record the command
-	 * @param memento The memento for store this command parameters
 	 */
-	public insertCommand(Engine engine, Invoker inv,Record recorder) {
-		if(test(engine,inv,recorder)) {
+	public InsertCommand(Engine engine, Invoker inv, Record recorder) {
+		if (test(engine, inv, recorder)) {
 			this.engine = engine;
 			this.inv = inv;
-			this.recorder= recorder;
+			this.recorder = recorder;
 		}
-		
 	}
       
 	/**
@@ -45,8 +45,7 @@ public class insertCommand implements Command {
 
 	@Override
 	public Memento save() {
-		return new insertMemento(this.s);
-		
+		return new InsertMemento(this.s);
 	}
 
 	@Override
@@ -57,20 +56,22 @@ public class insertCommand implements Command {
 			Object[] t = m.getParameter();
 			this.s = t[0].toString();
 		}
-       
-		
+
+
 	}
+
 	/**
 	 * Lift an error if the parameters are null and send true if not.
+	 *
 	 * @param engine
 	 * @param recorder
-	 * @param inv
+	 * @param invoker
 	 * @return
 	 * @throws IllegalArgumentException if the method parameters are null
 	 */
 	 public boolean test(Engine engine,Invoker invoker,Record recorder) throws IllegalArgumentException {
 	       if(engine.equals(null) || recorder.equals(null) || invoker.equals(null)) {
-	    	   throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
+	    	   throw new IllegalArgumentException("Vous devez passer des paramï¿½tres non nul");
 	       }else {
 	    	   return true;
 	       }

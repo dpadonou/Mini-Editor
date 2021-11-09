@@ -30,6 +30,10 @@ public class EngineImpl implements Engine {
         return this.buffer;
     }
 
+
+    /**
+     * @param buffer
+     */
     @Override
     public void setBuffer(StringBuilder buffer) {
         if (buffer != null)
@@ -81,11 +85,10 @@ public class EngineImpl implements Engine {
     @Override
     public void insert(String s) {
         if (s.isEmpty()) {
-            throw new IllegalArgumentException("Vous devez passer une varaible non vide");
+            throw new IllegalArgumentException("Vous devez passer une variable non vide");
         } else {
             this.buffer.replace(this.selection.getBeginIndex(), this.selection.getEndIndex(), s);
         }
-
     }
 
     @Override
