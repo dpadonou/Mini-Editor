@@ -20,7 +20,7 @@ public interface Command {
     /**
      * restore the old parameters
      * @param m the memento who contains parameters to restore
-     * @throws IllegalArgumentexception if the memento is null
+     * @throws NullPointerException if the memento is null
      */
-    public void restore(Memento m) throws IllegalArgumentException;
+    public void restore(Memento m) throws NullPointerException;
 }

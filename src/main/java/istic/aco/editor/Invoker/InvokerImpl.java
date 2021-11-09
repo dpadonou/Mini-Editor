@@ -32,8 +32,8 @@ public class InvokerImpl implements Invoker {
 	 */
      @Override
 	public void setS(String s) {
-    	 if(s.isEmpty()) {
-    		 throw new IllegalArgumentException("Vous devez passer une chaine non vide");
+    	 if(s==null) {
+    		 throw new NullPointerException("Vous devez passer une chaine non vide");
     	 }else {
     		 this.s = s;
     	 }
@@ -74,7 +74,7 @@ public class InvokerImpl implements Invoker {
 	 */
      @Override
 	public void setEndIndex(int endIndex) {
-    	 if(endIndex<0) {
+    	 if(endIndex<0 || endIndex<beginIndex) {
     		 throw new IllegalArgumentException("l'index ne doit pas etre negatif");
     	 }else {
     		 this.endIndex = endIndex;
@@ -84,22 +84,22 @@ public class InvokerImpl implements Invoker {
 
 	/**
  	 * @param c the cut text command
- 	 * @throws IllegalArgumentException if the parameter is null
+ 	 * @throws NullPointerException if the parameter is null
  	 */
-	public void setCutTextCommand(Command c) throws IllegalArgumentException{
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
+	public void setCutTextCommand(Command c) throws NullPointerException{
+		if(c==null) {
+			throw new NullPointerException("La commande passée doit etre non nul");
 		}else {
 			this.cutTextCommand = c;
 		}
 	}
 	 /**
  	 * @param c the copy text command
- 	 * @throws IllegalArgumentException if the parameter is null
+ 	 * @throws NullPointerException if the parameter is null
  	 */
-	public void setcopyTextCommand(Command c)  throws IllegalArgumentException{
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
+	public void setcopyTextCommand(Command c)  throws NullPointerException{
+		if(c==null) {
+			throw new NullPointerException("La commande passée doit etre non nul");
 		}else {
 			this.copyTextCommand = c;
 		}
@@ -107,11 +107,11 @@ public class InvokerImpl implements Invoker {
 	}
 	 /**
  	 * @param c the paste text command
- 	 * @throws IllegalArgumentException if the parameter is null
+ 	 * @throws NullPointerException if the parameter is null
  	 */
-	public void setPasteTextCommand(Command c)  throws IllegalArgumentException{
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
+	public void setPasteTextCommand(Command c)  throws NullPointerException{
+		if(c==null) {
+			throw new NullPointerException("La commande passée doit etre non nul");
 		}else {
 			this.pasteTextCommand = c;
 		}
@@ -119,11 +119,11 @@ public class InvokerImpl implements Invoker {
 	}
 	 /**
  	 * @param c the insert text command
- 	 * @throws IllegalArgumentException if the parameter is null
+ 	 * @throws NullPointerException if the parameter is null
  	 */
-	public void setinsertTextCommand(Command c) throws IllegalArgumentException {
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
+	public void setinsertTextCommand(Command c) throws NullPointerException {
+		if(c==null) {
+			throw new NullPointerException("La commande passée doit etre non nul");
 		}else {
 			this.insertTextCommand = c;
 		}
@@ -131,11 +131,11 @@ public class InvokerImpl implements Invoker {
 	}
 	 /**
  	 * @param c the selection change command
- 	 * @throws IllegalArgumentException if the parameter is null
+ 	 * @throws NullPointerException if the parameter is null
  	 */
-	public void setSelectionChangeCommand(Command c) throws IllegalArgumentException{
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
+	public void setSelectionChangeCommand(Command c) throws NullPointerException{
+		if(c==null) {
+			throw new NullPointerException("La commande passée doit etre non nul");
 		}else {
 			this.selectionChangeCommand = c;
 		}
@@ -144,11 +144,11 @@ public class InvokerImpl implements Invoker {
 	
 	 /**
  	 * @param c the selection change command
- 	 * @throws IllegalArgumentException if the parameter is null
+ 	 * @throws NullPointerException if the parameter is null
  	 */
-	public void setReplayCommand(Command c) throws IllegalArgumentException {
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
+	public void setReplayCommand(Command c) throws NullPointerException {
+		if(c==null) {
+			throw new NullPointerException("La commande passée doit etre non nul");
 		}else {
 			this.replay = c;
 		}

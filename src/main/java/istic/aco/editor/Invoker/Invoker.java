@@ -15,9 +15,9 @@ public interface Invoker  {
 	/**
 	 * Set the text to insert
 	 * @param s the text to insert
-	 * @throws IllegalArgumentException if the parameter is null
+	 * @throws NullPointerException if the parameter is null
 	 */
-	public void setS(String s) throws IllegalArgumentException;
+	public void setS(String s) throws NullPointerException;
 	/**
 	 * Get the beginIndex for the new Selection
 	 * @return beginIndex for the new Selection
@@ -37,7 +37,7 @@ public interface Invoker  {
 	/**
 	 * Set the endIndex for the new Selection
 	 * @param endIndex for the new Selection
-	 * @throws IllegalArgumentException if the parameter is negative
+	 * @throws IllegalArgumentException if the parameter is negative or endIndex<=beginIndex
 	 */
 	public void setEndIndex(int endIndex) throws IllegalArgumentException;
 	/**

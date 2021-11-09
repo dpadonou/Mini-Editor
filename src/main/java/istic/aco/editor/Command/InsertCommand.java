@@ -3,18 +3,18 @@ package main.java.istic.aco.editor.Command;
 import main.java.istic.aco.editor.Engine;
 import main.java.istic.aco.editor.Invoker.Invoker;
 import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Memento.insertMemento;
-import main.java.istic.aco.editor.Recorder.Record;
+import main.java.istic.aco.editor.Memento.InsertMemento;
+import main.java.istic.aco.editor.Recorder.Recorder;
 /**
  * Concrete Command, insertCommand
  * @author Arnauld Djedjemel
  * @author Dieu-Donné Padonou
  *
  */
-public class insertCommand implements Command {
+public class InsertCommand implements Command {
 	private Engine engine;
     private Invoker inv;
-    private Record recorder;
+    private Recorder recorder;
     private String s;
      /**
 	 * @param engine The Receiver where are the functions
@@ -22,7 +22,7 @@ public class insertCommand implements Command {
 	 * @param recorder The recorder for record the command
 	 * @param memento The memento for store this command parameters
 	 */
-	public insertCommand(Engine engine, Invoker inv,Record recorder) {
+	public InsertCommand(Engine engine, Invoker inv,Recorder recorder) {
 		if(test(engine,inv,recorder)) {
 			this.engine = engine;
 			this.inv = inv;
@@ -45,14 +45,14 @@ public class insertCommand implements Command {
 
 	@Override
 	public Memento save() {
-		return new insertMemento(this.s);
+		return new InsertMemento(this.s);
 		
 	}
 
 	@Override
 	public void restore(Memento m) { 
-		if(m.equals(null)) {
-			throw new IllegalArgumentException("vous devez passer un objet memento non nul");
+		if(m == null) {
+			throw new NullPointerException("vous devez passer un objet memento non nul");
 		}else {
 			Object[] t = m.getParameter();
 			this.s = t[0].toString();
@@ -66,11 +66,11 @@ public class insertCommand implements Command {
 	 * @param recorder
 	 * @param inv
 	 * @return
-	 * @throws IllegalArgumentException if the method parameters are null
+	 * @throws NullPointerException if the method parameters are null
 	 */
-	 public boolean test(Engine engine,Invoker invoker,Record recorder) throws IllegalArgumentException {
-	       if(engine.equals(null) || recorder.equals(null) || invoker.equals(null)) {
-	    	   throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
+	 public boolean test(Engine engine,Invoker invoker,Recorder recorder) throws NullPointerException {
+	       if(engine == null || recorder==null || invoker==null) {
+	    	   throw new NullPointerException("Vous devez passer des paramètres non nul");
 	       }else {
 	    	   return true;
 	       }

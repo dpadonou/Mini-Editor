@@ -6,14 +6,14 @@ package main.java.istic.aco.editor.Memento;
  * @author Dieu-Donné Padonou
  *
  */
-public class insertMemento implements Memento {
+public class InsertMemento implements Memento {
      private String s;
      
 
 	/**
 	 * @param s the command parameter
 	 */
-	public insertMemento(String s){
+	public InsertMemento(String s){
 		if(test(s)) {
 			this.s = s;
 		}
@@ -34,11 +34,11 @@ public class insertMemento implements Memento {
 	 * Test if the parameter is good
 	 * @param s
 	 * @return
-	 * @throws IllegalArgumentException if the parameter is empty
+	 * @throws NullPointerException if the parameter is null
 	 */
-	 public boolean test(String s) throws IllegalArgumentException {
-	        if (s.isEmpty()) {
-	        	throw new IllegalArgumentException("Vous devez passé une chaine de caractère non vide");
+	 public boolean test(String s) throws NullPointerException {
+	        if (s==null) {
+	        	throw new NullPointerException("Vous devez passé une chaine de caractère ");
 	        } else return true;
 	    
 	 }
