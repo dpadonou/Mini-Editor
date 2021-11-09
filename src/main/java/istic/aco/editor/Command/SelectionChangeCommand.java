@@ -3,19 +3,19 @@ package main.java.istic.aco.editor.Command;
 import main.java.istic.aco.editor.Selection;
 import main.java.istic.aco.editor.Invoker.Invoker;
 import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Memento.selectionChangeMemento;
-import main.java.istic.aco.editor.Recorder.Record;
+import main.java.istic.aco.editor.Memento.SelectionChangeMemento;
+import main.java.istic.aco.editor.Recorder.Recorder;
 /**
  * Concrete Command, selectionChangeCommand
  * @author Arnauld Djedjemel
  * @author Dieu-Donné Padonou
  *
  */
-public class selectionChangeCommand implements Command{
+public class SelectionChangeCommand implements Command{
 	
 	private Selection selection;
     private Invoker inv;
-    private Record recorder;
+    private Recorder recorder;
     private int beginIndex;
     private int endIndex;
 	/**
@@ -23,7 +23,7 @@ public class selectionChangeCommand implements Command{
 	 * @param inv The invoker who call this concrete command
 	 * @param recorder for record this command
 	 */
-	public selectionChangeCommand(Selection selection, Invoker inv,Record recorder) {
+	public SelectionChangeCommand(Selection selection, Invoker inv,Recorder recorder) {
 		if(test(selection,inv,recorder)) {
 			this.selection = selection;
 			this.inv = inv;
@@ -46,7 +46,7 @@ public class selectionChangeCommand implements Command{
 	}
 	@Override
 	public Memento save() {
-		return new selectionChangeMemento(this.beginIndex,this.endIndex);
+		return new SelectionChangeMemento(this.beginIndex,this.endIndex);
 		
 	}
 	/**
@@ -54,8 +54,8 @@ public class selectionChangeCommand implements Command{
 	 */
 	@Override
 	public void restore(Memento m) {
-		 if(m.equals(null)) {
-			 throw new IllegalArgumentException("Vous devez mpasser en paramètre un memento non null");
+		 if(m==null) {
+			 throw new NullPointerException("Vous devez mpasser en paramètre un memento non null");
 		 }else {
 			 Object[] t = m.getParameter();
 			 this.beginIndex = Integer.parseInt(t[0].toString());
@@ -71,10 +71,10 @@ public class selectionChangeCommand implements Command{
 	 * @param recorder
 	 * @param inv
 	 * @return
-	 * @throws IllegalArgumentException if the method parameters are null
+	 * @throws NullPointerException if the method parameters are null
 	 */
-	 public boolean test(Selection selection,Invoker invoker,Record recorder) throws IllegalArgumentException {
-	       if( selection.equals(null) || recorder.equals(null) || invoker.equals(null)) {
+	 public boolean test(Selection selection,Invoker invoker,Recorder recorder) throws NullPointerException {
+	       if( selection==null || recorder==null || invoker==null) {
 	    	   throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
 	       }else {
 	    	   return true;
