@@ -178,7 +178,7 @@ public class InvokerImpl implements Invoker {
      * the user action to copy text
      */
 	@Override
-	public void copytext() {
+	public void copyText() {
 		this.copyTextCommand.execute();
 		
 	}

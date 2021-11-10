@@ -1,5 +1,6 @@
 package main.java.istic.aco.editor.Recorder;
 
+import java.util.ArrayDeque;
 /**
  * Recorder interface implementation, RecorderImpl
  * @author Arnauld Djedjemel
@@ -7,13 +8,14 @@ package main.java.istic.aco.editor.Recorder;
  *
  */
 import java.util.ArrayList;
+import java.util.Deque;
 
 import main.java.istic.aco.editor.Command.Command;
 import main.java.istic.aco.editor.Memento.Memento;
 
 public class RecorderImpl implements Recorder {
-    private ArrayList<Command> com = new ArrayList<Command>();
-    private Memento memento;
+	private Deque<CommandFormat> commands = new ArrayDeque<CommandFormat>();
+	private boolean power = false;
     
     /**
      * Save one command in the receiver
@@ -21,13 +23,14 @@ public class RecorderImpl implements Recorder {
      */
 	@Override
 	public void save(Command c) {
-		if(c==null) {
-			throw new NullPointerException("La commande passée doit etre non nul");
-		}else {
-			com.add(c);
-			this.memento=c.save();
+		if(power) {
+			if(c==null) {
+				throw new NullPointerException("La commande passée doit etre non nul");
+			}else {
+				commands.addFirst(new CommandFormat(c,c.save()));
+			}
 		}
-		
+
 	}
     
 	/**
@@ -35,7 +38,7 @@ public class RecorderImpl implements Recorder {
 	 */
 	@Override
 	public void start() {
-		
+		power = true;
 	}
     
 	/**
@@ -43,15 +46,18 @@ public class RecorderImpl implements Recorder {
 	 */
 	@Override
 	public void stop() {
+		power = false;
 	}
     /**
      * First Restore the state of the command 
-     * Replay the last command save in the recorder
+     * Replay the command save in the recorder
      */
 	@Override
 	public void replay() {
-		this.com.get(this.com.size()-1).restore(this.memento);
-		this.com.get(this.com.size()-1).execute();
+		for(CommandFormat c : commands) {
+			c.getCommand().restore(c.getMemento());
+			c.getCommand().execute();
+		}
 		
 	}
      
