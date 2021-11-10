@@ -51,7 +51,7 @@ public interface Invoker  {
     /**
      * User action for copy the selection content's
      */
-    public void copytext();
+    public void copyText();
     /**
      * User action for paste the clipboard content's instead of the selection content's
      */
