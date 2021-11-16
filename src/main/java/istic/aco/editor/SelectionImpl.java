@@ -25,27 +25,27 @@ public class SelectionImpl implements Selection {
     public SelectionImpl() {
 
     }
-
+   @Override
     public StringBuilder getBuffer() {
         return buffer;
     }
-
+   @Override
     public int getBeginIndex() {
         return this.beginIndex;
     }
-
+   @Override
     public int getEndIndex() {
         return this.endIndex;
     }
-
+   @Override
     public int getBufferBeginIndex() {
         return BUFFER_BEGIN_INDEX;
     }
-
+   @Override
     public int getBufferEndIndex() {
         return this.buffer.length() - 1;
     }
-
+   @Override
     public void setBeginIndex(int beginIndex) {
         if (beginIndex <= this.buffer.length()) {
             if (beginIndex < 0){
@@ -57,7 +57,7 @@ public class SelectionImpl implements Selection {
             throw new IndexOutOfBoundsException("L'index de début est hors du buffer.");
         }
     }
-
+   @Override
     public void setEndIndex(int endIndex) {
         if (endIndex <= this.buffer.length()) {
             if (endIndex < 0){

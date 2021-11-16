@@ -1,45 +1,46 @@
-package istic.aco.editor.Memento;
+package main.java.istic.aco.editor.Memento;
 
 /**
  * Concrete Memento insertMemento
- *
  * @author Arnauld Djedjemel
- * @author Dieu-DonnÃ© Padonou
+ * @author Dieu-Donné Padonou
+ *
  */
 public class InsertMemento implements Memento {
-    private String s;
+     private String s;
+     
 
+	/**
+	 * @param s the command parameter
+	 */
+	public InsertMemento(String s){
+		if(test(s)) {
+			this.s = s;
+		}
+		
+	}
 
-    /**
-     * @param s the command parameter
-     */
-    public InsertMemento(String s) {
-        if (test(s)) {
-            this.s = s;
-        }
-    }
-
-    /**
-     * @return the parameter
-     */
-    @Override
-    public Object[] getParameter() {
-        Object[] t = new Object[1];
-        t[0] = this.s;
-        return t;
-    }
-
-    /**
-     * Test if the parameter is good
-     *
-     * @param s
-     * @return
-     * @throws IllegalArgumentException if the parameter is empty
-     */
-    public boolean test(String s) throws IllegalArgumentException {
-        if (s.isEmpty()) {
-            throw new IllegalArgumentException("Vous devez passer une chaine de caractÃ¨re non vide.");
-        } else return true;
-    }
-
+	/**
+	 * @return the parameter
+	 */
+	@Override
+	public Object[] getParameter() {
+		Object[] t = new Object[1];
+		t[0] = this.s;
+		return t ;
+	}
+	
+	/**
+	 * Test if the parameter is good
+	 * @param s
+	 * @return
+	 * @throws NullPointerException if the parameter is null
+	 */
+	 public boolean test(String s) throws NullPointerException {
+	        if (s==null) {
+	        	throw new NullPointerException("Vous devez passé une chaine de caractère ");
+	        } else return true;
+	    
+	 }
+     
 }

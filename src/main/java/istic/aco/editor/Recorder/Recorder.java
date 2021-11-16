@@ -1,60 +1,30 @@
-package istic.aco.editor.Recorder;
+package main.java.istic.aco.editor.Recorder;
 
-import istic.aco.editor.Command.Command;
-import istic.aco.editor.Memento.Memento;
-
-import java.util.ArrayList;
-
+import main.java.istic.aco.editor.Command.Command;
 /**
- * Record interface implementation, Recorder
- *
+ * Recorder interface 
  * @author Arnauld Djedjemel
  * @author Dieu-Donné Padonou
+ *
  */
-
-public class Recorder implements Record {
-
-    private final ArrayList<Command> commands = new ArrayList<Command>();
-    private Memento memento;
-
-    /**
-     * Save one command in the receiver
-     *
-     * @param c the command who wants to save in the recorder
-     */
-    @Override
-    public void save(Command c) {
-        if (c == null) {
-            throw new NullPointerException("La commande passée doit etre non nulle.");
-        } else {
-            commands.add(c);
-            this.memento = c.save();
-        }
-    }
-
+public interface Recorder {
+	/**
+	 * Save one command
+	 * @param c the command who wants to save
+	 * @throws NullPointerException if the command is null
+	 */
+    public void save(Command c) throws NullPointerException;
     /**
      * Start the recorder
      */
-    @Override
-    public void start() {
-
-    }
-
+    public void start();
     /**
-     * Stop the recorder
+     * Turn off the recorder
      */
-    @Override
-    public void stop() {
-    }
-
-    /**
-     * First Restore the state of the command
-     * Replay the last command save in the recorder
-     */
-    @Override
-    public void replay() {
-        this.commands.get(this.commands.size() - 1).restore(this.memento);
-        this.commands.get(this.commands.size() - 1).execute();
-    }
-
+    public void stop();
+     /**
+      * Replay the last command who had been save in the recorder
+      */
+    public void replay();
+    
 }
