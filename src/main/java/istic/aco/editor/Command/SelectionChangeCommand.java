@@ -31,7 +31,6 @@ public class SelectionChangeCommand implements Command {
 			this.inv = inv;
 			this.recorder = recorder;
 		}
-
 	}
 
 	/**
@@ -50,7 +49,6 @@ public class SelectionChangeCommand implements Command {
 	@Override
 	public Memento save() {
 		return new SelectionChangeMemento(this.beginIndex, this.endIndex);
-		
 	}
 
 	/**
@@ -82,7 +80,6 @@ public class SelectionChangeCommand implements Command {
 		} else {
 			return true;
 		}
-
 	}
 
 }

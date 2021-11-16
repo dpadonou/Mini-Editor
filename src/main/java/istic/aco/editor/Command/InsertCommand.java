@@ -56,8 +56,6 @@ public class InsertCommand implements Command {
 			Object[] t = m.getParameter();
 			this.s = t[0].toString();
 		}
-
-
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package istic.aco.editor.Invoker;
 
-import istic.aco.editor.Command.Command;
+import istic.aco.editor.Command.*;
 
 /**
  * Invoker interface implementation, InvokerImpl
@@ -9,16 +9,17 @@ import istic.aco.editor.Command.Command;
  * @author Dieu-Donné Padonou
  */
 public class InvokerImpl implements Invoker {
+
     private String s;
     private int beginIndex;
     private int endIndex;
+
     private Command cutTextCommand;
     private Command copyTextCommand;
     private Command pasteTextCommand;
     private Command insertTextCommand;
     private Command selectionChangeCommand;
     private Command replay;
-
 
     /**
      * @return s the text to insert
@@ -34,7 +35,7 @@ public class InvokerImpl implements Invoker {
     @Override
     public void setS(String s) {
         if (s.isEmpty()) {
-            throw new IllegalArgumentException("Vous devez passer une chaine non vide");
+            throw new IllegalArgumentException("Vous devez passer une chaine non vide.");
         } else {
             this.s = s;
         }
@@ -54,7 +55,7 @@ public class InvokerImpl implements Invoker {
     @Override
     public void setBeginIndex(int beginIndex) {
         if (beginIndex < 0) {
-            throw new IllegalArgumentException("l'index ne doit pas etre negatif");
+            throw new IllegalArgumentException("l'index ne doit pas etre negatif.");
         } else {
             this.beginIndex = beginIndex;
         }
@@ -74,7 +75,7 @@ public class InvokerImpl implements Invoker {
     @Override
     public void setEndIndex(int endIndex) {
         if (endIndex < 0) {
-            throw new IllegalArgumentException("l'index ne doit pas etre negatif");
+            throw new IllegalArgumentException("l'index ne doit pas etre negatif.");
         } else {
             this.endIndex = endIndex;
         }
@@ -86,7 +87,7 @@ public class InvokerImpl implements Invoker {
      */
     public void setCutTextCommand(Command c) throws IllegalArgumentException {
         if (c == null) {
-            throw new IllegalArgumentException("La commande passée doit etre non nul");
+            throw new IllegalArgumentException("La commande passée doit etre non nulle.");
         } else {
             this.cutTextCommand = c;
         }
@@ -96,9 +97,9 @@ public class InvokerImpl implements Invoker {
      * @param c the copy text command
      * @throws IllegalArgumentException if the parameter is null
      */
-    public void setcopyTextCommand(Command c) throws IllegalArgumentException {
+    public void setCopyTextCommand(CopyCommand c) throws IllegalArgumentException {
         if (c == null) {
-            throw new IllegalArgumentException("La commande passée doit etre non nul");
+            throw new IllegalArgumentException("La commande passée doit etre non nulle.");
         } else {
             this.copyTextCommand = c;
         }
@@ -108,9 +109,9 @@ public class InvokerImpl implements Invoker {
      * @param c the paste text command
      * @throws IllegalArgumentException if the parameter is null
      */
-    public void setPasteTextCommand(Command c) throws IllegalArgumentException {
+    public void setPasteTextCommand(PasteCommand c) throws IllegalArgumentException {
         if (c == null) {
-            throw new IllegalArgumentException("La commande passée doit etre non nul");
+            throw new IllegalArgumentException("La commande passée doit etre non nulle.");
         } else {
             this.pasteTextCommand = c;
         }
@@ -120,9 +121,9 @@ public class InvokerImpl implements Invoker {
      * @param c the insert text command
      * @throws IllegalArgumentException if the parameter is null
      */
-    public void setinsertTextCommand(Command c) throws IllegalArgumentException {
+    public void setInsertTextCommand(InsertCommand c) throws IllegalArgumentException {
         if (c == null) {
-            throw new IllegalArgumentException("La commande passée doit etre non nul");
+            throw new IllegalArgumentException("La commande passée doit etre non nulle.");
         } else {
             this.insertTextCommand = c;
         }
@@ -132,9 +133,9 @@ public class InvokerImpl implements Invoker {
      * @param c the selection change command
      * @throws IllegalArgumentException if the parameter is null
      */
-    public void setSelectionChangeCommand(Command c) throws IllegalArgumentException {
+    public void setSelectionChangeCommand(SelectionChangeCommand c) throws IllegalArgumentException {
         if (c == null) {
-            throw new IllegalArgumentException("La commande passée doit etre non nul");
+            throw new IllegalArgumentException("La commande passée doit etre non nulle.");
         } else {
             this.selectionChangeCommand = c;
         }
@@ -144,9 +145,9 @@ public class InvokerImpl implements Invoker {
      * @param c the selection change command
      * @throws IllegalArgumentException if the parameter is null
      */
-    public void setReplayCommand(Command c) throws IllegalArgumentException {
+    public void setReplayCommand(Replay c) throws IllegalArgumentException {
         if (c == null) {
-            throw new IllegalArgumentException("La commande passée doit etre non nul");
+            throw new IllegalArgumentException("La commande passée doit etre non nulle.");
         } else {
             this.replay = c;
         }
