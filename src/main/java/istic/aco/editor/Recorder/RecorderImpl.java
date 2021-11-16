@@ -7,11 +7,10 @@ import java.util.ArrayDeque;
  * @author Dieu-Donné Padonou
  *
  */
-import java.util.ArrayList;
+
 import java.util.Deque;
 
 import main.java.istic.aco.editor.Command.Command;
-import main.java.istic.aco.editor.Memento.Memento;
 
 public class RecorderImpl implements Recorder {
 	private Deque<CommandFormat> commands = new ArrayDeque<CommandFormat>();

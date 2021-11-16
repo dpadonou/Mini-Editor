@@ -1,4 +1,5 @@
 package main.java.istic.aco.editor.Command;
+import java.util.Optional;
 
 import main.java.istic.aco.editor.Memento.Memento;
 import main.java.istic.aco.editor.Recorder.Recorder;
@@ -29,17 +30,6 @@ public class Replay implements Command{
 		this.recorder.replay();
 		
 	}
-
-	@Override
-	public Memento save() {
-		return null;
-	}
-
-	@Override
-	public void restore(Memento m) {
-		
-	}
-	
 	/**
 	 * Lift an error if the parameters are null and send true if not.
 	 * @param recorder
@@ -54,5 +44,15 @@ public class Replay implements Command{
 	       }
 	    
 	 }
+	@Override
+	public Optional<Memento> save() {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+	@Override
+	public void restore(Memento m) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

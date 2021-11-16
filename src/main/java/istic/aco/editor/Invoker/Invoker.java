@@ -1,5 +1,7 @@
 package main.java.istic.aco.editor.Invoker;
 
+import main.java.istic.aco.editor.Command.Command;
+
 /**
  * Invoker interface
  * @author Arnauld Djedjemel
@@ -22,6 +24,14 @@ public interface Invoker  {
 	 * Get the beginIndex for the new Selection
 	 * @return beginIndex for the new Selection
 	 */
+	
+	 /**
+	  * Put the commands in the map
+	  * @param command
+	  * @throws IllegalArgumentException if the command is null or s is empty
+	  */
+	public void setCommand(String s,Command command) throws IllegalArgumentException;
+	
 	public int getBeginIndex();
 	/**
 	 * Set the beginIndex for the new Selection
