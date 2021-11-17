@@ -1,17 +1,18 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
+
+import istic.aco.editor.Engine;
+import istic.aco.editor.Invoker.Invoker;
+import istic.aco.editor.Memento.InsertMemento;
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Recorder.Recorder;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Engine;
-import main.java.istic.aco.editor.Invoker.Invoker;
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Memento.InsertMemento;
-import main.java.istic.aco.editor.Recorder.Recorder;
 /**
  * Concrete Command, insertCommand
+ *
  * @author Arnauld Djedjemel
  * @author Dieu-Donné Padonou
- *
  */
 public class InsertCommand implements Command {
 	private Engine engine;
@@ -22,7 +23,6 @@ public class InsertCommand implements Command {
 	 * @param engine The Receiver where are the functions
 	 * @param inv The invoker who call this concrete command
 	 * @param recorder The recorder for record the command
-	 * @param memento The memento for store this command parameters
 	 */
 	public InsertCommand(Engine engine, Invoker inv,Recorder recorder) {
 		if(test(engine,inv,recorder)) {
@@ -62,11 +62,13 @@ public class InsertCommand implements Command {
        
 		
 	}
+
 	/**
 	 * Lift an error if the parameters are null and send true if not.
+	 *
 	 * @param engine
 	 * @param recorder
-	 * @param inv
+	 * @param invoker
 	 * @return
 	 * @throws NullPointerException if the method parameters are null
 	 */

@@ -1,23 +1,25 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
+
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Recorder.Recorder;
+
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Recorder.Recorder;
 /**
  * Concrete Command, Replay
+ *
  * @author Arnauld Djedjemel
  * @author Dieu-Donné Padonou
- *
  */
-public class Replay implements Command{
-    private Recorder recorder;
-    
+public class Replay implements Command {
+	private Recorder recorder;
+
 	/**
 	 * @param recorder The recorder who contains the command for replaying
 	 */
 	public Replay(Recorder recorder) {
 		super();
-		if(test(recorder)) {
+		if (test(recorder)) {
 			this.recorder = recorder;
 		}
 		

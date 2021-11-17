@@ -1,27 +1,27 @@
-package main.java.istic.aco.editor.Invoker;
+package istic.aco.editor.Invoker;
+
+import istic.aco.editor.Command.Command;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import main.java.istic.aco.editor.Command.Command;
- /**
+/**
  * Invoker interface implementation, InvokerImpl
+ *
  * @author Arnauld Djedjemel
  * @author Dieu-Donné Padonou
- *
  */
 public class InvokerImpl implements Invoker {
-     private String s;
-     private int beginIndex;
-     private int endIndex;
-     private Map<String,Command> commands;
-     
-     
+	private String s;
+	private int beginIndex;
+	private final Map<String, Command> commands;
+	private int endIndex;
+
 	/**
-	 * 
+	 *
 	 */
 	public InvokerImpl() {
-		commands = new HashMap<String,Command>();
+		commands = new HashMap<String, Command>();
 	}
 
 	/**
@@ -63,7 +63,6 @@ public class InvokerImpl implements Invoker {
     	 }else {
     		 this.beginIndex = beginIndex;
     	 }
-		
 	}
 
 	/**
@@ -84,7 +83,6 @@ public class InvokerImpl implements Invoker {
     	 }else {
     		 this.endIndex = endIndex;
     	 }
-    	 
 	}
 
     /**
@@ -95,8 +93,6 @@ public class InvokerImpl implements Invoker {
 		if(commands.get("selection") !=null) {
 			commands.get("selection").execute();
 		}
-		
-		
 	}
     
 	 /**
@@ -107,7 +103,6 @@ public class InvokerImpl implements Invoker {
 		if(commands.get("cut") !=null) {
 			commands.get("cut").execute();
 		}
-
 	}
     
 	 /**
@@ -147,7 +142,6 @@ public class InvokerImpl implements Invoker {
 		if(commands.get("replay") !=null) {
 			commands.get("replay").execute();
 		}
-		
 	}
 
 	@Override
@@ -157,8 +151,6 @@ public class InvokerImpl implements Invoker {
 		}else {
 			commands.put(s, command);
 		}
-		
-		
 	}
         
 }

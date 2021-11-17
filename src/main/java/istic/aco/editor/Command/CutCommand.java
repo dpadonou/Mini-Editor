@@ -1,15 +1,16 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
+
+import istic.aco.editor.Engine;
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Recorder.Recorder;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Engine;
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Recorder.Recorder;
 /**
  * Concrete Command, cutCommand
+ *
  * @author Arnauld Djedjemel
  * @author Dieu-Donné Padonou
- *
  */
 public class CutCommand implements Command {
 	private Engine engine;
@@ -54,7 +55,7 @@ public class CutCommand implements Command {
 	 }
 
 	@Override
-	public Optional<Memento>  save() {
+	public Optional<Memento> save() {
 		return Optional.empty();
 	}
 

@@ -2,6 +2,8 @@ package istic.aco.editor.Command;
 
 import istic.aco.editor.Memento.Memento;
 
+import java.util.Optional;
+
 /**
  * Command Interface
  *
@@ -19,7 +21,7 @@ public interface Command {
      *
      * @return the Memento who have the parameters
      */
-    Memento save();
+    Optional<Memento> save();
 
     /**
      * restore the old parameters

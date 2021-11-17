@@ -1,25 +1,27 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
+
+import istic.aco.editor.Invoker.Invoker;
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Memento.SelectionChangeMemento;
+import istic.aco.editor.Recorder.Recorder;
+import istic.aco.editor.Selection;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Selection;
-import main.java.istic.aco.editor.Invoker.Invoker;
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Memento.SelectionChangeMemento;
-import main.java.istic.aco.editor.Recorder.Recorder;
 /**
  * Concrete Command, selectionChangeCommand
+ *
  * @author Arnauld Djedjemel
  * @author Dieu-Donné Padonou
- *
  */
-public class SelectionChangeCommand implements Command{
-	
+public class SelectionChangeCommand implements Command {
+
 	private Selection selection;
-    private Invoker inv;
-    private Recorder recorder;
-    private int beginIndex;
-    private int endIndex;
+	private Invoker inv;
+	private Recorder recorder;
+	private int beginIndex;
+	private int endIndex;
+
 	/**
 	 * @param selection The receiver where are the functions
 	 * @param inv The invoker who call this concrete command
@@ -33,6 +35,7 @@ public class SelectionChangeCommand implements Command{
 		}
 		
 	}
+
 	/**
 	 * Get the end and the begin index through the invoker
 	 * set at the selection new begin and end index
@@ -46,11 +49,13 @@ public class SelectionChangeCommand implements Command{
 		selection.setEndIndex(this.endIndex);
 		recorder.save(this);
 	}
+
 	@Override
 	public Optional<Memento> save() {
 		return Optional.of(new SelectionChangeMemento(this.beginIndex,this.endIndex));
 		
 	}
+
 	/**
 	 * Set in this object properties the memento values
 	 */
@@ -63,25 +68,23 @@ public class SelectionChangeCommand implements Command{
 			 this.beginIndex = Integer.parseInt(t[0].toString());
 			 this.endIndex = Integer.parseInt(t[1].toString());
 		 }
-		
-		
 	}
-	
+
 	/**
 	 * Lift an error if the parameters are null and send true if not.
-	 * @param engine
+	 *
+	 * @param selection
 	 * @param recorder
-	 * @param inv
+	 * @param invoker
 	 * @return
 	 * @throws NullPointerException if the method parameters are null
 	 */
-	 public boolean test(Selection selection,Invoker invoker,Recorder recorder) throws NullPointerException {
-	       if( selection==null || recorder==null || invoker==null) {
-	    	   throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
-	       }else {
-	    	   return true;
-	       }
-	    
-	 }
-    
+	public boolean test(Selection selection, Invoker invoker, Recorder recorder) throws NullPointerException {
+		if (selection == null || recorder == null || invoker == null) {
+			throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
+		} else {
+			return true;
+		}
+	}
+
 }
