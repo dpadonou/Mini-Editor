@@ -1,9 +1,6 @@
 package istic.aco.editor.invoker;
 
-import istic.aco.editor.Command.CopyCommand;
-import istic.aco.editor.Command.CutCommand;
-import istic.aco.editor.Command.InsertCommand;
-import istic.aco.editor.Command.SelectionChangeCommand;
+import istic.aco.editor.Command.*;
 import istic.aco.editor.Engine;
 import istic.aco.editor.EngineImpl;
 import istic.aco.editor.Invoker.InvokerImpl;
@@ -22,6 +19,7 @@ public class InvokerImplTest {
     InvokerImpl invoker;
     SelectionChangeCommand selectionChangeCommand;
     InsertCommand insertCommand;
+    PasteCommand pasteCommand;
     CopyCommand copyCommand;
     CutCommand cutCommand;
     StringBuilder stringBuilder;
@@ -39,11 +37,13 @@ public class InvokerImplTest {
 
         engine = new EngineImpl(stringBuilder, selection);
         recorder = new RecorderImpl();
+        invoker = new InvokerImpl();
 
+        insertCommand = new InsertCommand(engine, invoker, recorder);
+        pasteCommand = new PasteCommand(engine, recorder);
         copyCommand = new CopyCommand(engine, recorder);
         cutCommand = new CutCommand(engine, recorder);
 
-        invoker = new InvokerImpl();
     }
 
     @Test
@@ -70,20 +70,15 @@ public class InvokerImplTest {
     @Test
     @DisplayName("SelectionChange should change the index of the selection")
     void selectionChangeShouldChangeTheIndexOfTheSelection() {
+        selectionChangeCommand = new SelectionChangeCommand(selection, invoker, recorder);
+        invoker.setCommand("selection", selectionChangeCommand);
+
         invoker.setBeginIndex(60);
         invoker.setEndIndex(230);
         invoker.selectionChange();
 
-        selectionChangeCommand = new SelectionChangeCommand(selection, invoker, recorder);
-        invoker.setCommand("selection", selectionChangeCommand);
-
-        assertEquals(60, engine.getSelection().getBeginIndex());
-        assertEquals(230, engine.getSelection().getEndIndex());
-
-        String msg = "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
-        invoker.setCommand("copy", copyCommand);
-        invoker.copyText();
-        assertEquals(msg, engine.getClipboardContents());
+        assertEquals(60, selection.getBeginIndex());
+        assertEquals(230, selection.getEndIndex());
     }
 
     @Test
@@ -91,11 +86,35 @@ public class InvokerImplTest {
     void insertShouldChangeTheBufferSelectionWithTheParameterSOfTheInvokerInTheBuffer() {
         invoker.setS("=== TEXTE A INSERER DANS LE BUFFER ===");
 
-        insertCommand = new InsertCommand(engine, invoker, recorder);
         invoker.setCommand("insert", insertCommand);
         invoker.insert();
 
         String msg = "Simply dummy text of === TEXTE A INSERER DANS LE BUFFER === dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
         assertEquals(msg, engine.getBufferContents());
+    }
+
+    @Test
+    @DisplayName("Paste should paste the clipboard content into the buffer")
+    void pasteShouldPasteTheClipboardContentIntoTheBuffer() {
+        invoker.setCommand("cut", cutCommand);
+        invoker.cutText();
+
+        String cutted = "Simply dummy text of  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+        //Check if the cut has been done
+        assertEquals(cutted, engine.getBufferContents());
+
+        String result = "Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+        invoker.setCommand("paste", pasteCommand);
+
+        //Changer les index de la sélection pour recoller au même endroit (pas obligatoire)
+        selectionChangeCommand = new SelectionChangeCommand(selection, invoker, recorder);
+        invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setBeginIndex(21);
+        invoker.setEndIndex(21);
+        invoker.selectionChange();
+
+        invoker.pasteClipboard();
+
+        assertEquals(result, engine.getBufferContents());
     }
 }

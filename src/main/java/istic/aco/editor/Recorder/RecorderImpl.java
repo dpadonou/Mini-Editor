@@ -18,7 +18,7 @@ public class RecorderImpl implements Recorder {
     public void save(Command c) {
         if (power) {
             if (c == null) {
-                throw new NullPointerException("La commande passée doit etre non nul");
+                throw new NullPointerException("La commande passée doit etre non nulle.");
             } else {
                 commands.addFirst(new CommandFormat(c, c.save()));
             }

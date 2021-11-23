@@ -30,12 +30,12 @@ public class Replay implements Command {
 	@Override
 	public void execute() {
 		this.recorder.replay();
-		
 	}
 	/**
 	 * Lift an error if the parameters are null and send true if not.
-	 * @param recorder
-	 * @return
+	 *
+	 * @param recorder check if it's null
+	 * @return wether the given recorder is null or not
 	 * @throws NullPointerException if the method parameters are null
 	 */
 	 public boolean test(Recorder recorder) throws NullPointerException {

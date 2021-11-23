@@ -81,7 +81,7 @@ public class SelectionChangeCommand implements Command {
 	 */
 	public boolean test(Selection selection, Invoker invoker, Recorder recorder) throws NullPointerException {
 		if (selection == null || recorder == null || invoker == null) {
-			throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
+			throw new IllegalArgumentException("Vous devez passer des paramètres non nuls.");
 		} else {
 			return true;
 		}

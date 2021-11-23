@@ -21,7 +21,7 @@ public class InvokerImpl implements Invoker {
 	 *
 	 */
 	public InvokerImpl() {
-		commands = new HashMap<String, Command>();
+		commands = new HashMap<>();
 	}
 
 	/**
@@ -42,7 +42,6 @@ public class InvokerImpl implements Invoker {
     	 }else {
     		 this.s = s;
     	 }
-		
 	}
 	
      /**
