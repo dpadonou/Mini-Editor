@@ -1,7 +1,6 @@
 package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
-
 import main.java.istic.aco.editor.Engine;
 import main.java.istic.aco.editor.Memento.Memento;
 import main.java.istic.aco.editor.Recorder.Recorder;
@@ -60,7 +59,6 @@ public class CutCommand implements Command {
 
 	@Override
 	public void restore(Memento m) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
 		
 	}
 

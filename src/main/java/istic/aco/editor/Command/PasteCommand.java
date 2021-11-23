@@ -56,14 +56,11 @@ public class PasteCommand implements Command {
 
 	@Override
 	public Optional<Memento>  save() {
-		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
 	@Override
 	public void restore(Memento m) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
 		
 	}
-
 }

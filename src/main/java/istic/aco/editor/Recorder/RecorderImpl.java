@@ -1,16 +1,16 @@
 package main.java.istic.aco.editor.Recorder;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
+
+import main.java.istic.aco.editor.Command.Command;
+
 /**
  * Recorder interface implementation, RecorderImpl
  * @author Arnauld Djedjemel
  * @author Dieu-Donné Padonou
  *
  */
-
-import java.util.Deque;
-
-import main.java.istic.aco.editor.Command.Command;
 
 public class RecorderImpl implements Recorder {
 	private Deque<CommandFormat> commands = new ArrayDeque<CommandFormat>();
@@ -57,6 +57,7 @@ public class RecorderImpl implements Recorder {
 			c.getCommand().restore(c.getMemento());
 			c.getCommand().execute();
 		}
+		commands.clear();
 		
 	}
      

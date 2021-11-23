@@ -1,5 +1,9 @@
 
 package main.java.istic.aco.editor;
+
+import java.util.Optional;
+import main.java.istic.aco.editor.Memento.Memento;
+
 /**
  * Engine Interface
  * @author Arnauld Djedjemel
@@ -69,4 +73,17 @@ public interface Engine {
     * @throws NullPointerException if the selection is null
     */
     void setSelection(Selection selection) throws IllegalArgumentException,NullPointerException;
+    
+    /**
+     * Create new Memento and save the command state
+     * @return the Memento who have the parameters
+     */
+    public Optional<Memento> saveState();
+   
+    /**
+     * restore the old parameters
+     * @param m the memento who contains parameters to restore
+     * @throws IllegalArgumentException if the memento is null
+     */
+    public void restore(Memento m) throws IllegalArgumentException;
 }

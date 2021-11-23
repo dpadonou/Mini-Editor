@@ -1,5 +1,11 @@
 
 package main.java.istic.aco.editor;
+
+import java.util.Optional;
+
+import main.java.istic.aco.editor.Memento.EngineMemento;
+import main.java.istic.aco.editor.Memento.Memento;
+
 /**
  * Engine Interface Implementation, EngineImpl
  * @author Arnauld Djedjemel
@@ -109,4 +115,14 @@ public class EngineImpl implements Engine {
             throw new NullPointerException("La selection ne peut être nulle.");
         }
     }
+
+	@Override
+	public Optional<Memento> saveState() {
+		return Optional.of(new EngineMemento(clipboard, buffer, selection));
+	}
+
+	@Override
+	public void restore(Memento m) throws IllegalArgumentException {
+		
+	}
 }
