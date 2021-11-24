@@ -1,16 +1,18 @@
 package main.java.istic.aco.editor.Recorder;
 
+import java.util.Optional;
+
 import main.java.istic.aco.editor.Command.Command;
 import main.java.istic.aco.editor.Memento.Memento;
 
 public class CommandFormat {
       private Command command;
-      private Memento memento;
+      private Optional<Memento>  memento;
 	/**
 	 * @param command
 	 * @param memento
 	 */
-	public CommandFormat(Command command, Memento memento) {
+	public CommandFormat(Command command, Optional<Memento>  memento) {
 		super();
 		this.command = command;
 		this.memento = memento;
@@ -31,12 +33,12 @@ public class CommandFormat {
 	 * @return the memento
 	 */
 	public Memento getMemento() {
-		return memento;
+		return memento.get();
 	}
 	/**
 	 * @param memento the memento to set
 	 */
-	public void setMemento(Memento memento) {
+	public void setMemento(Optional<Memento>  memento) {
 		this.memento = memento;
 	}
 	

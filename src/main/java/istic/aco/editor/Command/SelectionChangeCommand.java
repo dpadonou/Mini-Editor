@@ -1,5 +1,7 @@
 package main.java.istic.aco.editor.Command;
 
+import java.util.Optional;
+
 import main.java.istic.aco.editor.Selection;
 import main.java.istic.aco.editor.Invoker.Invoker;
 import main.java.istic.aco.editor.Memento.Memento;
@@ -45,8 +47,8 @@ public class SelectionChangeCommand implements Command{
 		recorder.save(this);
 	}
 	@Override
-	public Memento save() {
-		return new SelectionChangeMemento(this.beginIndex,this.endIndex);
+	public Optional<Memento> save() {
+		return Optional.of(new SelectionChangeMemento(this.beginIndex,this.endIndex));
 		
 	}
 	/**
@@ -55,7 +57,7 @@ public class SelectionChangeCommand implements Command{
 	@Override
 	public void restore(Memento m) {
 		 if(m==null) {
-			 throw new NullPointerException("Vous devez mpasser en paramètre un memento non null");
+			 throw new IllegalArgumentException("Vous devez mpasser en paramètre un memento non null");
 		 }else {
 			 Object[] t = m.getParameter();
 			 this.beginIndex = Integer.parseInt(t[0].toString());

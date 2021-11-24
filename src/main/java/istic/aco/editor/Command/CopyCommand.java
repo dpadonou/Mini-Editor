@@ -1,5 +1,6 @@
 package main.java.istic.aco.editor.Command;
 
+import java.util.Optional;
 import main.java.istic.aco.editor.Engine;
 import main.java.istic.aco.editor.Memento.Memento;
 import main.java.istic.aco.editor.Recorder.Recorder;
@@ -34,15 +35,6 @@ public class CopyCommand implements Command {
 		recorder.save(this);
 		
 	}
-	@Override
-	public Memento save() {
-		return null;
-		
-	}
-	@Override
-	public void restore(Memento m) {
-		
-	}
 	/**
 	 * Lift an error if the parameters are null and send true if not.
 	 * @param engine
@@ -58,6 +50,15 @@ public class CopyCommand implements Command {
 	       }
 	    
 	 }
+	@Override
+	public Optional<Memento>  save() {
+		return Optional.empty();
+	}
+	
+	@Override
+	public void restore(Memento m) throws IllegalArgumentException {
+		
+	}
 
 
 }

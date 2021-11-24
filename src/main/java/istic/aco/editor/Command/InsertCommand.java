@@ -1,5 +1,7 @@
 package main.java.istic.aco.editor.Command;
 
+import java.util.Optional;
+
 import main.java.istic.aco.editor.Engine;
 import main.java.istic.aco.editor.Invoker.Invoker;
 import main.java.istic.aco.editor.Memento.Memento;
@@ -44,15 +46,15 @@ public class InsertCommand implements Command {
 	}
 
 	@Override
-	public Memento save() {
-		return new InsertMemento(this.s);
+	public Optional<Memento> save() {
+		return Optional.of(new InsertMemento(this.s));
 		
 	}
 
 	@Override
 	public void restore(Memento m) { 
 		if(m == null) {
-			throw new NullPointerException("vous devez passer un objet memento non nul");
+			throw new IllegalArgumentException("vous devez passer un objet memento non nul");
 		}else {
 			Object[] t = m.getParameter();
 			this.s = t[0].toString();
