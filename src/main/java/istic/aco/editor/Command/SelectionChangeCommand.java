@@ -13,7 +13,7 @@ import main.java.istic.aco.editor.Recorder.Recorder;
  * @author Dieu-Donné Padonou
  *
  */
-public class SelectionChangeCommand implements Command{
+public class SelectionChangeCommand implements CommandOriginator{
 	
 	private Selection selection;
     private Invoker inv;

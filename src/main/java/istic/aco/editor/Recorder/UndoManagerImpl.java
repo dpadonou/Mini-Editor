@@ -3,20 +3,21 @@ package main.java.istic.aco.editor.Recorder;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import main.java.istic.aco.editor.Engine;
+//import main.java.istic.aco.editor.Engine;
+import main.java.istic.aco.editor.EngineOriginator;
 import main.java.istic.aco.editor.Memento.EngineMemento;
 import main.java.istic.aco.editor.Memento.Memento;
 
 public class UndoManagerImpl implements UndoManager {
     private Deque<EngineMemento> stateEnginesPast = new ArrayDeque<EngineMemento>();
     private Deque<EngineMemento> stateEnginesFutur = new ArrayDeque<EngineMemento>();
-    private Engine engine;
+    private EngineOriginator engine;
     
 	
 	/**
 	 * @param engine
 	 */
-	public UndoManagerImpl(Engine engine) {
+	public UndoManagerImpl(EngineOriginator engine) {
 		super();
 		this.engine = engine;
 	}

@@ -3,7 +3,8 @@ package main.java.istic.aco.editor.Recorder;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import main.java.istic.aco.editor.Command.Command;
+//import main.java.istic.aco.editor.Command.Command;
+import main.java.istic.aco.editor.Command.CommandOriginator;
 
 /**
  * Recorder interface implementation, RecorderImpl
@@ -21,7 +22,7 @@ public class RecorderImpl implements Recorder {
      * @param c the command who wants to save in the recorder
      */
 	@Override
-	public void save(Command c) {
+	public void save(CommandOriginator c) {
 		if(power) {
 			if(c==null) {
 				throw new NullPointerException("La commande passée doit etre non nul");

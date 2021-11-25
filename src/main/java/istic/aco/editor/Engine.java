@@ -1,8 +1,8 @@
 
 package main.java.istic.aco.editor;
 
-import java.util.Optional;
-import main.java.istic.aco.editor.Memento.Memento;
+//import java.util.Optional;
+//import main.java.istic.aco.editor.Memento.Memento;
 
 /**
  * Engine Interface
@@ -78,12 +78,12 @@ public interface Engine {
      * Create new Memento and save the command state
      * @return the Memento who have the parameters
      */
-    public Optional<Memento> saveState();
+    //public Optional<Memento> saveState();
    
     /**
      * restore the old parameters
      * @param m the memento who contains parameters to restore
      * @throws IllegalArgumentException if the memento is null
      */
-    public void restore(Memento m) throws IllegalArgumentException;
+    //public void restore(Memento m) throws IllegalArgumentException;
 }

@@ -13,7 +13,7 @@ import main.java.istic.aco.editor.Recorder.Recorder;
  * @author Dieu-Donné Padonou
  *
  */
-public class InsertCommand implements Command {
+public class InsertCommand implements CommandOriginator {
 	private Engine engine;
     private Invoker inv;
     private Recorder recorder;

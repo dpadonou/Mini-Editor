@@ -11,7 +11,7 @@ import main.java.istic.aco.editor.Recorder.Recorder;
  * @author Dieu-Donné Padonou
  *
  */
-public class PasteCommand implements Command {
+public class PasteCommand implements CommandOriginator {
 	
 	private Engine engine;
 	private Recorder recorder;

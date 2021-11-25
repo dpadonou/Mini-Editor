@@ -8,7 +8,7 @@ import main.java.istic.aco.editor.Recorder.Recorder;
  * @author Dieu-Donné Padonou
  *
  */
-public class Replay implements Command{
+public class Replay implements CommandOriginator{
     private Recorder recorder;
     
 	/**

@@ -10,7 +10,7 @@ import main.java.istic.aco.editor.Recorder.Recorder;
  * @author Dieu-Donné Padonou
  *
  */
-public class CutCommand implements Command {
+public class CutCommand implements CommandOriginator {
 	private Engine engine;
 	private Recorder recorder;
     	

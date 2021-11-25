@@ -12,7 +12,7 @@ import main.java.istic.aco.editor.Memento.Memento;
  * @author Dieu-Donné Padonou
  *
  */
-public class EngineImpl implements Engine {
+public class EngineImpl implements EngineOriginator {
     private StringBuilder buffer;
     private String clipboard;
     private Selection selection;
@@ -117,7 +117,7 @@ public class EngineImpl implements Engine {
     }
 
 	@Override
-	public Optional<Memento> saveState() {
+	public Optional<Memento> save() {
 		return Optional.of(new EngineMemento(clipboard, buffer, selection));
 	}
 
@@ -125,4 +125,10 @@ public class EngineImpl implements Engine {
 	public void restore(Memento m) throws IllegalArgumentException {
 		
 	}
+
+	/*@Override
+	public Optional<Memento> saveState() {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
 }
