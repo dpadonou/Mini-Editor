@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * SelectionImplTest for Selection test
+ *
  * @author Arnauld Djedjemel
  * @author Dieu-Donn Padonou
- *
  */
 class SelectionImplTest {
 

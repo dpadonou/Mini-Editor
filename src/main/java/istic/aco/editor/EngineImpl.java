@@ -1,4 +1,3 @@
-
 package istic.aco.editor;
 
 /**
@@ -45,6 +44,19 @@ public class EngineImpl implements Engine {
     @Override
     public Selection getSelection() {
         return this.selection;
+    }
+
+    @Override
+    public void setSelection(Selection selection) {
+        if (selection != null) {
+            if (selection.getBuffer() == (this.buffer)) {
+                this.selection = selection;
+            } else {
+                throw new IllegalArgumentException("Le buffer de la selection ne correspond pas.");
+            }
+        } else {
+            throw new NullPointerException("La selection ne peut être nulle.");
+        }
     }
 
     /**
@@ -113,18 +125,5 @@ public class EngineImpl implements Engine {
         } else if (!(selection.getBuffer() == (buffer))) {
             throw new IllegalArgumentException("Le buffer de la selection ne correspond pas.");
         } else return true;
-    }
-
-    @Override
-    public void setSelection(Selection selection) {
-        if (selection != null) {
-            if (selection.getBuffer() == (this.buffer)) {
-                this.selection = selection;
-            } else {
-                throw new IllegalArgumentException("Le buffer de la selection ne correspond pas.");
-            }
-        } else {
-            throw new NullPointerException("La selection ne peut être nulle.");
-        }
     }
 }

@@ -12,49 +12,53 @@ import java.util.Optional;
  * @author Dieu-Donné Padonou
  */
 public class Replay implements Command {
-	private Recorder recorder;
+    private Recorder recorder;
 
-	/**
-	 * @param recorder The recorder who contains the command for replaying
-	 */
-	public Replay(Recorder recorder) {
-		super();
-		if (test(recorder)) {
-			this.recorder = recorder;
-		}
-		
-	}
-     /**
-      * Call the recorder replay method
-      */
-	@Override
-	public void execute() {
-		this.recorder.replay();
-	}
-	/**
-	 * Lift an error if the parameters are null and send true if not.
-	 *
-	 * @param recorder check if it's null
-	 * @return wether the given recorder is null or not
-	 * @throws NullPointerException if the method parameters are null
-	 */
-	 public boolean test(Recorder recorder) throws NullPointerException {
-	       if(recorder==null) {
-	    	   throw new NullPointerException("Vous devez passer des paramètres non nul");
-	       }else {
-	    	   return true;
-	       }
-	    
-	 }
-	@Override
-	public Optional<Memento> save() {
-		// TODO Auto-generated method stub
-		return Optional.empty();
-	}
-	@Override
-	public void restore(Memento m) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * @param recorder The recorder who contains the command for replaying
+     */
+    public Replay(Recorder recorder) {
+        super();
+        if (test(recorder)) {
+            this.recorder = recorder;
+        }
+
+    }
+
+    /**
+     * Call the recorder replay method
+     */
+    @Override
+    public void execute() {
+        this.recorder.replay();
+    }
+
+    /**
+     * Lift an error if the parameters are null and send true if not.
+     *
+     * @param recorder check if it's null
+     * @return wether the given recorder is null or not
+     * @throws NullPointerException if the method parameters are null
+     */
+    public boolean test(Recorder recorder) throws NullPointerException {
+        if (recorder == null) {
+            throw new NullPointerException("Vous devez passer des paramètres non nul");
+        } else {
+            return true;
+        }
+
+    }
+
+    @Override
+    public Optional<Memento> save() {
+        // TODO Auto-generated method stub
+        return Optional.empty();
+    }
+
+    @Override
+    public void restore(Memento m) throws IllegalArgumentException {
+        // TODO Auto-generated method stub
+
+    }
 
 }
