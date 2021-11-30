@@ -2,7 +2,6 @@
 package main.java.istic.aco.editor;
 
 import java.util.Optional;
-
 import main.java.istic.aco.editor.Memento.EngineMemento;
 import main.java.istic.aco.editor.Memento.Memento;
 

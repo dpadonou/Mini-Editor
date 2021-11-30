@@ -1,6 +1,5 @@
 package main.java.istic.aco.editor.Recorder;
 
-//import main.java.istic.aco.editor.Command.Command;
 import main.java.istic.aco.editor.Command.CommandOriginator;
 /**
  * Recorder interface 

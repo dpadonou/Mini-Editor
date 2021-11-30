@@ -3,7 +3,6 @@ package main.java.istic.aco.editor.Recorder;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-//import main.java.istic.aco.editor.Command.Command;
 import main.java.istic.aco.editor.Command.CommandOriginator;
 
 /**

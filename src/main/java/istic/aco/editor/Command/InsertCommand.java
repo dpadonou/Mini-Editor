@@ -2,11 +2,12 @@ package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Engine;
+import main.java.istic.aco.editor.EngineOriginator;
 import main.java.istic.aco.editor.Invoker.Invoker;
 import main.java.istic.aco.editor.Memento.Memento;
 import main.java.istic.aco.editor.Memento.InsertMemento;
 import main.java.istic.aco.editor.Recorder.Recorder;
+import main.java.istic.aco.editor.Recorder.UndoManager;
 /**
  * Concrete Command, insertCommand
  * @author Arnauld Djedjemel
@@ -14,9 +15,10 @@ import main.java.istic.aco.editor.Recorder.Recorder;
  *
  */
 public class InsertCommand implements CommandOriginator {
-	private Engine engine;
+	private EngineOriginator engine;
     private Invoker inv;
     private Recorder recorder;
+    private UndoManager undoManager;
     private String s;
      /**
 	 * @param engine The Receiver where are the functions
@@ -24,11 +26,12 @@ public class InsertCommand implements CommandOriginator {
 	 * @param recorder The recorder for record the command
 	 * @param memento The memento for store this command parameters
 	 */
-	public InsertCommand(Engine engine, Invoker inv,Recorder recorder) {
-		if(test(engine,inv,recorder)) {
+	public InsertCommand(EngineOriginator engine, Invoker inv,Recorder recorder,UndoManager undoManager) {
+		if(test(engine,inv,recorder,undoManager)) {
 			this.engine = engine;
 			this.inv = inv;
 			this.recorder= recorder;
+			this.undoManager = undoManager;
 		}
 		
 	}
@@ -40,9 +43,11 @@ public class InsertCommand implements CommandOriginator {
 	 */
 	@Override
 	public void execute() {
+		undoManager.save(engine.save());
 		this.s= inv.getS();
 		engine.insert(this.s);   
 		recorder.save(this);
+		
 	}
 
 	@Override
@@ -70,8 +75,8 @@ public class InsertCommand implements CommandOriginator {
 	 * @return
 	 * @throws NullPointerException if the method parameters are null
 	 */
-	 public boolean test(Engine engine,Invoker invoker,Recorder recorder) throws NullPointerException {
-	       if(engine == null || recorder==null || invoker==null) {
+	 public boolean test(EngineOriginator engine,Invoker invoker,Recorder recorder,UndoManager undoManager) throws NullPointerException {
+	       if(engine == null || recorder==null || invoker==null ||undoManager==null ) {
 	    	   throw new NullPointerException("Vous devez passer des paramètres non nul");
 	       }else {
 	    	   return true;

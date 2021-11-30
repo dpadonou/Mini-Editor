@@ -2,9 +2,10 @@ package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Engine;
+import main.java.istic.aco.editor.EngineOriginator;
 import main.java.istic.aco.editor.Memento.Memento;
 import main.java.istic.aco.editor.Recorder.Recorder;
+import main.java.istic.aco.editor.Recorder.UndoManager;
 /**
  * Concrete Command, pasteCommand
  * @author Arnauld Djedjemel
@@ -13,17 +14,19 @@ import main.java.istic.aco.editor.Recorder.Recorder;
  */
 public class PasteCommand implements CommandOriginator {
 	
-	private Engine engine;
+	private EngineOriginator engine;
 	private Recorder recorder;
+	private UndoManager undoManager;
     
 	/**
 	 * @param engine The Receiver where are the functions
 	 * @param recorder The recorder for record the command
 	 */
-	public PasteCommand(Engine engine,Recorder recorder) {
-		if(test(engine,recorder)) {
+	public PasteCommand(EngineOriginator engine,Recorder recorder,UndoManager undoManager) {
+		if(test(engine,recorder,undoManager)) {
 			this.engine = engine;
 			this.recorder = recorder;
+			this.undoManager = undoManager;
 		}
 		
 	}
@@ -34,6 +37,7 @@ public class PasteCommand implements CommandOriginator {
      */
 	@Override
 	public void execute() {
+		undoManager.save(engine.save());
 		engine.pasteClipboard();
 		recorder.save(this);
 	}
@@ -45,8 +49,8 @@ public class PasteCommand implements CommandOriginator {
 	 * @return
 	 * @throws NullPointerException if the method parameters are null
 	 */
-	 public boolean test(Engine engine,Recorder recorder) throws NullPointerException {
-	       if(engine==null || recorder==null) {
+	 public boolean test(EngineOriginator engine,Recorder recorder,UndoManager undoManager) throws NullPointerException {
+	       if(engine==null || recorder==null || undoManager == null) {
 	    	   throw new NullPointerException("Vous devez passer des paramètres non nul");
 	       }else {
 	    	   return true;
