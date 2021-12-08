@@ -8,7 +8,7 @@ import main.java.istic.aco.editor.Memento.Memento;
 /**
  * Engine Interface Implementation, EngineImpl
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public class EngineImpl implements EngineOriginator {
@@ -36,7 +36,7 @@ public class EngineImpl implements EngineOriginator {
         if (buffer != null)
             this.buffer = buffer;
         else
-            throw new NullPointerException("Le buffer ne peut être nul.");
+            throw new NullPointerException("Le buffer ne peut ï¿½tre nul.");
     }
     @Override
     public Selection getSelection() {
@@ -95,9 +95,9 @@ public class EngineImpl implements EngineOriginator {
    */
     public boolean test(StringBuilder buffer, Selection selection) throws IllegalArgumentException,NullPointerException {
         if (buffer == null) {
-            throw new NullPointerException("Le buffer ne peut être nul.");
+            throw new NullPointerException("Le buffer ne peut ï¿½tre nul.");
         } else if (selection == null) {
-            throw new NullPointerException("La selection ne peut être nulle.");
+            throw new NullPointerException("La selection ne peut ï¿½tre nulle.");
         } else if (!(selection.getBuffer().equals(buffer))) {
             throw new IllegalArgumentException("Le buffer de la selection ne correspond pas.");
         } else return true;
@@ -111,7 +111,7 @@ public class EngineImpl implements EngineOriginator {
                 throw new IllegalArgumentException("Le buffer de la selection ne correspond pas.");
             }
         } else {
-            throw new NullPointerException("La selection ne peut être nulle.");
+            throw new NullPointerException("La selection ne peut ï¿½tre nulle.");
         }
     }
 
@@ -122,7 +122,13 @@ public class EngineImpl implements EngineOriginator {
 
 	@Override
 	public void restore(Memento m) throws IllegalArgumentException {
-		
+		 if(m==null) {
+			 throw new IllegalArgumentException();
+		 }else {
+			clipboard =  m.getParameter()[0].toString();
+			buffer = (StringBuilder)m.getParameter()[1];
+			selection = (Selection)m.getParameter()[2];
+		 }
 	}
 
 	/*@Override
