@@ -1,12 +1,12 @@
-package istic.aco.editor.Invoker;
+package main.java.istic.aco.editor.Invoker;
 
-import istic.aco.editor.Command.Command;
+import main.java.istic.aco.editor.Command.Command;
 
 /**
  * Invoker interface
  *
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  */
 public interface Invoker {
     /**

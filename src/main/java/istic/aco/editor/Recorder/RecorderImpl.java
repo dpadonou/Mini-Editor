@@ -1,9 +1,9 @@
-package istic.aco.editor.Recorder;
-
-import istic.aco.editor.Command.Command;
+package main.java.istic.aco.editor.Recorder;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+
+import main.java.istic.aco.editor.Command.Command;
 
 public class RecorderImpl implements Recorder {
     private final Deque<CommandFormat> commands = new ArrayDeque<CommandFormat>();
@@ -18,7 +18,7 @@ public class RecorderImpl implements Recorder {
     public void save(Command c) {
         if (power) {
             if (c == null) {
-                throw new NullPointerException("La commande passée doit etre non nulle.");
+                throw new NullPointerException("La commande passï¿½e doit etre non nulle.");
             } else {
                 commands.addFirst(new CommandFormat(c, c.save()));
             }

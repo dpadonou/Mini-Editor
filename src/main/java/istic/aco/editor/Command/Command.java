@@ -1,8 +1,8 @@
-package istic.aco.editor.Command;
-
-import istic.aco.editor.Memento.Memento;
+package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.Memento.Memento;
 
 /**
  * Command Interface

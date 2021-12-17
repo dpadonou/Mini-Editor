@@ -1,12 +1,12 @@
-package istic.aco.editor.Recorder;
+package main.java.istic.aco.editor.Recorder;
 
-import istic.aco.editor.Command.Command;
+import main.java.istic.aco.editor.Command.Command;
 
 /**
  * Recorder interface
  *
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  */
 public interface Recorder {
     /**

@@ -1,9 +1,9 @@
-package istic.aco.editor.Recorder;
-
-import istic.aco.editor.Command.Command;
-import istic.aco.editor.Memento.Memento;
+package main.java.istic.aco.editor.Recorder;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.Command.Command;
+import main.java.istic.aco.editor.Memento.Memento;
 
 public class CommandFormat {
 	private Command command;

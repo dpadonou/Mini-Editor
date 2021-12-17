@@ -1,18 +1,18 @@
-package istic.aco.editor.Command;
-
-import istic.aco.editor.Invoker.Invoker;
-import istic.aco.editor.Memento.Memento;
-import istic.aco.editor.Memento.SelectionChangeMemento;
-import istic.aco.editor.Recorder.Recorder;
-import istic.aco.editor.Selection;
+package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.Selection;
+import main.java.istic.aco.editor.Invoker.Invoker;
+import main.java.istic.aco.editor.Memento.Memento;
+import main.java.istic.aco.editor.Memento.SelectionChangeMemento;
+import main.java.istic.aco.editor.Recorder.Recorder;
 
 /**
  * Concrete Command, selectionChangeCommand
  *
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  */
 public class SelectionChangeCommand implements Command {
 
@@ -60,7 +60,7 @@ public class SelectionChangeCommand implements Command {
     @Override
     public void restore(Memento m) {
         if (m == null) {
-            throw new IllegalArgumentException("Vous devez mpasser en paramètre un memento non null");
+            throw new IllegalArgumentException("Vous devez mpasser en paramï¿½tre un memento non null");
         } else {
             Object[] t = m.getParameter();
             this.beginIndex = Integer.parseInt(t[0].toString());
@@ -79,7 +79,7 @@ public class SelectionChangeCommand implements Command {
      */
     public boolean test(Selection selection, Invoker invoker, Recorder recorder) throws NullPointerException {
         if (selection == null || recorder == null || invoker == null) {
-            throw new IllegalArgumentException("Vous devez passer des paramètres non nuls.");
+            throw new IllegalArgumentException("Vous devez passer des paramï¿½tres non nuls.");
         } else {
             return true;
         }

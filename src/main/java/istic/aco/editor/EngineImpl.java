@@ -1,10 +1,10 @@
-package istic.aco.editor;
+package main.java.istic.aco.editor;
 
 /**
  * Engine Interface Implementation, EngineImpl
  *
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  */
 
 public class EngineImpl implements Engine {
@@ -38,7 +38,7 @@ public class EngineImpl implements Engine {
         if (buffer != null)
             this.buffer = buffer;
         else
-            throw new NullPointerException("Le buffer ne peut être nul.");
+            throw new NullPointerException("Le buffer ne peut ï¿½tre nul.");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class EngineImpl implements Engine {
                 throw new IllegalArgumentException("Le buffer de la selection ne correspond pas.");
             }
         } else {
-            throw new NullPointerException("La selection ne peut être nulle.");
+            throw new NullPointerException("La selection ne peut ï¿½tre nulle.");
         }
     }
 
@@ -119,9 +119,9 @@ public class EngineImpl implements Engine {
      */
     public boolean test(StringBuilder buffer, Selection selection) throws IllegalArgumentException, NullPointerException {
         if (buffer == null) {
-            throw new NullPointerException("Le buffer ne peut être nul.");
+            throw new NullPointerException("Le buffer ne peut ï¿½tre nul.");
         } else if (selection == null) {
-            throw new NullPointerException("La selection ne peut être nulle.");
+            throw new NullPointerException("La selection ne peut ï¿½tre nulle.");
         } else if (!(selection.getBuffer() == (buffer))) {
             throw new IllegalArgumentException("Le buffer de la selection ne correspond pas.");
         } else return true;

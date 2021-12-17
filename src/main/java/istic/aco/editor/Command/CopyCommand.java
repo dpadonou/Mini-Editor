@@ -1,16 +1,16 @@
-package istic.aco.editor.Command;
-
-import istic.aco.editor.Engine;
-import istic.aco.editor.Memento.Memento;
-import istic.aco.editor.Recorder.Recorder;
+package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.Engine;
+import main.java.istic.aco.editor.Memento.Memento;
+import main.java.istic.aco.editor.Recorder.Recorder;
 
 /**
  * Concrete Command, copyCommand
  *
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  */
 public class CopyCommand implements Command {
     private Engine engine;
@@ -50,7 +50,7 @@ public class CopyCommand implements Command {
      */
     public boolean test(Engine engine, Recorder recorder) throws NullPointerException {
         if (engine == null || recorder == null) {
-            throw new NullPointerException("Vous devez passer des paramètres non nul");
+            throw new NullPointerException("Vous devez passer des paramï¿½tres non nul");
         } else {
             return true;
         }

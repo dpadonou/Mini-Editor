@@ -1,4 +1,4 @@
-package istic.aco.editor;
+package main.java.istic.aco.editor;
 
 public class Run {
 

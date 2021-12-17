@@ -1,4 +1,4 @@
-package istic.aco.editor.Memento;
+package main.java.istic.aco.editor.Memento;
 
 /**
  * Concrete Memento selectionChangeMemento

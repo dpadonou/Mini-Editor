@@ -1,10 +1,10 @@
-package istic.aco.editor;
+package main.java.istic.aco.editor;
 
 /**
  * Engine Interface
  *
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  */
 public interface Engine {
     /**

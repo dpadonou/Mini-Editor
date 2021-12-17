@@ -1,15 +1,15 @@
-package istic.aco.editor.Command;
-
-import istic.aco.editor.Memento.Memento;
-import istic.aco.editor.Recorder.Recorder;
+package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.Memento.Memento;
+import main.java.istic.aco.editor.Recorder.Recorder;
 
 /**
  * Concrete Command, Replay
  *
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  */
 public class Replay implements Command {
     private Recorder recorder;
@@ -42,7 +42,7 @@ public class Replay implements Command {
      */
     public boolean test(Recorder recorder) throws NullPointerException {
         if (recorder == null) {
-            throw new NullPointerException("Vous devez passer des paramètres non nul");
+            throw new NullPointerException("Vous devez passer des paramï¿½tres non nul");
         } else {
             return true;
         }

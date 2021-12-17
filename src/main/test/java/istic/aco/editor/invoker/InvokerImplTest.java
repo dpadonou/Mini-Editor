@@ -1,18 +1,24 @@
-package istic.aco.editor.invoker;
+package main.test.java.istic.aco.editor.invoker;
 
-import istic.aco.editor.Command.*;
-import istic.aco.editor.Engine;
-import istic.aco.editor.EngineImpl;
-import istic.aco.editor.Invoker.InvokerImpl;
-import istic.aco.editor.Recorder.Recorder;
-import istic.aco.editor.Recorder.RecorderImpl;
-import istic.aco.editor.Selection;
-import istic.aco.editor.SelectionImpl;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import main.java.istic.aco.editor.Engine;
+import main.java.istic.aco.editor.EngineImpl;
+import main.java.istic.aco.editor.Selection;
+import main.java.istic.aco.editor.SelectionImpl;
+import main.java.istic.aco.editor.Command.CopyCommand;
+import main.java.istic.aco.editor.Command.CutCommand;
+import main.java.istic.aco.editor.Command.InsertCommand;
+import main.java.istic.aco.editor.Command.PasteCommand;
+import main.java.istic.aco.editor.Command.SelectionChangeCommand;
+import main.java.istic.aco.editor.Invoker.InvokerImpl;
+import main.java.istic.aco.editor.Recorder.Recorder;
+import main.java.istic.aco.editor.Recorder.RecorderImpl;
 
 public class InvokerImplTest {
 
@@ -106,7 +112,7 @@ public class InvokerImplTest {
         String result = "Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
         invoker.setCommand("paste", pasteCommand);
 
-        //Changer les index de la sélection pour recoller au même endroit (pas obligatoire)
+        //Changer les index de la sï¿½lection pour recoller au mï¿½me endroit (pas obligatoire)
         selectionChangeCommand = new SelectionChangeCommand(selection, invoker, recorder);
         invoker.setCommand("selection", selectionChangeCommand);
         invoker.setBeginIndex(21);
@@ -116,5 +122,19 @@ public class InvokerImplTest {
         invoker.pasteClipboard();
 
         assertEquals(result, engine.getBufferContents());
+    }
+    
+    @Test
+    @DisplayName("Invoker setters return error if the parameter are false")
+    void invokerSettersShouldReturnError(){
+    	assertThrows(NullPointerException.class, ()->{
+    		invoker.setS(null);
+    	});
+    	assertThrows(IllegalArgumentException.class, ()->{
+    		invoker.setBeginIndex(-1);
+    	});
+    	assertThrows(IllegalArgumentException.class, ()->{
+    		invoker.setEndIndex(-1);
+    	});
     }
 }
