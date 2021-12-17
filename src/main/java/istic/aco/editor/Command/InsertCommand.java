@@ -11,7 +11,7 @@ import main.java.istic.aco.editor.Recorder.UndoManager;
 /**
  * Concrete Command, insertCommand
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public class InsertCommand implements CommandOriginator {
@@ -44,7 +44,9 @@ public class InsertCommand implements CommandOriginator {
 	@Override
 	public void execute() {
 		undoManager.save(engine.save());
-		this.s= inv.getS();
+		if(this.s.isEmpty()) {
+			this.s= inv.getS();
+		}
 		engine.insert(this.s);   
 		recorder.save(this);
 		
@@ -77,7 +79,7 @@ public class InsertCommand implements CommandOriginator {
 	 */
 	 public boolean test(EngineOriginator engine,Invoker invoker,Recorder recorder,UndoManager undoManager) throws NullPointerException {
 	       if(engine == null || recorder==null || invoker==null ||undoManager==null ) {
-	    	   throw new NullPointerException("Vous devez passer des paramètres non nul");
+	    	   throw new NullPointerException("Vous devez passer des paramï¿½tres non nul");
 	       }else {
 	    	   return true;
 	       }

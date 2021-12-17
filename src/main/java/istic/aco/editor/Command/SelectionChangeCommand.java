@@ -12,7 +12,7 @@ import main.java.istic.aco.editor.Recorder.UndoManager;
 /**
  * Concrete Command, selectionChangeCommand
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public class SelectionChangeCommand implements CommandOriginator{
@@ -21,8 +21,8 @@ public class SelectionChangeCommand implements CommandOriginator{
     private Invoker inv;
     private Recorder recorder;
     private UndoManager undoManager;
-    private int beginIndex;
-    private int endIndex;
+    private int beginIndex =0;
+    private int endIndex=0;
 	/**
 	 * @param selection The receiver where are the functions
 	 * @param inv The invoker who call this concrete command
@@ -45,8 +45,10 @@ public class SelectionChangeCommand implements CommandOriginator{
 	@Override
 	public void execute() {
 		undoManager.save(engine.save());
-		this.beginIndex = inv.getBeginIndex();
-		this.endIndex = inv.getEndIndex();
+		if(this.beginIndex ==0 && this.endIndex==0) {
+			this.beginIndex = inv.getBeginIndex();
+			this.endIndex = inv.getEndIndex();
+		}
 		engine.getSelection().setBeginIndex(this.beginIndex);
 		engine.getSelection().setEndIndex(this.endIndex);
 		recorder.save(this);
@@ -62,7 +64,7 @@ public class SelectionChangeCommand implements CommandOriginator{
 	@Override
 	public void restore(Memento m) {
 		 if(m==null) {
-			 throw new IllegalArgumentException("Vous devez mpasser en paramètre un memento non null");
+			 throw new IllegalArgumentException("Vous devez mpasser en paramï¿½tre un memento non null");
 		 }else {
 			 Object[] t = m.getParameter();
 			 this.beginIndex = Integer.parseInt(t[0].toString());
@@ -82,7 +84,7 @@ public class SelectionChangeCommand implements CommandOriginator{
 	 */
 	 public boolean test(Engine engine,Invoker invoker,Recorder recorder,UndoManager undoManager) throws NullPointerException {
 	       if( engine==null || recorder==null || invoker==null || undoManager == null) {
-	    	   throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
+	    	   throw new IllegalArgumentException("Vous devez passer des paramï¿½tres non nul");
 	       }else {
 	    	   return true;
 	       }
