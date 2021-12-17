@@ -2,34 +2,38 @@ package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Selection;
+import main.java.istic.aco.editor.Engine;
+import main.java.istic.aco.editor.EngineOriginator;
 import main.java.istic.aco.editor.Invoker.Invoker;
 import main.java.istic.aco.editor.Memento.Memento;
 import main.java.istic.aco.editor.Memento.SelectionChangeMemento;
 import main.java.istic.aco.editor.Recorder.Recorder;
+import main.java.istic.aco.editor.Recorder.UndoManager;
 /**
  * Concrete Command, selectionChangeCommand
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
-public class SelectionChangeCommand implements Command{
+public class SelectionChangeCommand implements CommandOriginator{
 	
-	private Selection selection;
+	private EngineOriginator engine;
     private Invoker inv;
     private Recorder recorder;
-    private int beginIndex;
-    private int endIndex;
+    private UndoManager undoManager;
+    private int beginIndex =0;
+    private int endIndex=0;
 	/**
 	 * @param selection The receiver where are the functions
 	 * @param inv The invoker who call this concrete command
 	 * @param recorder for record this command
 	 */
-	public SelectionChangeCommand(Selection selection, Invoker inv,Recorder recorder) {
-		if(test(selection,inv,recorder)) {
-			this.selection = selection;
+	public SelectionChangeCommand(EngineOriginator engine, Invoker inv,Recorder recorder,UndoManager undoManager) {
+		if(test(engine,inv,recorder,undoManager)) {
+			this.engine = engine;
 			this.inv = inv;
 			this.recorder= recorder;
+			this.undoManager = undoManager;
 		}
 		
 	}
@@ -40,10 +44,13 @@ public class SelectionChangeCommand implements Command{
 	 */
 	@Override
 	public void execute() {
-		this.beginIndex = inv.getBeginIndex();
-		this.endIndex = inv.getEndIndex();
-		selection.setBeginIndex(this.beginIndex);
-		selection.setEndIndex(this.endIndex);
+		undoManager.save(engine.save());
+		if(this.beginIndex ==0 && this.endIndex==0) {
+			this.beginIndex = inv.getBeginIndex();
+			this.endIndex = inv.getEndIndex();
+		}
+		engine.getSelection().setBeginIndex(this.beginIndex);
+		engine.getSelection().setEndIndex(this.endIndex);
 		recorder.save(this);
 	}
 	@Override
@@ -57,7 +64,7 @@ public class SelectionChangeCommand implements Command{
 	@Override
 	public void restore(Memento m) {
 		 if(m==null) {
-			 throw new IllegalArgumentException("Vous devez mpasser en paramètre un memento non null");
+			 throw new IllegalArgumentException("Vous devez mpasser en paramï¿½tre un memento non null");
 		 }else {
 			 Object[] t = m.getParameter();
 			 this.beginIndex = Integer.parseInt(t[0].toString());
@@ -75,9 +82,9 @@ public class SelectionChangeCommand implements Command{
 	 * @return
 	 * @throws NullPointerException if the method parameters are null
 	 */
-	 public boolean test(Selection selection,Invoker invoker,Recorder recorder) throws NullPointerException {
-	       if( selection==null || recorder==null || invoker==null) {
-	    	   throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
+	 public boolean test(Engine engine,Invoker invoker,Recorder recorder,UndoManager undoManager) throws NullPointerException {
+	       if( engine==null || recorder==null || invoker==null || undoManager == null) {
+	    	   throw new IllegalArgumentException("Vous devez passer des paramï¿½tres non nul");
 	       }else {
 	    	   return true;
 	       }

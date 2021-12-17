@@ -1,6 +1,6 @@
 package main.java.istic.aco.editor.Recorder;
 
-import main.java.istic.aco.editor.Command.Command;
+import main.java.istic.aco.editor.Command.CommandOriginator;
 /**
  * Recorder interface 
  * @author Arnauld Djedjemel
@@ -13,7 +13,7 @@ public interface Recorder {
 	 * @param c the command who wants to save
 	 * @throws NullPointerException if the command is null
 	 */
-    public void save(Command c) throws NullPointerException;
+    public void save(CommandOriginator c) throws NullPointerException;
     /**
      * Start the recorder
      */

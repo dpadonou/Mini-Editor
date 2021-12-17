@@ -20,17 +20,17 @@ public interface Invoker  {
 	 * @throws NullPointerException if the parameter is null
 	 */
 	public void setS(String s) throws NullPointerException;
-	/**
-	 * Get the beginIndex for the new Selection
-	 * @return beginIndex for the new Selection
-	 */
-	
+
 	 /**
 	  * Put the commands in the map
 	  * @param command
 	  * @throws IllegalArgumentException if the command is null or s is empty
 	  */
 	public void setCommand(String s,Command command) throws IllegalArgumentException;
+	/**
+	 * Get the beginIndex for the new Selection
+	 * @return beginIndex for the new Selection
+	 */
 	
 	public int getBeginIndex();
 	/**
@@ -74,5 +74,13 @@ public interface Invoker  {
      * user action for replay last command
      */
     public void replay();
+    /**
+     * user action for make undo
+     */
+    public void undo();
+    /**
+     * user action for make redo
+     */  
+    public void redo();
     
 }

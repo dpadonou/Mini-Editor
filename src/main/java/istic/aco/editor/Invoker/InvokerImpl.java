@@ -160,5 +160,20 @@ public class InvokerImpl implements Invoker {
 		
 		
 	}
+
+	@Override
+	public void undo() {
+		if(commands.get("undo") !=null) {
+			commands.get("undo").execute();
+		}	
+	}
+
+	@Override
+	public void redo() {
+		if(commands.get("redo") !=null) {
+			commands.get("redo").execute();
+		}
+		
+	}
         
 }

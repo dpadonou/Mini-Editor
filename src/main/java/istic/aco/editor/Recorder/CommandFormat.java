@@ -2,31 +2,38 @@ package main.java.istic.aco.editor.Recorder;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Command.Command;
+import main.java.istic.aco.editor.Command.CommandOriginator;
 import main.java.istic.aco.editor.Memento.Memento;
-
+/**
+ * Data structure to save in recorder,CommandFormat
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donné Padonou
+ *
+ */
 public class CommandFormat {
-      private Command command;
+      private CommandOriginator command;
       private Optional<Memento>  memento;
 	/**
 	 * @param command
 	 * @param memento
 	 */
-	public CommandFormat(Command command, Optional<Memento>  memento) {
+	public CommandFormat(CommandOriginator command, Optional<Memento>  memento) {
 		super();
-		this.command = command;
-		this.memento = memento;
+		if(test(command)) {
+			this.command = command;
+			this.memento = memento;
+		}
 	}
 	/**
 	 * @return the command
 	 */
-	public Command getCommand() {
+	public CommandOriginator getCommand() {
 		return command;
 	}
 	/**
 	 * @param command the command to set
 	 */
-	public void setCommand(Command command) {
+	public void setCommand(CommandOriginator command) {
 		this.command = command;
 	}
 	/**
@@ -41,5 +48,21 @@ public class CommandFormat {
 	public void setMemento(Optional<Memento>  memento) {
 		this.memento = memento;
 	}
+	
+	/**
+	 * Test the constructor parameter
+	 * @param command
+	 * @return true if the parameter is good
+	 * @throws NullPointerException if the parameter is null
+	 */
+	 public boolean test(CommandOriginator command) throws NullPointerException {
+	       if(command==null ) {
+	    	   throw new NullPointerException("Vous devez passer des paramètres non nul");
+	       }else {
+	    	   return true;
+	       }
+	    
+	 }
+	
 	
 }
