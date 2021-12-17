@@ -30,7 +30,7 @@ public class InvokerTest {
     Selection selection;
     Engine engine;
 
-    Recorder recorder;
+    Recorder recorder;                                                
 
     @BeforeEach
     @Test
@@ -109,7 +109,7 @@ public class InvokerTest {
         String result = "Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
         invoker.setCommand("paste", pasteCommand);
 
-        //Changer les index de la sélection pour recoller au même endroit (pas obligatoire)
+        //Changer les index de la sï¿½lection pour recoller au mï¿½me endroit (pas obligatoire)
         selectionChangeCommand = new SelectionChangeCommand(selection, invoker, recorder);
         invoker.setCommand("selection", selectionChangeCommand);
         invoker.setBeginIndex(21);
