@@ -1,20 +1,24 @@
 package main.java.istic.aco.editor.Command;
 
-import main.java.istic.aco.editor.Engine;
+import java.util.Optional;
+
+import main.java.istic.aco.editor.EngineOriginator;
 import main.java.istic.aco.editor.Invoker.Invoker;
 import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Memento.insertMemento;
-import main.java.istic.aco.editor.Recorder.Record;
+import main.java.istic.aco.editor.Memento.InsertMemento;
+import main.java.istic.aco.editor.Recorder.Recorder;
+import main.java.istic.aco.editor.Recorder.UndoManager;
 /**
  * Concrete Command, insertCommand
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
-public class insertCommand implements Command {
-	private Engine engine;
+public class InsertCommand implements CommandOriginator {
+	private EngineOriginator engine;
     private Invoker inv;
-    private Record recorder;
+    private Recorder recorder;
+    private UndoManager undoManager;
     private String s;
      /**
 	 * @param engine The Receiver where are the functions
@@ -22,11 +26,12 @@ public class insertCommand implements Command {
 	 * @param recorder The recorder for record the command
 	 * @param memento The memento for store this command parameters
 	 */
-	public insertCommand(Engine engine, Invoker inv,Record recorder) {
-		if(test(engine,inv,recorder)) {
+	public InsertCommand(EngineOriginator engine, Invoker inv,Recorder recorder,UndoManager undoManager) {
+		if(test(engine,inv,recorder,undoManager)) {
 			this.engine = engine;
 			this.inv = inv;
 			this.recorder= recorder;
+			this.undoManager = undoManager;
 		}
 		
 	}
@@ -38,20 +43,25 @@ public class insertCommand implements Command {
 	 */
 	@Override
 	public void execute() {
-		this.s= inv.getS();
+		undoManager.save(engine.save());
+		if(this.s.isEmpty()) {
+			this.s= inv.getS();
+		}
 		engine.insert(this.s);   
 		recorder.save(this);
+		s = "";
+		
 	}
 
 	@Override
-	public Memento save() {
-		return new insertMemento(this.s);
+	public Optional<Memento> save() {
+		return Optional.of(new InsertMemento(this.s));
 		
 	}
 
 	@Override
 	public void restore(Memento m) { 
-		if(m.equals(null)) {
+		if(m == null) {
 			throw new IllegalArgumentException("vous devez passer un objet memento non nul");
 		}else {
 			Object[] t = m.getParameter();
@@ -66,11 +76,11 @@ public class insertCommand implements Command {
 	 * @param recorder
 	 * @param inv
 	 * @return
-	 * @throws IllegalArgumentException if the method parameters are null
+	 * @throws NullPointerException if the method parameters are null
 	 */
-	 public boolean test(Engine engine,Invoker invoker,Record recorder) throws IllegalArgumentException {
-	       if(engine.equals(null) || recorder.equals(null) || invoker.equals(null)) {
-	    	   throw new IllegalArgumentException("Vous devez passer des paramètres non nul");
+	 public boolean test(EngineOriginator engine,Invoker invoker,Recorder recorder,UndoManager undoManager) throws NullPointerException {
+	       if(engine == null || recorder==null || invoker==null ||undoManager==null ) {
+	    	   throw new NullPointerException("Vous devez passer des paramï¿½tres non nul");
 	       }else {
 	    	   return true;
 	       }

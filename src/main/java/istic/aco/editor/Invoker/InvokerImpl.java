@@ -1,5 +1,8 @@
 package main.java.istic.aco.editor.Invoker;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import main.java.istic.aco.editor.Command.Command;
  /**
  * Invoker interface implementation, InvokerImpl
@@ -11,14 +14,16 @@ public class InvokerImpl implements Invoker {
      private String s;
      private int beginIndex;
      private int endIndex;
-     private Command cutTextCommand;
-     private Command copyTextCommand;
-     private Command pasteTextCommand;
-     private Command insertTextCommand;
-     private Command selectionChangeCommand;
-     private Command replay;
+     private Map<String,Command> commands;
      
      
+	/**
+	 * 
+	 */
+	public InvokerImpl() {
+		commands = new HashMap<String,Command>();
+	}
+
 	/**
 	 * @return s the text to insert
 	 */
@@ -32,8 +37,8 @@ public class InvokerImpl implements Invoker {
 	 */
      @Override
 	public void setS(String s) {
-    	 if(s.isEmpty()) {
-    		 throw new IllegalArgumentException("Vous devez passer une chaine non vide");
+    	 if(s==null) {
+    		 throw new NullPointerException("Vous devez passer une chaine non vide");
     	 }else {
     		 this.s = s;
     	 }
@@ -74,7 +79,7 @@ public class InvokerImpl implements Invoker {
 	 */
      @Override
 	public void setEndIndex(int endIndex) {
-    	 if(endIndex<0) {
+    	 if(endIndex<0 || endIndex<beginIndex) {
     		 throw new IllegalArgumentException("l'index ne doit pas etre negatif");
     	 }else {
     		 this.endIndex = endIndex;
@@ -82,85 +87,15 @@ public class InvokerImpl implements Invoker {
     	 
 	}
 
-	/**
- 	 * @param c the cut text command
- 	 * @throws IllegalArgumentException if the parameter is null
- 	 */
-	public void setCutTextCommand(Command c) throws IllegalArgumentException{
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
-		}else {
-			this.cutTextCommand = c;
-		}
-	}
-	 /**
- 	 * @param c the copy text command
- 	 * @throws IllegalArgumentException if the parameter is null
- 	 */
-	public void setcopyTextCommand(Command c)  throws IllegalArgumentException{
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
-		}else {
-			this.copyTextCommand = c;
-		}
-		
-	}
-	 /**
- 	 * @param c the paste text command
- 	 * @throws IllegalArgumentException if the parameter is null
- 	 */
-	public void setPasteTextCommand(Command c)  throws IllegalArgumentException{
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
-		}else {
-			this.pasteTextCommand = c;
-		}
-		
-	}
-	 /**
- 	 * @param c the insert text command
- 	 * @throws IllegalArgumentException if the parameter is null
- 	 */
-	public void setinsertTextCommand(Command c) throws IllegalArgumentException {
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
-		}else {
-			this.insertTextCommand = c;
-		}
-		
-	}
-	 /**
- 	 * @param c the selection change command
- 	 * @throws IllegalArgumentException if the parameter is null
- 	 */
-	public void setSelectionChangeCommand(Command c) throws IllegalArgumentException{
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
-		}else {
-			this.selectionChangeCommand = c;
-		}
-		
-	}
-	
-	 /**
- 	 * @param c the selection change command
- 	 * @throws IllegalArgumentException if the parameter is null
- 	 */
-	public void setReplayCommand(Command c) throws IllegalArgumentException {
-		if(c.equals(null)) {
-			throw new IllegalArgumentException("La commande passée doit etre non nul");
-		}else {
-			this.replay = c;
-		}
-		
-	}
-
     /**
      * the user action to change selection
      */
 	@Override
 	public void selectionChange() {
-		this.selectionChangeCommand.execute();
+		if(commands.get("selection") !=null) {
+			commands.get("selection").execute();
+		}
+		
 		
 	}
     
@@ -169,18 +104,20 @@ public class InvokerImpl implements Invoker {
      */
 	@Override
 	public void cutText() {
-		this.cutTextCommand.execute();
-		
-		
+		if(commands.get("cut") !=null) {
+			commands.get("cut").execute();
+		}
+
 	}
     
 	 /**
      * the user action to copy text
      */
 	@Override
-	public void copytext() {
-		this.copyTextCommand.execute();
-		
+	public void copyText() {
+		if(commands.get("copy") !=null) {
+			commands.get("copy").execute();
+		}
 	}
 
 	 /**
@@ -188,15 +125,18 @@ public class InvokerImpl implements Invoker {
      */
 	@Override
 	public void pasteClipboard() {
-		this.pasteTextCommand.execute();
-		
+		if(commands.get("paste") !=null) {
+			commands.get("paste").execute();
+		}
 	}
 	 /**
      * the user action to insert text
      */
 	@Override
 	public void insert() {
-		this.insertTextCommand.execute();
+		if(commands.get("insert") !=null) {
+			commands.get("insert").execute();
+		}
 	}
     
 	/**
@@ -204,8 +144,35 @@ public class InvokerImpl implements Invoker {
 	 */
 	@Override
 	public void replay() {
-		// TODO Auto-generated method stub
-		this.replay.execute();
+		if(commands.get("replay") !=null) {
+			commands.get("replay").execute();
+		}
+		
+	}
+
+	@Override
+	public void setCommand(String s, Command command) throws IllegalArgumentException {
+		if(command == null || s.isEmpty()) {
+			throw new IllegalArgumentException("Vous devez passé des pramètres valides.");
+		}else {
+			commands.put(s, command);
+		}
+		
+		
+	}
+
+	@Override
+	public void undo() {
+		if(commands.get("undo") !=null) {
+			commands.get("undo").execute();
+		}	
+	}
+
+	@Override
+	public void redo() {
+		if(commands.get("redo") !=null) {
+			commands.get("redo").execute();
+		}
 		
 	}
         

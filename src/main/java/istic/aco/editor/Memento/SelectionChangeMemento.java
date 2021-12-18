@@ -5,7 +5,7 @@ package main.java.istic.aco.editor.Memento;
  * @author Dieu-Donné Padonou
  *
  */
-public class selectionChangeMemento implements Memento {
+public class SelectionChangeMemento implements Memento {
     private int beginIndex;
     private int endIndex;
     
@@ -13,7 +13,7 @@ public class selectionChangeMemento implements Memento {
 	 * @param beginIndex
 	 * @param endIndex
 	 */
-	public selectionChangeMemento(int beginIndex, int endIndex) {
+	public SelectionChangeMemento(int beginIndex, int endIndex) {
 		super();
 		if(test(beginIndex,endIndex)) {
 			this.beginIndex = beginIndex;
@@ -34,11 +34,11 @@ public class selectionChangeMemento implements Memento {
 	 * Test if the parameter is good
 	 * @param s
 	 * @return
-	 * @throws IllegalArgumentException if one of the parameter is negative
+	 * @throws IllegalArgumentException if one of the parameter is negative or beginIndex is tall than endIndex
 	 */
 	 public boolean test(int beginIndex, int endIndex) throws IllegalArgumentException {
-	        if ( beginIndex<0 || endIndex<0) {
-	        	throw new IllegalArgumentException("Vous devez passé une chaine de caractère non vide");
+	        if ( beginIndex<0 || endIndex<0 || beginIndex>=endIndex) {
+	        	throw new IllegalArgumentException("Vous devez passé des paramètres valides");
 	        } else return true;
 	    
 	 }
