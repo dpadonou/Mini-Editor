@@ -1,21 +1,18 @@
-package test.java.editor;
+package editor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import istic.aco.editor.Engine;
+import istic.aco.editor.EngineImpl;
+import istic.aco.editor.Selection;
+import istic.aco.editor.SelectionImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import main.java.istic.aco.editor.Engine;
-import main.java.istic.aco.editor.EngineImpl;
-import main.java.istic.aco.editor.Selection;
-import main.java.istic.aco.editor.SelectionImpl;
+import static org.junit.jupiter.api.Assertions.*;
 /**
  * EngineImplTest for Engine test
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public class EngineImplTest {

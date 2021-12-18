@@ -1,20 +1,20 @@
-package main.java.istic.aco.editor.Recorder;
+package istic.aco.editor.Recorder;
+
+import istic.aco.editor.Command.CommandOriginator;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import main.java.istic.aco.editor.Command.CommandOriginator;
-
 /**
  * Recorder interface implementation, RecorderImpl
- * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
  *
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donnï¿½ Padonou
  */
 
 public class RecorderImpl implements Recorder {
-	private Deque<CommandFormat> commands = new ArrayDeque<CommandFormat>();
-	private boolean power = false;
+    private final Deque<CommandFormat> commands = new ArrayDeque<CommandFormat>();
+    private boolean power = false;
     
     /**
      * Save one command in the receiver
@@ -24,7 +24,7 @@ public class RecorderImpl implements Recorder {
 	public void save(CommandOriginator c) {
 		if(power) {
 			if(c==null) {
-				throw new NullPointerException("La commande passée doit etre non nul");
+				throw new NullPointerException("La commande passï¿½e doit etre non nul");
 			}else {
 				commands.addFirst(new CommandFormat(c,c.save()));
 			}

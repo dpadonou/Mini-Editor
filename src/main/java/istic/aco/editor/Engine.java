@@ -1,13 +1,13 @@
 
-package main.java.istic.aco.editor;
+package istic.aco.editor;
 
 //import java.util.Optional;
-//import main.java.istic.aco.editor.Memento.Memento;
+//import istic.aco.editor.Memento.Memento;
 
 /**
  * Engine Interface
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public interface Engine {

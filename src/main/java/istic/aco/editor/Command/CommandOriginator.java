@@ -1,9 +1,9 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
 
 /**
  * 
  * @author Arnauld Cyriaque
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 

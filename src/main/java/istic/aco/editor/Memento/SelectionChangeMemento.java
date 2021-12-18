@@ -1,8 +1,8 @@
-package main.java.istic.aco.editor.Memento;
+package istic.aco.editor.Memento;
 /**
  * Concrete Memento selectionChangeMemento
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public class SelectionChangeMemento implements Memento {
@@ -38,7 +38,7 @@ public class SelectionChangeMemento implements Memento {
 	 */
 	 public boolean test(int beginIndex, int endIndex) throws IllegalArgumentException {
 	        if ( beginIndex<0 || endIndex<0 || beginIndex>=endIndex) {
-	        	throw new IllegalArgumentException("Vous devez passé des paramètres valides");
+	        	throw new IllegalArgumentException("Vous devez passï¿½ des paramï¿½tres valides");
 	        } else return true;
 	    
 	 }

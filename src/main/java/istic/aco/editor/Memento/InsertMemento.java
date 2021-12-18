@@ -1,9 +1,9 @@
-package main.java.istic.aco.editor.Memento;
+package istic.aco.editor.Memento;
 
 /**
  * Concrete Memento insertMemento
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public class InsertMemento implements Memento {
@@ -38,7 +38,7 @@ public class InsertMemento implements Memento {
 	 */
 	 public boolean test(String s) throws NullPointerException {
 	        if (s==null) {
-	        	throw new NullPointerException("Vous devez passé une chaine de caractère ");
+	        	throw new NullPointerException("Vous devez passï¿½ une chaine de caractï¿½re ");
 	        } else return true;
 	    
 	 }

@@ -1,26 +1,23 @@
-package test.java.editor;
+package editor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import istic.aco.editor.Command.*;
+import istic.aco.editor.EngineImpl;
+import istic.aco.editor.EngineOriginator;
+import istic.aco.editor.Invoker.InvokerImpl;
+import istic.aco.editor.Recorder.Recorder;
+import istic.aco.editor.Recorder.RecorderImpl;
+import istic.aco.editor.Recorder.UndoManager;
+import istic.aco.editor.Recorder.UndoManagerImpl;
+import istic.aco.editor.Selection;
+import istic.aco.editor.SelectionImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import main.java.istic.aco.editor.Engine;
-import main.java.istic.aco.editor.EngineImpl;
-import main.java.istic.aco.editor.Selection;
-import main.java.istic.aco.editor.SelectionImpl;
-import main.java.istic.aco.editor.Command.CopyCommand;
-import main.java.istic.aco.editor.Command.CutCommand;
-import main.java.istic.aco.editor.Command.InsertCommand;
-import main.java.istic.aco.editor.Command.PasteCommand;
-import main.java.istic.aco.editor.Command.SelectionChangeCommand;
-import main.java.istic.aco.editor.Invoker.InvokerImpl;
-import main.java.istic.aco.editor.Recorder.Recorder;
-import main.java.istic.aco.editor.Recorder.RecorderImpl;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InvokerTest {
-	InvokerImpl invoker;
+    InvokerImpl invoker;
     SelectionChangeCommand selectionChangeCommand;
     InsertCommand insertCommand;
     PasteCommand pasteCommand;
@@ -28,9 +25,10 @@ public class InvokerTest {
     CutCommand cutCommand;
     StringBuilder stringBuilder;
     Selection selection;
-    Engine engine;
+    EngineOriginator engine;
+    UndoManager undoManager;
 
-    Recorder recorder;                                                
+    Recorder recorder;
 
     @BeforeEach
     @Test
@@ -40,12 +38,13 @@ public class InvokerTest {
         selection = new SelectionImpl(21, 104, stringBuilder);
 
         engine = new EngineImpl(stringBuilder, selection);
+        undoManager = new UndoManagerImpl(engine);
         recorder = new RecorderImpl();
         invoker = new InvokerImpl();
-        insertCommand = new InsertCommand(engine, invoker, recorder);
-        pasteCommand = new PasteCommand(engine, recorder);
-        copyCommand = new CopyCommand(engine, recorder);
-        cutCommand = new CutCommand(engine, recorder);
+        insertCommand = new InsertCommand(engine, invoker, recorder, undoManager);
+        pasteCommand = new PasteCommand(engine, recorder, undoManager);
+        copyCommand = new CopyCommand(engine, recorder, undoManager);
+        cutCommand = new CutCommand(engine, recorder, undoManager);
 
     }
 
@@ -73,7 +72,7 @@ public class InvokerTest {
     @Test
     @DisplayName("SelectionChange should change the index of the selection")
     void selectionChangeShouldChangeTheIndexOfTheSelection() {
-        selectionChangeCommand = new SelectionChangeCommand(selection, invoker, recorder);
+        selectionChangeCommand = new SelectionChangeCommand(engine, invoker, recorder, undoManager);
         invoker.setCommand("selection", selectionChangeCommand);
 
         invoker.setBeginIndex(60);
@@ -109,7 +108,7 @@ public class InvokerTest {
         invoker.setCommand("paste", pasteCommand);
 
         //Changer les index de la s�lection pour recoller au m�me endroit (pas obligatoire)
-        selectionChangeCommand = new SelectionChangeCommand(selection, invoker, recorder);
+        selectionChangeCommand = new SelectionChangeCommand(engine, invoker, recorder, undoManager);
         invoker.setCommand("selection", selectionChangeCommand);
         invoker.setBeginIndex(21);
         invoker.setEndIndex(21);

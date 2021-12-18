@@ -1,27 +1,30 @@
-package main.java.istic.aco.editor.Recorder;
+package istic.aco.editor.Recorder;
+
+import istic.aco.editor.Memento.Memento;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Memento.Memento;
 /**
  * UndoManager, Recorder for engine
- * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
  *
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donnï¿½ Padonou
  */
 public interface UndoManager {
-	/**
-	 * Save engine state
-	 * @param m The memento who contains engine state
-	 * @throws IllegalArgumentException if the memento is null
-	 */
-   public void save( Optional<Memento> m) throws IllegalArgumentException;
-   /**
-    * Cancel the last engine state
-    */
-   public void undo();
-   /**
-    * Reset the last engine state
-    */
-   public void redo();
+    /**
+     * Save engine state
+     * @param m The memento who contains engine state
+     * @throws IllegalArgumentException if the memento is null
+     */
+    void save(Optional<Memento> m) throws IllegalArgumentException;
+
+    /**
+     * Cancel the last engine state
+     */
+    void undo();
+
+    /**
+     * Reset the last engine state
+     */
+    void redo();
 }

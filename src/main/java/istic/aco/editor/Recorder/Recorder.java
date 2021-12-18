@@ -1,30 +1,34 @@
-package main.java.istic.aco.editor.Recorder;
+package istic.aco.editor.Recorder;
 
-import main.java.istic.aco.editor.Command.CommandOriginator;
+import istic.aco.editor.Command.CommandOriginator;
 /**
  * Recorder interface 
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public interface Recorder {
-	/**
-	 * Save one command
-	 * @param c the command who wants to save
-	 * @throws NullPointerException if the command is null
-	 */
-    public void save(CommandOriginator c) throws NullPointerException;
+    /**
+     * Save one command
+     *
+     * @param c the command who wants to save
+     * @throws NullPointerException if the command is null
+     */
+    void save(CommandOriginator c) throws NullPointerException;
+
     /**
      * Start the recorder
      */
-    public void start();
+    void start();
+
     /**
      * Turn off the recorder
      */
-    public void stop();
-     /**
-      * Replay the last command who had been save in the recorder
-      */
-    public void replay();
+    void stop();
+
+    /**
+     * Replay the last command who had been save in the recorder
+     */
+    void replay();
     
 }

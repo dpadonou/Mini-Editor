@@ -1,20 +1,21 @@
-package main.java.istic.aco.editor.Invoker;
+package istic.aco.editor.Invoker;
+
+import istic.aco.editor.Command.Command;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import main.java.istic.aco.editor.Command.Command;
- /**
+/**
  * Invoker interface implementation, InvokerImpl
- * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
  *
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donnï¿½ Padonou
  */
 public class InvokerImpl implements Invoker {
      private String s;
      private int beginIndex;
-     private int endIndex;
-     private Map<String,Command> commands;
+	private int endIndex;
+	private final Map<String, Command> commands;
      
      
 	/**
@@ -107,7 +108,6 @@ public class InvokerImpl implements Invoker {
 		if(commands.get("cut") !=null) {
 			commands.get("cut").execute();
 		}
-
 	}
     
 	 /**
@@ -153,7 +153,7 @@ public class InvokerImpl implements Invoker {
 	@Override
 	public void setCommand(String s, Command command) throws IllegalArgumentException {
 		if(command == null || s.isEmpty()) {
-			throw new IllegalArgumentException("Vous devez passé des pramètres valides.");
+			throw new IllegalArgumentException("Vous devez passï¿½ des pramï¿½tres valides.");
 		}else {
 			commands.put(s, command);
 		}

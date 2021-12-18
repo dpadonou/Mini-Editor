@@ -1,6 +1,6 @@
-package main.java.istic.aco.editor;
+package istic.aco.editor;
 
-import main.java.istic.aco.editor.Command.Originator;
+import istic.aco.editor.Command.Originator;
 
 public interface EngineOriginator extends Engine,Originator {
 

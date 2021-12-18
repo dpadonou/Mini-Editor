@@ -1,20 +1,20 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
 
 //import java.util.Optional;
 
-//import main.java.istic.aco.editor.Memento.Memento;
+//import istic.aco.editor.Memento.Memento;
 
 /**
  * Command Interface
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public interface Command {
 	/**
 	 * Execute the user action
 	 */
-    public void execute();
+	void execute();
     
     /**
      * Create new Memento and save the command state

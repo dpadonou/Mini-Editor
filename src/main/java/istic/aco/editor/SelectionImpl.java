@@ -1,9 +1,9 @@
 
-package main.java.istic.aco.editor;
+package istic.aco.editor;
 /**
  * Selection Interface implementation, SelectionImpl
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public class SelectionImpl implements Selection {

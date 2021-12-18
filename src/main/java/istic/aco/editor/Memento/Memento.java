@@ -1,14 +1,15 @@
-package main.java.istic.aco.editor.Memento;
+package istic.aco.editor.Memento;
 /**
  * Memento Interface
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public interface Memento {
 	/**
 	 * Provides the parameters who saved
+	 *
 	 * @return an object table who contains all parameters
 	 */
-    public Object[] getParameter();
+	Object[] getParameter();
 }

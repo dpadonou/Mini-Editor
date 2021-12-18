@@ -1,11 +1,11 @@
-package main.java.istic.aco.editor.Memento;
+package istic.aco.editor.Memento;
 
-import main.java.istic.aco.editor.Selection;
+import istic.aco.editor.Selection;
 
 /**
  * Concrete Memento EngineMemento
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public class EngineMemento implements Memento {
@@ -46,7 +46,7 @@ public class EngineMemento implements Memento {
 	 */
 	public boolean test(String clipboard, StringBuilder buffer, Selection selection) throws IllegalArgumentException {
 		if(clipboard==null || buffer == null || selection == null) {
-			throw new IllegalArgumentException("Vous devez passé des paramètres non nulles");
+			throw new IllegalArgumentException("Vous devez passï¿½ des paramï¿½tres non nulles");
 		}else {
 			return true;
 		}

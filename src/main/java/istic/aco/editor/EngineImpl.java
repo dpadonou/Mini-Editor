@@ -1,15 +1,16 @@
 
-package main.java.istic.aco.editor;
+package istic.aco.editor;
+
+import istic.aco.editor.Memento.EngineMemento;
+import istic.aco.editor.Memento.Memento;
 
 import java.util.Optional;
-import main.java.istic.aco.editor.Memento.EngineMemento;
-import main.java.istic.aco.editor.Memento.Memento;
 
 /**
  * Engine Interface Implementation, EngineImpl
+ *
  * @author Arnauld Djedjemel
  * @author Dieu-Donn� Padonou
- *
  */
 public class EngineImpl implements EngineOriginator {
     private StringBuilder buffer;
@@ -17,7 +18,7 @@ public class EngineImpl implements EngineOriginator {
     private Selection selection;
 
     public EngineImpl() {
-        this.buffer = new StringBuilder("");
+        this.buffer = new StringBuilder();
         this.selection = new SelectionImpl();
     }
 

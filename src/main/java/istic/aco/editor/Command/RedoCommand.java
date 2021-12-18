@@ -1,17 +1,18 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
+
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Recorder.UndoManager;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Recorder.UndoManager;
 /**
  * Concrete Command, RedoCommand
- * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
  *
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donnï¿½ Padonou
  */
 public class RedoCommand implements CommandOriginator {
-	 private UndoManager undoManager;
+	private UndoManager undoManager;
 		/**
 		 * @param undoManager
 		 */
@@ -44,7 +45,7 @@ public class RedoCommand implements CommandOriginator {
 		 */
 		public boolean test(UndoManager undoManager) throws NullPointerException {
 		       if(undoManager==null) {
-		    	   throw new NullPointerException("Vous devez passer des paramètres non nul");
+		    	   throw new NullPointerException("Vous devez passer des paramï¿½tres non nul");
 		       }else {
 		    	   return true;
 		       }

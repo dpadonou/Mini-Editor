@@ -1,17 +1,18 @@
-package main.java.istic.aco.editor.Recorder;
+package istic.aco.editor.Recorder;
+
+import istic.aco.editor.Command.CommandOriginator;
+import istic.aco.editor.Memento.Memento;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Command.CommandOriginator;
-import main.java.istic.aco.editor.Memento.Memento;
 /**
  * Data structure to save in recorder,CommandFormat
- * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
  *
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donnï¿½ Padonou
  */
 public class CommandFormat {
-      private CommandOriginator command;
+	private CommandOriginator command;
       private Optional<Memento>  memento;
 	/**
 	 * @param command
@@ -57,7 +58,7 @@ public class CommandFormat {
 	 */
 	 public boolean test(CommandOriginator command) throws NullPointerException {
 	       if(command==null ) {
-	    	   throw new NullPointerException("Vous devez passer des paramètres non nul");
+	    	   throw new NullPointerException("Vous devez passer des paramï¿½tres non nul");
 	       }else {
 	    	   return true;
 	       }

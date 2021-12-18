@@ -1,52 +1,55 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
+
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Recorder.UndoManager;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Recorder.UndoManager;
 /**
  * Concrete Command, UndoCommand
- * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
  *
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donnï¿½ Padonou
  */
 public class UndoCommand implements CommandOriginator {
-    private UndoManager undoManager;  
-	/**
-	 * @param undoManager
-	 */
-	public UndoCommand(UndoManager undoManager) {
-		super();
-		if(test(undoManager)) {
-			this.undoManager = undoManager;
-		}
-	}
+    private UndoManager undoManager;
 
-	@Override
-	public void execute() {
-	    undoManager.undo();
-	}
+    /**
+     * @param undoManager .
+     */
+    public UndoCommand(UndoManager undoManager) {
+        super();
+        if (test(undoManager)) {
+            this.undoManager = undoManager;
+        }
+    }
 
-	@Override
-	public Optional<Memento> save() {
-		return Optional.empty();
-	}
+    @Override
+    public void execute() {
+        undoManager.undo();
+    }
 
-	@Override
-	public void restore(Memento m) throws IllegalArgumentException {
-		
-	}
-	/**
-	 * Test the constructor parameter
-	 * @param undoManager
-	 * @return true if the parameter is good
-	 * @throws NullPointerException if the parameter is null
-	 */
-	public boolean test(UndoManager undoManager) throws NullPointerException {
-	       if(undoManager==null) {
-	    	   throw new NullPointerException("Vous devez passer des paramètres non nul");
-	       }else {
-	    	   return true;
-	       }
-	 }
+    @Override
+    public Optional<Memento> save() {
+        return Optional.empty();
+    }
+
+    @Override
+    public void restore(Memento m) throws IllegalArgumentException {
+    }
+
+    /**
+     * Test the constructor parameter
+     *
+     * @param undoManager .
+     * @return true if the parameter is good
+     * @throws NullPointerException if the parameter is null
+     */
+    public boolean test(UndoManager undoManager) throws NullPointerException {
+        if (undoManager == null) {
+            throw new NullPointerException("Vous devez passer des paramï¿½tres non nul");
+        } else {
+            return true;
+        }
+    }
 }

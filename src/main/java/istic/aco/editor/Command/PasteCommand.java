@@ -1,16 +1,17 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
+
+import istic.aco.editor.EngineOriginator;
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Recorder.Recorder;
+import istic.aco.editor.Recorder.UndoManager;
 
 import java.util.Optional;
 
-import main.java.istic.aco.editor.EngineOriginator;
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Recorder.Recorder;
-import main.java.istic.aco.editor.Recorder.UndoManager;
 /**
  * Concrete Command, pasteCommand
- * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
  *
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donnï¿½ Padonou
  */
 public class PasteCommand implements CommandOriginator {
 	
@@ -28,7 +29,6 @@ public class PasteCommand implements CommandOriginator {
 			this.recorder = recorder;
 			this.undoManager = undoManager;
 		}
-		
 	}
 
     /**
@@ -37,9 +37,9 @@ public class PasteCommand implements CommandOriginator {
      */
 	@Override
 	public void execute() {
-		undoManager.save(engine.save());
 		engine.pasteClipboard();
 		recorder.save(this);
+		undoManager.save(engine.save());
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class PasteCommand implements CommandOriginator {
 	 */
 	 public boolean test(EngineOriginator engine,Recorder recorder,UndoManager undoManager) throws NullPointerException {
 	       if(engine==null || recorder==null || undoManager == null) {
-	    	   throw new NullPointerException("Vous devez passer des paramètres non nul");
+	    	   throw new NullPointerException("Vous devez passer des paramï¿½tres non nul");
 	       }else {
 	    	   return true;
 	       }
