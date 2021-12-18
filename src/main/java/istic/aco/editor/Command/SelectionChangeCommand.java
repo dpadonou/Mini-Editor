@@ -52,6 +52,8 @@ public class SelectionChangeCommand implements CommandOriginator{
 		engine.getSelection().setBeginIndex(this.beginIndex);
 		engine.getSelection().setEndIndex(this.endIndex);
 		recorder.save(this);
+		this.beginIndex = 0;
+		this.endIndex = 0;
 	}
 	@Override
 	public Optional<Memento> save() {

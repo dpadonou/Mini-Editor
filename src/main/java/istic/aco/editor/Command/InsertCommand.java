@@ -49,6 +49,7 @@ public class InsertCommand implements CommandOriginator {
 		}
 		engine.insert(this.s);   
 		recorder.save(this);
+		s = "";
 		
 	}
 

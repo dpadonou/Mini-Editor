@@ -42,7 +42,6 @@ public class InvokerTest {
         engine = new EngineImpl(stringBuilder, selection);
         recorder = new RecorderImpl();
         invoker = new InvokerImpl();
-
         insertCommand = new InsertCommand(engine, invoker, recorder);
         pasteCommand = new PasteCommand(engine, recorder);
         copyCommand = new CopyCommand(engine, recorder);
