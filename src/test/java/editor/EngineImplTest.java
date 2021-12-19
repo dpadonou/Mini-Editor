@@ -8,22 +8,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 /**
  * EngineImplTest for Engine test
+ *
  * @author Arnauld Djedjemel
  * @author Dieu-Donn� Padonou
- *
  */
 public class EngineImplTest {
 
-    private Engine engine;
-    private Engine engine2;
-    private StringBuilder stringBuilder;
-    private Selection selection;
-
-    public EngineImplTest() {
-    }
+    Engine engine;
+    Engine engine2;
+    StringBuilder stringBuilder;
+    Selection selection;
 
     @BeforeEach
     void setUp() {
@@ -107,9 +106,9 @@ public class EngineImplTest {
     }
 
     @Test
-    @DisplayName("Clipboard should be null if no cut or copy hasn't be done.")
+    @DisplayName("Clipboard should be empty if no cut or copy hasn't be done.")
     void getClipboardContentsAfterInstanciation() {
-        assertNull(engine.getClipboardContents());
+        assertEquals("", engine.getClipboardContents());
     }
 
     @Test
@@ -152,7 +151,7 @@ public class EngineImplTest {
         engine2.delete();
 
         assertEquals(newBuffer, engine2.getBufferContents());
-        assertNull(engine2.getClipboardContents());
+        assertEquals("", engine2.getClipboardContents());
     }
 
     @Test

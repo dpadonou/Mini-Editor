@@ -20,7 +20,7 @@ public class InsertCommand implements CommandOriginator {
     private Invoker inv;
     private Recorder recorder;
     private UndoManager undoManager;
-    private String s;
+    private String s = "";
 
     /**
      * @param engine      The Receiver where are the functions
@@ -67,8 +67,6 @@ public class InsertCommand implements CommandOriginator {
             Object[] t = m.getParameter();
             this.s = t[0].toString();
         }
-
-
     }
 
     /**
@@ -76,7 +74,8 @@ public class InsertCommand implements CommandOriginator {
      *
      * @param engine
      * @param recorder
-     * @param inv
+     * @param invoker
+     * @param undoManager
      * @return
      * @throws NullPointerException if the method parameters are null
      */
@@ -86,8 +85,6 @@ public class InsertCommand implements CommandOriginator {
         } else {
             return true;
         }
-
     }
-
 
 }

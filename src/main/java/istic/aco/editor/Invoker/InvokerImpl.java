@@ -43,7 +43,6 @@ public class InvokerImpl implements Invoker {
     	 }else {
     		 this.s = s;
     	 }
-		
 	}
 	
      /**
@@ -64,7 +63,6 @@ public class InvokerImpl implements Invoker {
     	 }else {
     		 this.beginIndex = beginIndex;
     	 }
-		
 	}
 
 	/**
@@ -96,8 +94,6 @@ public class InvokerImpl implements Invoker {
 		if(commands.get("selection") !=null) {
 			commands.get("selection").execute();
 		}
-		
-		
 	}
     
 	 /**
