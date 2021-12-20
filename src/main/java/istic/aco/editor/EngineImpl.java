@@ -38,7 +38,7 @@ public class EngineImpl implements EngineOriginator {
         if (buffer != null)
             this.buffer = buffer;
         else
-            throw new NullPointerException("Le buffer ne peut �tre nul.");
+            throw new NullPointerException("Le buffer ne peut être nul.");
     }
 
     @Override
@@ -103,7 +103,6 @@ public class EngineImpl implements EngineOriginator {
         } else {
             this.buffer.replace(this.selection.getBeginIndex(), this.selection.getEndIndex(), s);
         }
-
     }
 
     @Override
@@ -145,10 +144,4 @@ public class EngineImpl implements EngineOriginator {
             selection = (Selection) m.getParameter()[2];
         }
     }
-
-	/*@Override
-	public Optional<Memento> saveState() {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 }

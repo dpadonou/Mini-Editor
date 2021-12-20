@@ -46,9 +46,9 @@ public class InsertCommand implements CommandOriginator {
     public void execute() {
         if (this.s.isEmpty()) {
             this.s = inv.getS();
+            recorder.save(this);
         }
         engine.insert(this.s);
-        recorder.save(this);
         s = "";
         undoManager.save(engine.save());
     }
@@ -56,7 +56,6 @@ public class InsertCommand implements CommandOriginator {
     @Override
     public Optional<Memento> save() {
         return Optional.of(new InsertMemento(this.s));
-
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.util.Deque;
  */
 
 public class RecorderImpl implements Recorder {
+
     private final Deque<CommandFormat> commands = new ArrayDeque<CommandFormat>();
     private boolean power = false;
 
@@ -57,8 +58,9 @@ public class RecorderImpl implements Recorder {
         for (CommandFormat c : commands) {
             c.getCommand().restore(c.getMemento());
             c.getCommand().execute();
+            commands.remove(c);
         }
-        commands.clear();
+        //commands.clear();
     }
 
 }

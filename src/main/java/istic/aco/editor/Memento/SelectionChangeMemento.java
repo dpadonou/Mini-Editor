@@ -19,7 +19,6 @@ public class SelectionChangeMemento implements Memento {
 			this.beginIndex = beginIndex;
 			this.endIndex = endIndex;
 		}
-		
 	}
 
 	@Override
@@ -32,7 +31,9 @@ public class SelectionChangeMemento implements Memento {
 	
 	/**
 	 * Test if the parameter is good
-	 * @param s
+	 *
+	 * @param beginIndex
+	 * @param endIndex
 	 * @return
 	 * @throws IllegalArgumentException if one of the parameter is negative or beginIndex is tall than endIndex
 	 */
@@ -40,7 +41,6 @@ public class SelectionChangeMemento implements Memento {
 	        if ( beginIndex<0 || endIndex<0 || beginIndex>=endIndex) {
 	        	throw new IllegalArgumentException("Vous devez pass� des param�tres valides");
 	        } else return true;
-	    
 	 }
 
 }

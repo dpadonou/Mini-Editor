@@ -33,7 +33,7 @@ public class Replay implements CommandOriginator {
     }
 
     /**
-     * Lift an error if the parameters are null and send true if not.
+     * Lift an error if the parameters are nuell and send true if not.
      *
      * @param recorder
      * @return

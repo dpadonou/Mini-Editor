@@ -16,11 +16,7 @@ public class InvokerImpl implements Invoker {
      private int beginIndex;
 	private int endIndex;
 	private final Map<String, Command> commands;
-     
-     
-	/**
-	 * 
-	 */
+
 	public InvokerImpl() {
 		commands = new HashMap<String,Command>();
 	}
@@ -83,7 +79,6 @@ public class InvokerImpl implements Invoker {
     	 }else {
     		 this.endIndex = endIndex;
     	 }
-    	 
 	}
 
     /**
@@ -143,7 +138,6 @@ public class InvokerImpl implements Invoker {
 		if(commands.get("replay") !=null) {
 			commands.get("replay").execute();
 		}
-		
 	}
 
 	@Override
@@ -153,8 +147,6 @@ public class InvokerImpl implements Invoker {
 		}else {
 			commands.put(s, command);
 		}
-		
-		
 	}
 
 	@Override
@@ -169,7 +161,6 @@ public class InvokerImpl implements Invoker {
 		if(commands.get("redo") !=null) {
 			commands.get("redo").execute();
 		}
-		
 	}
         
 }

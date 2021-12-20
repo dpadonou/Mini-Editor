@@ -50,10 +50,11 @@ public class SelectionChangeCommand implements CommandOriginator {
         if (this.beginIndex == 0 && this.endIndex == 0) {
             this.beginIndex = inv.getBeginIndex();
             this.endIndex = inv.getEndIndex();
+            recorder.save(this);
         }
         engine.getSelection().setBeginIndex(this.beginIndex);
         engine.getSelection().setEndIndex(this.endIndex);
-        recorder.save(this);
+
         this.beginIndex = 0;
         this.endIndex = 0;
 
