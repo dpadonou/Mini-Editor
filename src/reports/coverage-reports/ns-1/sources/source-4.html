@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+    <title>Coverage Report > Selection</title>
+    <style type="text/css">
+        @import "../../css/coverage.css";
+        @import "../../css/highlight-idea.css";
+    </style>
+    <script src="../../js/highlight.pack.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div class="content">
+    <div class="breadCrumbs">
+        Current scope: <a href="../../index.html">all classes</a>
+        <span class="separator">|</span>
+        <a href="../index.html">istic.aco.editor</a>
+    </div>
+
+    <h1>Coverage Summary for Class: Selection (istic.aco.editor)</h1>
+
+    <table class="coverageStats">
+        <tr>
+            <th class="name">Class</th>
+        </tr>
+        <tr>
+            <td class="name">Selection</td>
+        </tr>
+
+    </table>
+
+    <br/>
+    <br/>
+
+
+    <pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package istic.aco.editor;
+<i class="no-highlight">2</i>&nbsp;/**
+<i class="no-highlight">3</i>&nbsp; * Selection Interface
+<i class="no-highlight">4</i>&nbsp; * @author Arnauld Djedjemel
+<i class="no-highlight">5</i>&nbsp; * @author Dieu-Donné Padonou
+<i class="no-highlight">6</i>&nbsp; *
+<i class="no-highlight">7</i>&nbsp; */
+<i class="no-highlight">8</i>&nbsp;public interface Selection {
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;	/**
+<i class="no-highlight">11</i>&nbsp;     * Provides the index of the first character designated
+<i class="no-highlight">12</i>&nbsp;     * by the selection.
+<i class="no-highlight">13</i>&nbsp;     *
+<i class="no-highlight">14</i>&nbsp;     * @return the begin Index
+<i class="no-highlight">15</i>&nbsp;     */
+<i class="no-highlight">16</i>&nbsp;    int getBeginIndex();
+<i class="no-highlight">17</i>&nbsp;    
+<i class="no-highlight">18</i>&nbsp;    /**
+<i class="no-highlight">19</i>&nbsp;     * Provides the index of the first character
+<i class="no-highlight">20</i>&nbsp;     * after the last character designated
+<i class="no-highlight">21</i>&nbsp;     * by the selection.
+<i class="no-highlight">22</i>&nbsp;     *
+<i class="no-highlight">23</i>&nbsp;     * @return the end index
+<i class="no-highlight">24</i>&nbsp;     */
+<i class="no-highlight">25</i>&nbsp;    int getEndIndex();
+<i class="no-highlight">26</i>&nbsp;    /**
+<i class="no-highlight">27</i>&nbsp;     * Provides the index of the first character in the buffer
+<i class="no-highlight">28</i>&nbsp;     *
+<i class="no-highlight">29</i>&nbsp;     * @return the buffer&#39;s begin index
+<i class="no-highlight">30</i>&nbsp;     */
+<i class="no-highlight">31</i>&nbsp;    int getBufferBeginIndex();
+<i class="no-highlight">32</i>&nbsp;    /**
+<i class="no-highlight">33</i>&nbsp;     * Provides the index of the first &quot;virtual&quot; character
+<i class="no-highlight">34</i>&nbsp;     * after the end of the buffer
+<i class="no-highlight">35</i>&nbsp;     *
+<i class="no-highlight">36</i>&nbsp;     * @return the post end buffer index
+<i class="no-highlight">37</i>&nbsp;     */
+<i class="no-highlight">38</i>&nbsp;    int getBufferEndIndex();
+<i class="no-highlight">39</i>&nbsp;    
+<i class="no-highlight">40</i>&nbsp;    /**
+<i class="no-highlight">41</i>&nbsp;     * Changes the value of the begin index of the selection
+<i class="no-highlight">42</i>&nbsp;     *
+<i class="no-highlight">43</i>&nbsp;     * @param beginIndex, must be within the buffer index range
+<i class="no-highlight">44</i>&nbsp;     * @throws IndexOutOfBoundsException if the beginIndex is out of bounds
+<i class="no-highlight">45</i>&nbsp;     * @throws IllegalArgumentException if the beginIndex is negative
+<i class="no-highlight">46</i>&nbsp;     */
+<i class="no-highlight">47</i>&nbsp;    void setBeginIndex(int var1) throws IndexOutOfBoundsException,IllegalArgumentException;
+<i class="no-highlight">48</i>&nbsp;   
+<i class="no-highlight">49</i>&nbsp;    /**
+<i class="no-highlight">50</i>&nbsp;     * Changes the value of the end index of the selection
+<i class="no-highlight">51</i>&nbsp;     *
+<i class="no-highlight">52</i>&nbsp;     * @param endIndex, must be within the buffer index range
+<i class="no-highlight">53</i>&nbsp;     * @throws IndexOutOfBoundsException if the endIndex is out of bounds
+<i class="no-highlight">54</i>&nbsp;     * @throws IllegalArgumentException if the endIndex is negative
+<i class="no-highlight">55</i>&nbsp;     */
+<i class="no-highlight">56</i>&nbsp;    void setEndIndex(int var1) throws IndexOutOfBoundsException,IllegalArgumentException;
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;    /**
+<i class="no-highlight">59</i>&nbsp;     * Provides the buffer who contains this selection
+<i class="no-highlight">60</i>&nbsp;     * @return the buffer instance
+<i class="no-highlight">61</i>&nbsp;     */
+<i class="no-highlight">62</i>&nbsp;    StringBuilder getBuffer();
+<i class="no-highlight">63</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+    (function () {
+        var msie = false, msie9 = false;
+        /*@cc_on
+          msie = true;
+          @if (@_jscript_version >= 9)
+            msie9 = true;
+          @end
+        @*/
+
+        if (!msie || msie && msie9) {
+            var codeBlock = document.getElementById('sourceCode');
+
+            if (codeBlock) {
+                hljs.highlightBlock(codeBlock);
+            }
+        }
+    })();
+</script>
+
+<div class="footer">
+
+    <div style="float:right;">generated on 2021-12-20 19:03</div>
+</div>
+</body>
+</html>

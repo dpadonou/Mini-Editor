@@ -45,9 +45,9 @@ public class RedoCommand implements CommandOriginator {
 		 */
 		public boolean test(UndoManager undoManager) throws NullPointerException {
 		       if(undoManager==null) {
-		    	   throw new NullPointerException("Vous devez passer des param�tres non nul");
+		    	   throw new NullPointerException("Vous devez passer des paramètres non nuls");
 		       }else {
 		    	   return true;
 		       }
-		 }
+		}
 }
