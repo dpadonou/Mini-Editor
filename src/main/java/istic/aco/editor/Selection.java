@@ -1,8 +1,8 @@
-package istic.aco.editor;
+package main.java.istic.aco.editor;
 /**
  * Selection Interface
  * @author Arnauld Djedjemel
- * @author Dieu-Donné Padonou
+ * @author Dieu-Donnï¿½ Padonou
  *
  */
 public interface Selection {
@@ -40,7 +40,7 @@ public interface Selection {
     /**
      * Changes the value of the begin index of the selection
      *
-     * @param beginIndex, must be within the buffer index range
+     * @param var1,the begin index who  must be within the buffer index range
      * @throws IndexOutOfBoundsException if the beginIndex is out of bounds
      * @throws IllegalArgumentException if the beginIndex is negative
      */
@@ -48,8 +48,7 @@ public interface Selection {
    
     /**
      * Changes the value of the end index of the selection
-     *
-     * @param endIndex, must be within the buffer index range
+     * @param var1,the end index who must be within the buffer index range
      * @throws IndexOutOfBoundsException if the endIndex is out of bounds
      * @throws IllegalArgumentException if the endIndex is negative
      */

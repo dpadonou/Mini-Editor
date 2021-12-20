@@ -1,12 +1,13 @@
-package editor;
+package test.java.editor;
 
-import istic.aco.editor.SelectionImpl;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import main.java.istic.aco.editor.SelectionImpl;
 /**
  * SelectionImplTest for Selection test
  * @author Arnauld Djedjemel

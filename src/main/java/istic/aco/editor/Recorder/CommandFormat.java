@@ -1,9 +1,9 @@
-package istic.aco.editor.Recorder;
-
-import istic.aco.editor.Command.CommandOriginator;
-import istic.aco.editor.Memento.Memento;
+package main.java.istic.aco.editor.Recorder;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.Command.CommandOriginator;
+import main.java.istic.aco.editor.Memento.Memento;
 
 /**
  * Data structure to save in recorder,CommandFormat
@@ -16,8 +16,8 @@ public class CommandFormat {
     private Optional<Memento> memento;
 
     /**
-     * @param command
-     * @param memento
+     * @param command, a command
+     * @param memento, a memento
      */
     public CommandFormat(CommandOriginator command, Optional<Memento> memento) {
         super();
@@ -58,7 +58,7 @@ public class CommandFormat {
     /**
      * Test the constructor parameter
      *
-     * @param command
+     * @param command a command
      * @return true if the parameter is good
      * @throws NullPointerException if the parameter is null
      */

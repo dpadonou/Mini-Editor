@@ -1,8 +1,7 @@
-package istic.aco.editor.Memento;
+package main.java.istic.aco.editor.Memento;
 
 /**
- * Concrete Memento EngineMemento
- *
+ * Concrete Memento EngineMemento, the engine state
  * @author Arnauld Djedjemel
  * @author Dieu-Donn� Padonou
  */
@@ -13,10 +12,10 @@ public class EngineMemento implements Memento {
     private int endIndex = 0;
 
     /**
-     * @param clipboard
-     * @param buffer
-     * @param beginIndex
-     * @param endIndex
+     * @param clipboard the clipboard of the engine
+     * @param buffer the engine buffer
+     * @param beginIndex the begin index of the engine selection's
+     * @param endIndex the end index of the engine selection's
      */
     public EngineMemento(String clipboard, String buffer, int beginIndex, int endIndex) {
         super();
@@ -38,15 +37,15 @@ public class EngineMemento implements Memento {
         return t;
     }
 
-    /**
-     * Test if the parameter is good
-     *
-     * @param clipboard the engine clipboard
-     * @param buffer    the engine buffer
-     * @param selection the engine selection
-     * @return true if all paramets is good and error if not
-     * @throws IllegalArgumentException if at least one parameter is bad
-     */
+/**
+ * Test if the parameter is good
+ * @param clipboard the clipboard of the engine
+ * @param buffer the engine buffer
+ * @param beginIndex the begin index of the engine selection's
+ * @param endIndex the end index of the engine selection's
+ * @return true if all parameters are good
+ * @throws IllegalArgumentException if the parameters are not good
+ */
     public boolean test(String clipboard, String buffer, int beginIndex, int endIndex) throws IllegalArgumentException {
         if (clipboard == null || buffer == null || beginIndex <= 0 || endIndex <= 0) {
             throw new IllegalArgumentException("Vous devez pass� des param�tres non nulles");

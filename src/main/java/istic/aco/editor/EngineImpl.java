@@ -1,9 +1,9 @@
-package istic.aco.editor;
-
-import istic.aco.editor.Memento.EngineMemento;
-import istic.aco.editor.Memento.Memento;
+package main.java.istic.aco.editor;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.Memento.EngineMemento;
+import main.java.istic.aco.editor.Memento.Memento;
 
 /**
  * Engine Interface Implementation, EngineImpl
@@ -15,12 +15,19 @@ public class EngineImpl implements EngineOriginator {
     private StringBuilder buffer;
     private String clipboard = "";
     private Selection selection;
-
+  
+    /**
+     * Constructor to instanciate the engine whitout parameter
+     */
     public EngineImpl() {
         this.buffer = new StringBuilder();
         this.selection = new SelectionImpl();
     }
-
+   /**
+    * 
+    * @param buffer of the engine
+    * @param s, the selection of the engine
+    */
     public EngineImpl(StringBuilder buffer, Selection s) {
         if (test(buffer, s)) {
             this.buffer = buffer;
@@ -55,15 +62,6 @@ public class EngineImpl implements EngineOriginator {
         } else {
             throw new NullPointerException("La selection ne peut �tre nulle.");
         }
-    }
-
-    /**
-     * Provides the selection content's
-     *
-     * @return the buffer content's for the selection
-     */
-    public String getSelectionContents() {
-        return this.buffer.substring(this.selection.getBeginIndex(), this.selection.getEndIndex());
     }
 
     @Override
@@ -110,9 +108,8 @@ public class EngineImpl implements EngineOriginator {
 
     /**
      * Test if the constructor parameters are good.
-     *
-     * @param buffer
-     * @param selection
+     * @param buffer the buffer of the engine
+     * @param selection the selection of the engine
      * @return true if the parameters are good and error if not.
      * @throws IllegalArgumentException if the buffer don't match.
      * @throws NullPointerException     if the buffer or the selection are null

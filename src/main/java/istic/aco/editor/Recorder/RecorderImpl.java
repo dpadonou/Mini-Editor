@@ -1,9 +1,9 @@
-package istic.aco.editor.Recorder;
-
-import istic.aco.editor.Command.CommandOriginator;
+package main.java.istic.aco.editor.Recorder;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+
+import main.java.istic.aco.editor.Command.CommandOriginator;
 
 /**
  * Recorder interface implementation, RecorderImpl

@@ -1,9 +1,9 @@
-package istic.aco.editor.Invoker;
-
-import istic.aco.editor.Command.Command;
+package main.java.istic.aco.editor.Invoker;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import main.java.istic.aco.editor.Command.Command;
 
 /**
  * Invoker interface implementation, InvokerImpl
@@ -16,7 +16,10 @@ public class InvokerImpl implements Invoker {
      private int beginIndex;
 	private int endIndex;
 	private final Map<String, Command> commands;
-
+    
+	/**
+	 * Construcrtor for invoker
+	 */
 	public InvokerImpl() {
 		commands = new HashMap<String,Command>();
 	}

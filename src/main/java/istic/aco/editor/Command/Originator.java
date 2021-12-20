@@ -1,9 +1,13 @@
-package istic.aco.editor.Command;
-
-import istic.aco.editor.Memento.Memento;
+package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
 
+import main.java.istic.aco.editor.Memento.Memento;
+/**
+ * Originator Interface
+ * @author Arnauld Djedjemel
+ * @author Dieu-Donné Padonou
+ */
 public interface Originator {
     /**
      * Create new Memento and save the command state

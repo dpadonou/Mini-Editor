@@ -1,11 +1,11 @@
-package istic.aco.editor.Command;
-
-import istic.aco.editor.EngineOriginator;
-import istic.aco.editor.Memento.Memento;
-import istic.aco.editor.Recorder.Recorder;
-import istic.aco.editor.Recorder.UndoManager;
+package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.EngineOriginator;
+import main.java.istic.aco.editor.Memento.Memento;
+import main.java.istic.aco.editor.Recorder.Recorder;
+import main.java.istic.aco.editor.Recorder.UndoManager;
 
 /**
  * Concrete Command, pasteCommand
@@ -22,6 +22,7 @@ public class PasteCommand implements CommandOriginator {
 	/**
 	 * @param engine The Receiver where are the functions
 	 * @param recorder The recorder for record the command
+	 * @param undoManager, the manager for manage the engine state
 	 */
 	public PasteCommand(EngineOriginator engine,Recorder recorder,UndoManager undoManager) {
 		if(test(engine,recorder,undoManager)) {
@@ -44,9 +45,10 @@ public class PasteCommand implements CommandOriginator {
 	
 	/**
 	 * Lift an error if the parameters are null and send true if not.
-	 * @param engine
-	 * @param recorder
-	 * @return
+	 * @param engine the receiver who contains the paste function
+	 * @param recorder the recorder for store the command
+	 * @param undoManager the manager for manage the engine state
+	 * @return true if all parameters are good
 	 * @throws NullPointerException if the method parameters are null
 	 */
 	 public boolean test(EngineOriginator engine,Recorder recorder,UndoManager undoManager) throws NullPointerException {
@@ -65,6 +67,5 @@ public class PasteCommand implements CommandOriginator {
 
 	@Override
 	public void restore(Memento m) throws IllegalArgumentException {
-		
 	}
 }

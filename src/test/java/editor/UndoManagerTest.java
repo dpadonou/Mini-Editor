@@ -1,23 +1,31 @@
-package editor;
+package test.java.editor;
 
-import istic.aco.editor.Command.*;
-import istic.aco.editor.EngineImpl;
-import istic.aco.editor.EngineOriginator;
-import istic.aco.editor.Invoker.InvokerImpl;
-import istic.aco.editor.Recorder.Recorder;
-import istic.aco.editor.Recorder.RecorderImpl;
-import istic.aco.editor.Recorder.UndoManager;
-import istic.aco.editor.Recorder.UndoManagerImpl;
-import istic.aco.editor.Selection;
-import istic.aco.editor.SelectionImpl;
-import istic.aco.editor.exceptions.CannotRedoException;
-import istic.aco.editor.exceptions.CannotUndoException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import main.java.istic.aco.editor.EngineImpl;
+import main.java.istic.aco.editor.EngineOriginator;
+import main.java.istic.aco.editor.Selection;
+import main.java.istic.aco.editor.SelectionImpl;
+import main.java.istic.aco.editor.Command.Command;
+import main.java.istic.aco.editor.Command.CopyCommand;
+import main.java.istic.aco.editor.Command.CutCommand;
+import main.java.istic.aco.editor.Command.InsertCommand;
+import main.java.istic.aco.editor.Command.PasteCommand;
+import main.java.istic.aco.editor.Command.RedoCommand;
+import main.java.istic.aco.editor.Command.SelectionChangeCommand;
+import main.java.istic.aco.editor.Command.UndoCommand;
+import main.java.istic.aco.editor.Invoker.InvokerImpl;
+import main.java.istic.aco.editor.Recorder.Recorder;
+import main.java.istic.aco.editor.Recorder.RecorderImpl;
+import main.java.istic.aco.editor.Recorder.UndoManager;
+import main.java.istic.aco.editor.Recorder.UndoManagerImpl;
+import main.java.istic.aco.editor.exceptions.CannotRedoException;
+import main.java.istic.aco.editor.exceptions.CannotUndoException;
 
 public class UndoManagerTest {
     InvokerImpl invoker;

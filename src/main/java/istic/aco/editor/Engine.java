@@ -1,5 +1,5 @@
 
-package istic.aco.editor;
+package main.java.istic.aco.editor;
 
 //import java.util.Optional;
 //import istic.aco.editor.Memento.Memento;
@@ -45,7 +45,7 @@ public interface Engine {
     void pasteClipboard();
     /**
      * Inserts a string in the buffer, which replaces the contents of the selection
-     * @param s the text to insert
+     * @param var1, the text to insert
      * @throws IllegalArgumentException if the string is empty
      */
     void insert(String var1) throws IllegalArgumentException;
@@ -62,13 +62,13 @@ public interface Engine {
     StringBuilder getBuffer();
    /**
     * Set the engine buffer's.
-    * @param buffer
+    * @param buffer, the engine buffer's
     * @throws NullPointerException if the buffer is null
     */
     void setBuffer(StringBuilder buffer) throws NullPointerException;
    /**
     * Set the engine selection's.
-    * @param selection
+    * @param selection the engine selection's
     * @throws IllegalArgumentException if the buffer selection's don't match
     * @throws NullPointerException if the selection is null
     */

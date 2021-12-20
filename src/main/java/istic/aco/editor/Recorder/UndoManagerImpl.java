@@ -1,14 +1,14 @@
-package istic.aco.editor.Recorder;
-
-import istic.aco.editor.EngineOriginator;
-import istic.aco.editor.Memento.EngineMemento;
-import istic.aco.editor.Memento.Memento;
-import istic.aco.editor.exceptions.CannotRedoException;
-import istic.aco.editor.exceptions.CannotUndoException;
+package main.java.istic.aco.editor.Recorder;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Optional;
+
+import main.java.istic.aco.editor.EngineOriginator;
+import main.java.istic.aco.editor.Memento.EngineMemento;
+import main.java.istic.aco.editor.Memento.Memento;
+import main.java.istic.aco.editor.exceptions.CannotRedoException;
+import main.java.istic.aco.editor.exceptions.CannotUndoException;
 
 /**
  * UndoManager interface implementation, UndoManagerImpl
@@ -22,7 +22,7 @@ public class UndoManagerImpl implements UndoManager {
     private EngineOriginator engine;
 
     /**
-     * @param engine
+     * @param engine, a engine
      */
     public UndoManagerImpl(EngineOriginator engine) {
         super();
@@ -65,7 +65,7 @@ public class UndoManagerImpl implements UndoManager {
     /**
      * Test the constructor parameter
      *
-     * @param engine
+     * @param engine, a engine
      * @return true if the parameter is good
      * @throws NullPointerException if the parameter is null
      */

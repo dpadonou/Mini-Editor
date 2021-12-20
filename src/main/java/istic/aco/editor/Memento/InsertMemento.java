@@ -1,4 +1,4 @@
-package istic.aco.editor.Memento;
+package main.java.istic.aco.editor.Memento;
 
 /**
  * Concrete Memento insertMemento
@@ -30,9 +30,8 @@ public class InsertMemento implements Memento {
 
     /**
      * Test if the parameter is good
-     *
-     * @param s
-     * @return
+     * @param s the string to insert
+     * @return true if the parameter is good
      * @throws NullPointerException if the parameter is null
      */
     public boolean test(String s) throws NullPointerException {

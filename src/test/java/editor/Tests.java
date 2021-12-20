@@ -1,21 +1,34 @@
-package editor;
+package test.java.editor;
 
-import istic.aco.editor.Command.*;
-import istic.aco.editor.*;
-import istic.aco.editor.Invoker.InvokerImpl;
-import istic.aco.editor.Recorder.Recorder;
-import istic.aco.editor.Recorder.RecorderImpl;
-import istic.aco.editor.Recorder.UndoManager;
-import istic.aco.editor.Recorder.UndoManagerImpl;
-import istic.aco.editor.exceptions.CannotRedoException;
-import istic.aco.editor.exceptions.CannotUndoException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import main.java.istic.aco.editor.Engine;
+import main.java.istic.aco.editor.EngineImpl;
+import main.java.istic.aco.editor.EngineOriginator;
+import main.java.istic.aco.editor.Selection;
+import main.java.istic.aco.editor.SelectionImpl;
+import main.java.istic.aco.editor.Command.Command;
+import main.java.istic.aco.editor.Command.CopyCommand;
+import main.java.istic.aco.editor.Command.CutCommand;
+import main.java.istic.aco.editor.Command.InsertCommand;
+import main.java.istic.aco.editor.Command.PasteCommand;
+import main.java.istic.aco.editor.Command.RedoCommand;
+import main.java.istic.aco.editor.Command.Replay;
+import main.java.istic.aco.editor.Command.SelectionChangeCommand;
+import main.java.istic.aco.editor.Command.UndoCommand;
+import main.java.istic.aco.editor.Invoker.InvokerImpl;
+import main.java.istic.aco.editor.Recorder.Recorder;
+import main.java.istic.aco.editor.Recorder.RecorderImpl;
+import main.java.istic.aco.editor.Recorder.UndoManager;
+import main.java.istic.aco.editor.Recorder.UndoManagerImpl;
+import main.java.istic.aco.editor.exceptions.CannotRedoException;
+import main.java.istic.aco.editor.exceptions.CannotUndoException;
 
 public class Tests {
     Engine engine;
@@ -49,7 +62,7 @@ public class Tests {
         this.selection = new SelectionImpl(3, 20, stringBuilder);
         engine2 = new EngineImpl(stringBuilder, selection);
 
-        testBf = new StringBuilder("Buffer créer pour faire des test sur les getters et getters setters.");
+        testBf = new StringBuilder("Buffer crï¿½er pour faire des test sur les getters et getters setters.");
         sp = new SelectionImpl(2, 12, testBf);
 
         stringBuilder1 = new StringBuilder("Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
@@ -218,7 +231,7 @@ public class Tests {
     @Test
     @DisplayName("End index should be greater 0")
     void EndIndexShouldBeGreaterThan0() {
-        Assertions.assertDoesNotThrow(() -> new SelectionImpl(0, 0, testBf), "L'index de fin doit être supérieure ou égale à 0.");
+        Assertions.assertDoesNotThrow(() -> new SelectionImpl(0, 0, testBf), "L'index de fin doit ï¿½tre supï¿½rieure ou ï¿½gale ï¿½ 0.");
     }
 
     @Test
@@ -418,7 +431,7 @@ public class Tests {
 
         //Trying to go back to the first selection begin and end index by calling recorder.replay()
         invoker.replay();
-        //The beginIndex and the endIndex had returned to their prévious value : 60 and 230
+        //The beginIndex and the endIndex had returned to their prï¿½vious value : 60 and 230
         assertEquals(60, selection1.getBeginIndex());
         assertEquals(230, selection1.getEndIndex());
     }
@@ -431,7 +444,7 @@ public class Tests {
         invoker.setCommand("selection", selectionChangeCommand);
         invoker.setCommand("replay", replayCommand);
 
-        //Vérification de l'état initial du buffer
+        //Vï¿½rification de l'ï¿½tat initial du buffer
         assertEquals(stringBuilder1.toString(), engine1.getBufferContents());
 
         //Start recording
@@ -482,7 +495,7 @@ public class Tests {
         invoker.setCommand("selection", selectionChangeCommand);
         invoker.setCommand("replay", replayCommand);
 
-        //Vérification de l'état initial du buffer
+        //Vï¿½rification de l'ï¿½tat initial du buffer
         assertEquals(stringBuilder1.toString(), engine1.getBufferContents());
 
         //Start recording

@@ -1,4 +1,4 @@
-package istic.aco.editor.Memento;
+package main.java.istic.aco.editor.Memento;
 /**
  * Concrete Memento selectionChangeMemento
  * @author Arnauld Djedjemel
@@ -10,8 +10,8 @@ public class SelectionChangeMemento implements Memento {
     private int endIndex;
     
 	/**
-	 * @param beginIndex
-	 * @param endIndex
+	 * @param beginIndex the begin index of the selection
+	 * @param endIndex the end index of the selection
 	 */
 	public SelectionChangeMemento(int beginIndex, int endIndex) {
 		super();
@@ -31,10 +31,9 @@ public class SelectionChangeMemento implements Memento {
 	
 	/**
 	 * Test if the parameter is good
-	 *
-	 * @param beginIndex
-	 * @param endIndex
-	 * @return
+	 * @param beginIndex the begin index of the selection
+	 * @param endIndex the end index of the selection
+	 * @return true if all parameters are good
 	 * @throws IllegalArgumentException if one of the parameter is negative or beginIndex is tall than endIndex
 	 */
 	 public boolean test(int beginIndex, int endIndex) throws IllegalArgumentException {

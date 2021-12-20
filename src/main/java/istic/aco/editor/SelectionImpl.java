@@ -1,17 +1,22 @@
-package istic.aco.editor;
+package main.java.istic.aco.editor;
 
 /**
  * Selection Interface implementation, SelectionImpl
  *
  * @author Arnauld Djedjemel
- * @author Dieu-Donn� Padonou
+ * @author Dieu-Donné  Padonou
  */
 public class SelectionImpl implements Selection {
     static int BUFFER_BEGIN_INDEX = 0;
     private int beginIndex;
     private int endIndex;
     private StringBuilder buffer;
-
+  /**
+   * Constructor the selection
+   * @param beginIndex the begin index of the selection
+   * @param endIndex the end index of the selection
+   * @param buffer the engine buffer
+   */
     public SelectionImpl(int beginIndex, int endIndex, StringBuilder buffer) {
         if (test(beginIndex, endIndex, buffer)) {
             this.beginIndex = beginIndex;
@@ -19,6 +24,9 @@ public class SelectionImpl implements Selection {
             this.buffer = buffer;
         }
     }
+    /**
+     * Constructor to instanciate the selection whitout parameter
+     */
 
     public SelectionImpl() {
 
@@ -74,8 +82,16 @@ public class SelectionImpl implements Selection {
     public int getBufferEndIndex() {
         return this.buffer.length() - 1;
     }
-
-    public boolean test(int begin, int end, StringBuilder bf) {
+  /**
+   * Lift an error if the parameters are null and send true if not.
+   * @param begin the beginIndex
+   * @param end the endIndex
+   * @param bf the buffer
+   * @return true if all parameters are good
+   * @throws IllegalArgumentException if the parameters are not good
+   * @throws IndexOutOfBoundsException if the parameter 'end' if tall than the buffer length
+   */
+    public boolean test(int begin, int end, StringBuilder bf) throws IllegalArgumentException,IndexOutOfBoundsException{
         if (end <= bf.length()) {
             if (end < 0) {
                 throw new IllegalArgumentException("L'index de fin doit être supérieure ou égale à 0.");

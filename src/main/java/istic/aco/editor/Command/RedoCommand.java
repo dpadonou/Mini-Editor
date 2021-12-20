@@ -1,9 +1,9 @@
-package istic.aco.editor.Command;
-
-import istic.aco.editor.Memento.Memento;
-import istic.aco.editor.Recorder.UndoManager;
+package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.Memento.Memento;
+import main.java.istic.aco.editor.Recorder.UndoManager;
 
 /**
  * Concrete Command, RedoCommand
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class RedoCommand implements CommandOriginator {
 	private UndoManager undoManager;
 		/**
-		 * @param undoManager
+		 * @param undoManager, the manager for manage the engine state
 		 */
 		public RedoCommand(UndoManager undoManager) {
 			super();
@@ -39,9 +39,9 @@ public class RedoCommand implements CommandOriginator {
 		}
 		/**
 		 * Test the constructor parameter's
-		 * @param undoManager
+		 * @param undoManager,the manager for manage the engine state
 		 * @return true if the parameter is good
-		 * @throws NullPointerException
+		 * @throws NullPointerException if the parameter is null
 		 */
 		public boolean test(UndoManager undoManager) throws NullPointerException {
 		       if(undoManager==null) {

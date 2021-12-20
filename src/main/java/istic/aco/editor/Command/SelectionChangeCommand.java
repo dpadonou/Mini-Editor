@@ -1,14 +1,14 @@
-package istic.aco.editor.Command;
-
-import istic.aco.editor.Engine;
-import istic.aco.editor.EngineOriginator;
-import istic.aco.editor.Invoker.Invoker;
-import istic.aco.editor.Memento.Memento;
-import istic.aco.editor.Memento.SelectionChangeMemento;
-import istic.aco.editor.Recorder.Recorder;
-import istic.aco.editor.Recorder.UndoManager;
+package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.Engine;
+import main.java.istic.aco.editor.EngineOriginator;
+import main.java.istic.aco.editor.Invoker.Invoker;
+import main.java.istic.aco.editor.Memento.Memento;
+import main.java.istic.aco.editor.Memento.SelectionChangeMemento;
+import main.java.istic.aco.editor.Recorder.Recorder;
+import main.java.istic.aco.editor.Recorder.UndoManager;
 
 /**
  * Concrete Command, selectionChangeCommand
@@ -29,7 +29,7 @@ public class SelectionChangeCommand implements CommandOriginator {
      * @param engine      The receiver where are the functions
      * @param inv         The invoker who call this concrete command
      * @param recorder    for record this command
-     * @param undoManager .
+     * @param undoManager The manager who manage the engine state
      */
     public SelectionChangeCommand(EngineOriginator engine, Invoker inv, Recorder recorder, UndoManager undoManager) {
         if (test(engine, inv, recorder, undoManager)) {
@@ -82,10 +82,11 @@ public class SelectionChangeCommand implements CommandOriginator {
     /**
      * Lift an error if the parameters are null and send true if not.
      *
-     * @param engine
-     * @param recorder
-     * @param undoManager
-     * @return
+     * @param engine the receiver who contains the functions
+     * @param recorder the recorder to save command
+     * @param undoManager, the manager for manage the engine state
+     * @param invoker, the invoker who emit the command
+     * @return true if all parameters are good
      * @throws NullPointerException if the method parameters are null
      */
     public boolean test(Engine engine, Invoker invoker, Recorder recorder, UndoManager undoManager) throws NullPointerException {

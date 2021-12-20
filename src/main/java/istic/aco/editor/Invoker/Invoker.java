@@ -1,6 +1,6 @@
-package istic.aco.editor.Invoker;
+package main.java.istic.aco.editor.Invoker;
 
-import istic.aco.editor.Command.Command;
+import main.java.istic.aco.editor.Command.Command;
 
 /**
  * Invoker interface
@@ -26,8 +26,8 @@ public interface Invoker  {
 
 	/**
 	 * Put the commands in the map
-	 *
-	 * @param command
+	 *@param s, the string who represent the key
+	 * @param command , the command who is store
 	 * @throws IllegalArgumentException if the command is null or s is empty
 	 */
 	void setCommand(String s, Command command) throws IllegalArgumentException;
@@ -59,7 +59,7 @@ public interface Invoker  {
 	 * Set the endIndex for the new Selection
 	 *
 	 * @param endIndex for the new Selection
-	 * @throws IllegalArgumentException if the parameter is negative or endIndex<=beginIndex
+	 * @throws IllegalArgumentException if the parameter is negative or endIndex is small than beginIndex
 	 */
 	void setEndIndex(int endIndex) throws IllegalArgumentException;
 
@@ -89,17 +89,17 @@ public interface Invoker  {
 	void insert();
 
 	/**
-	 * user action for replay last command
+	 * user action for replay last commands
 	 */
 	void replay();
 
 	/**
-	 * user action for make undo
+	 * user action for make undo action
 	 */
 	void undo();
 
 	/**
-	 * user action for make redo
+	 * user action for make redo action
      */
     void redo();
     

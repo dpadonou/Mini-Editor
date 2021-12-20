@@ -1,15 +1,16 @@
-package editor;
+package test.java.editor;
 
-import istic.aco.editor.Engine;
-import istic.aco.editor.EngineImpl;
-import istic.aco.editor.Selection;
-import istic.aco.editor.SelectionImpl;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import main.java.istic.aco.editor.Engine;
+import main.java.istic.aco.editor.EngineImpl;
+import main.java.istic.aco.editor.Selection;
+import main.java.istic.aco.editor.SelectionImpl;
 
 /**
  * EngineImplTest for Engine test
@@ -24,6 +25,9 @@ public class EngineImplTest {
     StringBuilder stringBuilder;
     Selection selection;
 
+    /**
+     * Initialize object's for the test
+     */
     @BeforeEach
     void setUp() {
         this.engine = new EngineImpl();
@@ -31,7 +35,6 @@ public class EngineImplTest {
         this.selection = new SelectionImpl(3, 20, stringBuilder);
         engine2 = new EngineImpl(stringBuilder, selection);
     }
-
     @Test
     @DisplayName("Buffer must be empty after initialisation")
     void bufferMustBeEmptyAfterInitialisation() {

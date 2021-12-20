@@ -1,13 +1,13 @@
-package istic.aco.editor.Command;
-
-import istic.aco.editor.EngineOriginator;
-import istic.aco.editor.Invoker.Invoker;
-import istic.aco.editor.Memento.InsertMemento;
-import istic.aco.editor.Memento.Memento;
-import istic.aco.editor.Recorder.Recorder;
-import istic.aco.editor.Recorder.UndoManager;
+package main.java.istic.aco.editor.Command;
 
 import java.util.Optional;
+
+import main.java.istic.aco.editor.EngineOriginator;
+import main.java.istic.aco.editor.Invoker.Invoker;
+import main.java.istic.aco.editor.Memento.InsertMemento;
+import main.java.istic.aco.editor.Memento.Memento;
+import main.java.istic.aco.editor.Recorder.Recorder;
+import main.java.istic.aco.editor.Recorder.UndoManager;
 
 /**
  * Concrete Command, insertCommand
@@ -71,11 +71,11 @@ public class InsertCommand implements CommandOriginator {
     /**
      * Lift an error if the parameters are null and send true if not.
      *
-     * @param engine
-     * @param recorder
-     * @param invoker
-     * @param undoManager
-     * @return
+     * @param engine the receiver who contains the insert function
+     * @param recorder the recorder for store the command
+     * @param invoker the invoker who emit the command
+     * @param undoManager the manager for manage the engine state
+     * @return true if all parameters are good
      * @throws NullPointerException if the method parameters are null
      */
     public boolean test(EngineOriginator engine, Invoker invoker, Recorder recorder, UndoManager undoManager) throws NullPointerException {
