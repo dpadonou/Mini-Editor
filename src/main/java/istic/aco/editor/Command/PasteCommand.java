@@ -37,9 +37,9 @@ public class PasteCommand implements CommandOriginator {
      */
 	@Override
 	public void execute() {
+		undoManager.save(engine.save());
 		engine.pasteClipboard();
 		recorder.save(this);
-		undoManager.save(engine.save());
 	}
 	
 	/**

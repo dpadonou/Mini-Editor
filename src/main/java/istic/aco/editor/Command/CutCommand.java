@@ -37,8 +37,8 @@ public class CutCommand implements CommandOriginator {
      */
     @Override
     public void execute() {
-        this.engine.cutSelectedText();
         undoManager.save(engine.save());
+        this.engine.cutSelectedText();
         recorder.save(this);
     }
 

@@ -18,11 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InvokerTest {
     InvokerImpl invoker;
-    SelectionChangeCommand selectionChangeCommand;
-    InsertCommand insertCommand;
-    PasteCommand pasteCommand;
-    CopyCommand copyCommand;
-    CutCommand cutCommand;
+    Command selectionChangeCommand;
+    Command insertCommand;
+    Command pasteCommand;
+    Command copyCommand;
+    Command cutCommand;
     StringBuilder stringBuilder;
     Selection selection;
     EngineOriginator engine;
@@ -72,7 +72,6 @@ public class InvokerTest {
     @Test
     @DisplayName("SelectionChange should change the index of the selection")
     void selectionChangeShouldChangeTheIndexOfTheSelection() {
-        selectionChangeCommand = new SelectionChangeCommand(engine, invoker, recorder, undoManager);
         invoker.setCommand("selection", selectionChangeCommand);
 
         invoker.setBeginIndex(60);
@@ -277,4 +276,6 @@ public class InvokerTest {
         assertEquals(21, selection.getBeginIndex());
         assertEquals(104, selection.getEndIndex());
     }
+
+
 }

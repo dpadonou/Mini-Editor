@@ -44,13 +44,13 @@ public class InsertCommand implements CommandOriginator {
      */
     @Override
     public void execute() {
+        undoManager.save(engine.save());
         if (this.s.isEmpty()) {
             this.s = inv.getS();
             recorder.save(this);
         }
         engine.insert(this.s);
         s = "";
-        undoManager.save(engine.save());
     }
 
     @Override

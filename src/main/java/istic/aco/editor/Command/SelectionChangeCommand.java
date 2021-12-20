@@ -47,18 +47,17 @@ public class SelectionChangeCommand implements CommandOriginator {
      */
     @Override
     public void execute() {
+        undoManager.save(engine.save());
         if (this.beginIndex == 0 && this.endIndex == 0) {
             this.beginIndex = inv.getBeginIndex();
             this.endIndex = inv.getEndIndex();
             recorder.save(this);
         }
-        engine.getSelection().setBeginIndex(this.beginIndex);
         engine.getSelection().setEndIndex(this.endIndex);
+        engine.getSelection().setBeginIndex(this.beginIndex);
 
         this.beginIndex = 0;
         this.endIndex = 0;
-
-        undoManager.save(engine.save());
     }
 
     @Override

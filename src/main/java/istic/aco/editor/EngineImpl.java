@@ -35,10 +35,8 @@ public class EngineImpl implements EngineOriginator {
 
     @Override
     public void setBuffer(StringBuilder buffer) {
-        if (buffer != null)
-            this.buffer = buffer;
-        else
-            throw new NullPointerException("Le buffer ne peut être nul.");
+        if (buffer != null) this.buffer = buffer;
+        else throw new NullPointerException("Le buffer ne peut être nul.");
     }
 
     @Override
@@ -131,7 +129,7 @@ public class EngineImpl implements EngineOriginator {
 
     @Override
     public Optional<Memento> save() {
-        return Optional.of(new EngineMemento(clipboard, buffer, selection));
+        return Optional.of(new EngineMemento(clipboard, this.getBufferContents(), this.getSelection().getBeginIndex(), this.getSelection().getEndIndex()));
     }
 
     @Override
@@ -139,9 +137,15 @@ public class EngineImpl implements EngineOriginator {
         if (m == null) {
             throw new IllegalArgumentException();
         } else {
+            buffer.replace(0, getBuffer().length() - 1, (String) m.getParameter()[1]);
             clipboard = m.getParameter()[0].toString();
-            buffer = (StringBuilder) m.getParameter()[1];
-            selection = (Selection) m.getParameter()[2];
+            if (this.getSelection().getEndIndex() < (int) m.getParameter()[2]) {
+                this.getSelection().setEndIndex((int) m.getParameter()[3]);
+                this.getSelection().setBeginIndex((int) m.getParameter()[2]);
+            } else {
+                this.getSelection().setBeginIndex((int) m.getParameter()[2]);
+                this.getSelection().setEndIndex((int) m.getParameter()[3]);
+            }
         }
     }
 }

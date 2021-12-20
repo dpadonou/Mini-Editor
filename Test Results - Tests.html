@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:str="http://exslt.org/strings">
 <head>
     <META content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <title>Test Results &mdash; SelectionImplTest</title>
+    <title>Test Results &mdash; Tests</title>
     <style type="text/css">
         html {
             height: 100%
@@ -593,10 +593,10 @@
 <body>
 <div id="container">
     <div id="header">
-        <div class="time" xmlns="">25 ms</div>
+        <div class="time" xmlns="">35 ms</div>
         <h1>
-            SelectionImplTest: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">15 total, </span><span
-                class="passed">15 passed</span></strong>
+            Tests: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">46 total, </span><span
+                class="passed">46 passed</span></strong>
         </h1>
         <div id="treecontrol">
             <ul>
@@ -615,17 +615,31 @@
         <ul id="tree">
             <li class="level top open" xmlns="">
                         <span><em class="time">
-                                <div class="time">25 ms</div>
-                            </em>SelectionImplTest</span>
+                                <div class="time">35 ms</div>
+                            </em>Tests</span>
                 <ul>
                     <li class="level test">
                                 <span><em class="time">
-                                        <div class="time">15 ms</div>
-                                    </em><em class="status">passed</em>getBufferEndIndex should return the buffer's end index</span>
+                                        <div class="time">18 ms</div>
+                                    </em><em class="status">passed</em>Test recording on insertCommand</span>
                     </li>
                     <li class="level test">
                                 <span><em class="time">
-                                        <div class="time">3 ms</div>
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>It shouldn't be possible to set a NULL selection.</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>pasteClipboard()</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>getBufferEndIndex should return the buffer's end index</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>If any command hadn't been triggered then undo and redo should raise an exception</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
                                     </em><em class="status">passed</em>Can't set a end index lower than 0</span>
                     </li>
                     <li class="level test">
@@ -639,18 +653,68 @@
                                     </em><em class="status">passed</em>Can't set a end index greater than the buffer length</span>
                     </li>
                     <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Cut should remove the selection from buffer and put it in the clipboard.</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>delete should remove the selection from buffer. And keep the clipboard unmodified.</span>
+                    </li>
+                    <li class="level test">
                                 <span><em class="time">
                                         <div class="time">1 ms</div>
-                                    </em><em
-                                        class="status">passed</em>Begin index should be greater or equals to 0</span>
+                                    </em><em class="status">passed</em>Calls to undo() should put the engine1 in it's last state</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Insertion should insert the given char sequence into the given range</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Begin index should be greater or equals to 0</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Buffer must be empty after initialisation</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Clipboard should be empty if no cut or copy hasn't be done.</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Cut should change the buffer and the clipboard too</span>
                     </li>
                     <li class="level test">
                         <span><em class="time"></em><em class="status">passed</em>getEndIndex should return the selection's end index</span>
                     </li>
                     <li class="level test">
                                 <span><em class="time">
-                                        <div class="time">2 ms</div>
-                                    </em><em class="status">passed</em>getBuffer should return the given selection buffer</span>
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>Trying to undo and redo clipboard state</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>Teststing stop recording method</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Clipboard should be impacted after a copy.</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>Insert should change the buffer selection1 with the parameter s of the invoker in the buffer</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>getBuffer should return the given selection buffer</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>getBufferContents()</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>It shouldn't be possible to set empty string to insert.</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>buffer shouldn't be null.</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>redo or undo should raise en exception if there no more state to novigate to</span>
                     </li>
                     <li class="level test">
                         <span><em class="time"></em><em class="status">passed</em>getBufferBeginIndex should always return 0</span>
@@ -659,12 +723,28 @@
                         <span><em class="time"></em><em class="status">passed</em>getBeginIndex should return the selection's begin index</span>
                     </li>
                     <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>copy should change the engine clipboard and let the buffer unchanged</span>
+                    </li>
+                    <li class="level test">
                         <span><em class="time"></em><em class="status">passed</em>Begin index should be lower than end index</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>It shouldn't be possible to a NULL buffer.</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>SelectionChange should change the index of the selection</span>
                     </li>
                     <li class="level test">
                                 <span><em class="time">
                                         <div class="time">1 ms</div>
                                     </em><em class="status">passed</em>End index should be greater 0</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>Selection shouldn't have different buffer than Engine.</span>
                     </li>
                     <li class="level test">
                         <span><em class="time"></em><em
@@ -674,13 +754,45 @@
                         <span><em class="time"></em><em class="status">passed</em>Can't set a begin index greater than the end index</span>
                     </li>
                     <li class="level test">
-                        <span><em class="time"></em><em class="status">passed</em>Can't set a end index greater than the buffer length</span>
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>Can't set a end index greater than the buffer length</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>Trying to do and undo clipboard, buffer and selection1 state at ounce</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>End index can't be greater than buffer length</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Selection shouldn't be null.</span>
                     </li>
                     <li class="level test">
                                 <span><em class="time">
                                         <div class="time">1 ms</div>
                                     </em><em
-                                        class="status">passed</em>End index can't be greater than buffer length</span>
+                                        class="status">passed</em>Copy shouldn't modify the buffer's content.</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Paste should paste the clipboard content into the buffer</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Recorder shouldn't record if it's not explicitly started</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>It shouldn't be possible to a selection with different buffer.</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Clipboard should be impacted after a cut.</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>Recorder should start recording after a call to recorder.start()</span>
                     </li>
                 </ul>
             </li>
@@ -688,7 +800,7 @@
     </div>
 </div>
 <div id="footer">
-    <p>Generated by IntelliJ IDEA on 20/12/2021 18:20</p>
+    <p>Generated by IntelliJ IDEA on 20/12/2021 18:18</p>
 </div>
 </body>
 </html>

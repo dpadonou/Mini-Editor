@@ -7,6 +7,8 @@ import istic.aco.editor.Recorder.Recorder;
 import istic.aco.editor.Recorder.RecorderImpl;
 import istic.aco.editor.Recorder.UndoManager;
 import istic.aco.editor.Recorder.UndoManagerImpl;
+import istic.aco.editor.exceptions.CannotRedoException;
+import istic.aco.editor.exceptions.CannotUndoException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,11 +27,11 @@ public class Tests {
     SelectionImpl sp;
 
     InvokerImpl invoker;
-    SelectionChangeCommand selectionChangeCommand;
-    InsertCommand insertCommand;
-    PasteCommand pasteCommand;
-    CopyCommand copyCommand;
-    CutCommand cutCommand;
+    Command selectionChangeCommand;
+    Command insertCommand;
+    Command pasteCommand;
+    Command copyCommand;
+    Command cutCommand;
     StringBuilder stringBuilder1;
     Selection selection1;
     EngineOriginator engine1;
@@ -55,6 +57,7 @@ public class Tests {
         undoManager = new UndoManagerImpl(engine1);
         recorder = new RecorderImpl();
         invoker = new InvokerImpl();
+        selectionChangeCommand = new SelectionChangeCommand(engine1, invoker, recorder, undoManager);
         insertCommand = new InsertCommand(engine1, invoker, recorder, undoManager);
         pasteCommand = new PasteCommand(engine1, recorder, undoManager);
         copyCommand = new CopyCommand(engine1, recorder, undoManager);
@@ -197,17 +200,13 @@ public class Tests {
     @Test
     @DisplayName("Begin index should be lower than end index")
     void beginIndexShouldBeLowerThanEndIndex() {
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new SelectionImpl(27, 8, testBf));
-        String msg = "L'index de fin doit être supérieure ou égale à l'index de début.";
-        assert (msg.equals(exception.getMessage()));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new SelectionImpl(27, 8, testBf));
     }
 
     @Test
     @DisplayName("Begin index should be greater or equals to 0")
     void beginIndexShouldBeGreaterThan0() {
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new SelectionImpl(-6, 8, testBf));
-        String msg = "L'index de début doit être supérieure ou égale à 0.";
-        assert (msg.equals(exception.getMessage()));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new SelectionImpl(-6, 8, testBf));
     }
 
     @Test
@@ -219,9 +218,7 @@ public class Tests {
     @Test
     @DisplayName("End index can't be greater than buffer length")
     void selectionLengthShouldLesserOrEqualToBufferLength2() {
-        Exception exception = Assertions.assertThrows(IndexOutOfBoundsException.class, () -> new SelectionImpl(2, 73, testBf));
-        String msg = "L'index de fin est hors du buffer.";
-        assert (msg.equals(exception.getMessage()));
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> new SelectionImpl(2, 73, testBf));
     }
 
     @Test
@@ -257,49 +254,37 @@ public class Tests {
     @Test
     @DisplayName("Can't set a begin index lower than 0")
     void setBeginIndex1() {
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> sp.setBeginIndex(-3));
-        String msg = "L'index de début doit être supérieure ou égale à 0.";
-        assert (msg.equals(exception.getMessage()));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> sp.setBeginIndex(-3));
     }
 
     @Test
     @DisplayName("Can't set a begin index greater than the end index")
     void setBeginIndex2() {
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> sp.setBeginIndex(39));
-        String msg = "L'index de début doit être inférieure ou égale à l'index de fin.";
-        assert (msg.equals(exception.getMessage()));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> sp.setBeginIndex(39));
     }
 
     @Test
     @DisplayName("Can't set a end index greater than the buffer length")
     void setBeginIndex3() {
-        Exception exception = Assertions.assertThrows(IndexOutOfBoundsException.class, () -> sp.setBeginIndex(73));
-        String msg = "L'index de début est hors du buffer.";
-        assert (msg.equals(exception.getMessage()));
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> sp.setBeginIndex(73));
     }
 
     @Test
     @DisplayName("Can't set a end index lower than 0")
     void setEndIndex1() {
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> sp.setEndIndex(-3));
-        String msg = "L'index de fin doit être supérieure ou égale à 0.";
-        assert (msg.equals(exception.getMessage()));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> sp.setEndIndex(-3));
     }
 
     @Test
     @DisplayName("Can't set a end index lesser than the begin index")
     void setEndIndex2() {
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> sp.setEndIndex(1));
-        String msg = "L'index de fin doit être supérieure ou égale à l'index de début.";
-        assert (msg.equals(exception.getMessage()));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> sp.setEndIndex(1));
     }
 
     @Test
     @DisplayName("Can't set a end index greater than the buffer length")
     void setEndIndex3() {
-        Exception exception = Assertions.assertThrows(IndexOutOfBoundsException.class, () -> sp.setEndIndex(105));
-        String msg = "L'index de fin est hors du buffer.";
-        assert (msg.equals(exception.getMessage()));
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> sp.setEndIndex(105));
     }
 
 
@@ -372,5 +357,377 @@ public class Tests {
         invoker.pasteClipboard();
 
         assertEquals(result, engine1.getBufferContents());
+    }
+
+    @Test
+    @DisplayName("Recorder shouldn't record if it's not explicitly started")
+    void recorderShouldnTRecordIfItSNotExplicitlyStarted() {
+        invoker.setCommand("selection", selectionChangeCommand);
+
+        invoker.setBeginIndex(60);
+        invoker.setEndIndex(230);
+        //First call to selctionChange without calling recorder.start().
+        invoker.selectionChange();
+        assertEquals(60, selection1.getBeginIndex());
+        assertEquals(230, selection1.getEndIndex());
+
+        invoker.setBeginIndex(130);
+        invoker.setEndIndex(200);
+        //Second call to selctionChange without calling recorder.start().
+        invoker.selectionChange();
+        assertEquals(130, selection1.getBeginIndex());
+        assertEquals(200, selection1.getEndIndex());
+
+        //Trying to go back to the first selection begin and end index by calling recorder.replay()
+        recorder.replay();
+        //Nothing hadn't changed
+        assertEquals(130, selection1.getBeginIndex());
+        assertEquals(200, selection1.getEndIndex());
+    }
+
+    @Test
+    @DisplayName("Recorder should start recording after a call to recorder.start()")
+    void recorderShouldStartRecordingAfterACallToRecorderStart() {
+        invoker.setCommand("selection", selectionChangeCommand);
+
+        //Start recording
+        recorder.start();
+
+        invoker.setBeginIndex(60);
+        invoker.setEndIndex(230);
+        //First call to selctionChange.
+        invoker.selectionChange();
+        assertEquals(60, selection1.getBeginIndex());
+        assertEquals(230, selection1.getEndIndex());
+        ///////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////
+        invoker.setBeginIndex(130);
+        invoker.setEndIndex(200);
+        //Second call to selctionChange.
+        invoker.selectionChange();
+        assertEquals(130, selection1.getBeginIndex());
+        assertEquals(200, selection1.getEndIndex());
+
+        //Trying to go back to the first selection begin and end index by calling recorder.replay()
+        recorder.replay();
+        //The beginIndex and the endIndex had returned to their prévious value : 60 and 230
+        assertEquals(60, selection1.getBeginIndex());
+        assertEquals(230, selection1.getEndIndex());
+    }
+
+    @Test
+    @DisplayName("Test recording on insertCommand")
+    void testRecordingOnInsertCommand() {
+        invoker.setS("=== NOUVEAU TEXTE INSERER DANS LE BUFFER ===");
+        invoker.setCommand("insert", insertCommand);
+        invoker.setCommand("selection", selectionChangeCommand);
+        //Vérification de l'état initial du buffer
+        assertEquals(stringBuilder1.toString(), engine1.getBufferContents());
+
+        //Start recording
+        recorder.start();
+
+        //Change selection to insert first piece of text
+        invoker.setBeginIndex(21);
+        invoker.setEndIndex(104);
+        //This selection has been recorded too
+        invoker.selectionChange();
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+
+        //Firt insert after recording
+        invoker.insert();
+        String msg = "Simply dummy text of === NOUVEAU TEXTE INSERER DANS LE BUFFER === dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+        assertEquals(msg, engine1.getBufferContents());
+
+        //Change selection to insert another piece of text
+        invoker.setBeginIndex(103);
+        invoker.setEndIndex(114);
+        //This selection has been recorded too
+        invoker.selectionChange();
+        assertEquals(103, selection1.getBeginIndex());
+        assertEquals(114, selection1.getEndIndex());
+
+        invoker.insert();
+        msg = "Simply dummy text of === NOUVEAU TEXTE INSERER DANS LE BUFFER === dummy text ever since the 1500s, when=== NOUVEAU TEXTE INSERER DANS LE BUFFER === printer took a galley of type and scrambled it to make a type specimen book.";
+        assertEquals(msg, engine1.getBufferContents());
+
+        //Replay all insertion on the brand-new buffer
+        recorder.replay();
+        // The two insertCommand has been made at begin: 103 and end: 114, because those are the last beginIndex and endIndex of the engine1
+        // Which means all the commands (selectionChange > insertComand > selectionChange > insertCommand)
+        // have been successfully replayed
+        msg = "Simply dummy text of === NOUVEAU TEXTE INSERER DANS LE BUFFER === dummy text ever since the 1500s, when=== NOUVEAU TEXTE INSERER DANS LE BUFFER === TEXTE INSERER DANS LE BUFFER === TEXTE INSERER DANS LE BUFFER === printer took a galley of type and scrambled it to make a type specimen book.";
+        assertEquals(msg, engine1.getBufferContents());
+        //Selection indexes has returned the first values we gave to selectionChangeCommand
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+    }
+
+    @Test
+    @DisplayName("Teststing stop recording method")
+    void teststingStopRecordingMethod() {
+        invoker.setS("=== NOUVEAU TEXTE INSERER DANS LE BUFFER ===");
+        invoker.setCommand("insert", insertCommand);
+        invoker.setCommand("selection", selectionChangeCommand);
+        //Vérification de l'état initial du buffer
+        assertEquals(stringBuilder1.toString(), engine1.getBufferContents());
+
+        //Start recording
+        recorder.start();
+
+        //Change selection to insert first piece of text
+        invoker.setBeginIndex(21);
+        invoker.setEndIndex(104);
+        //This selection has been recorded too
+        invoker.selectionChange();
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+
+        //Firt insert after recording
+        invoker.insert();
+        String msg = "Simply dummy text of === NOUVEAU TEXTE INSERER DANS LE BUFFER === dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+        assertEquals(msg, engine1.getBufferContents());
+
+        //Change selection to insert another piece of text
+        invoker.setBeginIndex(103);
+        invoker.setEndIndex(114);
+        //This selection has been recorded too
+        invoker.selectionChange();
+        assertEquals(103, selection1.getBeginIndex());
+        assertEquals(114, selection1.getEndIndex());
+
+        //Stop recording
+        recorder.stop();
+
+        //This insert shouldn't be recorded
+        invoker.insert();
+        msg = "Simply dummy text of === NOUVEAU TEXTE INSERER DANS LE BUFFER === dummy text ever since the 1500s, when=== NOUVEAU TEXTE INSERER DANS LE BUFFER === printer took a galley of type and scrambled it to make a type specimen book.";
+        assertEquals(msg, engine1.getBufferContents());
+
+        //Replay all insertion on the brand-new buffer
+        recorder.replay();
+        /*
+         * Only one insertCommand has been applied at begin: 103 and end: 114
+         * Which means only this commands <b>(selectionChange > insertComand > selectionChange)</b>
+         * have been successfully replayed
+         */
+        msg = "Simply dummy text of === NOUVEAU TEXTE INSERER DANS LE BUFFER === dummy text ever since the 1500s, when=== NOUVEAU TEXTE INSERER DANS LE BUFFER === TEXTE INSERER DANS LE BUFFER === printer took a galley of type and scrambled it to make a type specimen book.";
+        assertEquals(msg, engine1.getBufferContents());
+        //Selection indexes has returned the first values we gave to selectionChangeCommand
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+    }
+
+    @Test
+    @DisplayName("Calls to undo() should put the engine1 in it's last state")
+    void oneCallToUndoShouldPutTheEngineInItSLastState() {
+        invoker.setCommand("selection", selectionChangeCommand);
+
+        //Change the selection1 ounce
+        invoker.setBeginIndex(60);
+        invoker.setEndIndex(230);
+        invoker.selectionChange();
+        assertEquals(60, selection1.getBeginIndex());
+        assertEquals(230, selection1.getEndIndex());
+
+        //Change the selection1 twice
+        invoker.setBeginIndex(100);
+        invoker.setEndIndex(200);
+        invoker.selectionChange();
+        assertEquals(100, selection1.getBeginIndex());
+        assertEquals(200, selection1.getEndIndex());
+
+        //Undo the last command (selectionChangeCommand in this case)
+        undoManager.undo();
+        undoManager.undo();
+        //The selection1 state might return to its previous state
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+    }
+
+    @Test
+    @DisplayName("If any command hadn't been triggered then undo and redo should raise an exception")
+    void ifAnyCommandHadnTBeenTriggeredThenUndoAndRedoShouldRaiseAnException() {
+        assertThrows(CannotUndoException.class, () -> undoManager.undo());
+        assertThrows(CannotRedoException.class, () -> undoManager.redo());
+    }
+
+    @Test
+    @DisplayName("redo or undo should raise en exception if there no more state to novigate to")
+    void redoOrUndoShouldRaiseEnExceptionIfThereNoMoreStateToNovigateTo() {
+        invoker.setCommand("selection", selectionChangeCommand);
+
+        //Change the selection1 ounce
+        invoker.setBeginIndex(60);
+        invoker.setEndIndex(230);
+        invoker.selectionChange();
+        assertEquals(60, selection1.getBeginIndex());
+        assertEquals(230, selection1.getEndIndex());
+
+        //Change the selection1 twice
+        invoker.setBeginIndex(100);
+        invoker.setEndIndex(200);
+        invoker.selectionChange();
+        assertEquals(100, selection1.getBeginIndex());
+        assertEquals(200, selection1.getEndIndex());
+
+        //Undo the last command (selectionChangeCommand in this case)
+        undoManager.undo();
+        undoManager.undo();
+        //The selection1 state might return to its initial state
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+
+        //Calling undo a third time (exception should raise)
+        assertThrows(CannotUndoException.class, () -> undoManager.undo());
+
+        undoManager.redo();
+        undoManager.redo();
+        //The selection1 state might return to its previous state
+        assertEquals(60, selection1.getBeginIndex());
+        assertEquals(230, selection1.getEndIndex());
+
+        //No more redo possible
+        assertThrows(CannotRedoException.class, () -> undoManager.redo());
+    }
+
+    @Test
+    @DisplayName("Trying to undo and redo clipboard state")
+    void tryingToUndoAndRedoClipboardState() {
+        invoker.setCommand("copy", copyCommand);
+        invoker.setCommand("selection", selectionChangeCommand);
+
+        invoker.copyText();////////////////////////////////////////////////////
+        //Change clipboard content
+        assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
+        // The beginning state of beginIndex And endIndex have been saved
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+
+        //Change the selection1 ounce
+        invoker.setEndIndex(197);
+        invoker.setBeginIndex(105);
+        invoker.selectionChange();///////////////////////////////////////////////
+        assertEquals(105, selection1.getBeginIndex());
+        assertEquals(197, selection1.getEndIndex());
+
+        //Copy the text into the new selection1 range
+        invoker.copyText();////////////////////////////////////////////////////
+
+        //Its change clipboard content too
+        assertEquals("dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled", engine1.getClipboardContents());
+
+        //First undo:
+        //Go back to the latest saved state
+        undoManager.undo();
+        assertEquals(105, selection1.getBeginIndex());
+        assertEquals(197, selection1.getEndIndex());
+        assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
+
+        //Second undo
+        //The beginIndex and the endIndex stays the same
+        //But the cliboard content return to the state in which it was after the first copyCommand occurs
+        undoManager.undo();
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+        assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
+
+        //Third undo
+        //The beginIndex and the endIndex returns to their initial state
+        //The cliboard content stays in the state in which it was after the first copyCommand occurs
+        undoManager.undo();
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+        //Return to initial state
+        assertEquals("", engine1.getClipboardContents());
+
+        //Another undo
+        //Anyother undo should raise an error
+        //There is no more state to go back to
+        assertThrows(CannotUndoException.class, () -> undoManager.undo());
+
+        //The second REDO
+        //The beginIndex and the endIndex should go back to 21 and 104
+        //But the cliboard content return to the state in which it was after the last copyCommand occurs
+        undoManager.redo();
+        undoManager.redo();
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+        assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
+    }
+
+    @Test
+    @DisplayName("Trying to do and undo clipboard, buffer and selection1 state at ounce")
+    void tryingToDoAndUndoClipboardBufferAndSelectionStateAtOunce() {
+        invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("cut", cutCommand);
+
+        invoker.cutText();////////////////////////////////////////////////////
+
+        //Change clipboard content
+        assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
+        //Change buffer content
+        assertEquals("Simply dummy text of  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", engine1.getBufferContents());
+        //Initial begin index and end index
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+
+        //Change the selection1 ounce
+        invoker.setBeginIndex(7);
+        invoker.setEndIndex(114);
+        invoker.selectionChange();///////////////////////////////////////////////
+        //Change beginIndex and endIndex
+        assertEquals(7, selection1.getBeginIndex());
+        assertEquals(114, selection1.getEndIndex());
+
+        //cut the text between the new selection1 range
+        invoker.cutText();////////////////////////////////////////////////////
+
+        //Its change clipboard content too
+        assertEquals("dummy text of  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled", engine1.getClipboardContents());
+        //Its change the buffer content too
+        assertEquals("Simply  it to make a type specimen book.", engine1.getBufferContents());
+
+        //First undo:
+        //Go back to the state  after the latest selectionChange
+        undoManager.undo();
+        assertEquals(7, selection1.getBeginIndex());
+        assertEquals(114, selection1.getEndIndex());
+        assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
+        assertEquals("Simply dummy text of  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book..", engine1.getBufferContents());
+
+        //Second undo
+        //The beginIndex and the endIndex stays the same
+        //But the cliboard content return to the state in which it was after the first copyCommand occurs
+        undoManager.undo();
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+        assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
+        assertEquals("Simply dummy text of  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book..", engine1.getBufferContents());
+
+        //Third undo
+        //The beginIndex and the endIndex returns to their initial state
+        //The cliboard content stays in the state in which it was after the first copyCommand occurs
+        undoManager.undo();
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+        assertEquals("", engine1.getClipboardContents());
+        assertEquals("Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book..", engine1.getBufferContents());
+
+        //Another undo
+        //Anyother undo should raise an error
+        //There is no more state to go back to
+        assertThrows(CannotUndoException.class, () -> undoManager.undo());
+
+        //The Second REDO
+        //The beginIndex and the endIndex should go back to 7 and 114
+        //But the cliboard and the buffer content return to the state in which they were after the second Command occurs
+        undoManager.redo();
+        undoManager.redo();
+        assertEquals(21, selection1.getBeginIndex());
+        assertEquals(104, selection1.getEndIndex());
+        assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
+        assertEquals("Simply dummy text of  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book..", engine1.getBufferContents());
     }
 }

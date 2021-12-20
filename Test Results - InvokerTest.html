@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:str="http://exslt.org/strings">
 <head>
     <META content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <title>Test Results &mdash; SelectionImplTest</title>
+    <title>Test Results &mdash; InvokerTest</title>
     <style type="text/css">
         html {
             height: 100%
@@ -595,8 +595,8 @@
     <div id="header">
         <div class="time" xmlns="">25 ms</div>
         <h1>
-            SelectionImplTest: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">15 total, </span><span
-                class="passed">15 passed</span></strong>
+            InvokerTest: <strong><span class="total" xmlns="http://www.w3.org/1999/xhtml">10 total, </span><span
+                class="passed">10 passed</span></strong>
         </h1>
         <div id="treecontrol">
             <ul>
@@ -616,71 +616,51 @@
             <li class="level top open" xmlns="">
                         <span><em class="time">
                                 <div class="time">25 ms</div>
-                            </em>SelectionImplTest</span>
+                            </em>InvokerTest</span>
                 <ul>
                     <li class="level test">
                                 <span><em class="time">
-                                        <div class="time">15 ms</div>
-                                    </em><em class="status">passed</em>getBufferEndIndex should return the buffer's end index</span>
+                                        <div class="time">19 ms</div>
+                                    </em><em class="status">passed</em>Test recording on insertCommand</span>
                     </li>
                     <li class="level test">
-                                <span><em class="time">
-                                        <div class="time">3 ms</div>
-                                    </em><em class="status">passed</em>Can't set a end index lower than 0</span>
+                        <span><em class="time"></em><em class="status">passed</em>Cut should change the buffer and the clipboard too</span>
                     </li>
                     <li class="level test">
-                                <span><em class="time">
-                                        <div class="time">1 ms</div>
-                                    </em><em class="status">passed</em>Can't set a end index lesser than the begin index</span>
+                        <span><em class="time"></em><em class="status">passed</em>Teststing stop recording method</span>
                     </li>
                     <li class="level test">
                                 <span><em class="time">
                                         <div class="time">1 ms</div>
-                                    </em><em class="status">passed</em>Can't set a end index greater than the buffer length</span>
+                                    </em><em class="status">passed</em>Insert should change the buffer selection with the parameter s of the invoker in the buffer</span>
                     </li>
                     <li class="level test">
                                 <span><em class="time">
                                         <div class="time">1 ms</div>
-                                    </em><em
-                                        class="status">passed</em>Begin index should be greater or equals to 0</span>
-                    </li>
-                    <li class="level test">
-                        <span><em class="time"></em><em class="status">passed</em>getEndIndex should return the selection's end index</span>
-                    </li>
-                    <li class="level test">
-                                <span><em class="time">
-                                        <div class="time">2 ms</div>
-                                    </em><em class="status">passed</em>getBuffer should return the given selection buffer</span>
-                    </li>
-                    <li class="level test">
-                        <span><em class="time"></em><em class="status">passed</em>getBufferBeginIndex should always return 0</span>
-                    </li>
-                    <li class="level test">
-                        <span><em class="time"></em><em class="status">passed</em>getBeginIndex should return the selection's begin index</span>
-                    </li>
-                    <li class="level test">
-                        <span><em class="time"></em><em class="status">passed</em>Begin index should be lower than end index</span>
+                                    </em><em class="status">passed</em>copy should change the engine clipboard and let the buffer unchanged</span>
                     </li>
                     <li class="level test">
                                 <span><em class="time">
                                         <div class="time">1 ms</div>
-                                    </em><em class="status">passed</em>End index should be greater 0</span>
-                    </li>
-                    <li class="level test">
-                        <span><em class="time"></em><em
-                                class="status">passed</em>Can't set a begin index lower than 0</span>
-                    </li>
-                    <li class="level test">
-                        <span><em class="time"></em><em class="status">passed</em>Can't set a begin index greater than the end index</span>
-                    </li>
-                    <li class="level test">
-                        <span><em class="time"></em><em class="status">passed</em>Can't set a end index greater than the buffer length</span>
+                                    </em><em class="status">passed</em>SelectionChange should change the index of the selection</span>
                     </li>
                     <li class="level test">
                                 <span><em class="time">
                                         <div class="time">1 ms</div>
-                                    </em><em
-                                        class="status">passed</em>End index can't be greater than buffer length</span>
+                                    </em><em class="status">passed</em>initializer()</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>Paste should paste the clipboard content into the buffer</span>
+                    </li>
+                    <li class="level test">
+                                <span><em class="time">
+                                        <div class="time">1 ms</div>
+                                    </em><em class="status">passed</em>Recorder shouldn't record if it's not explicitly started</span>
+                    </li>
+                    <li class="level test">
+                        <span><em class="time"></em><em class="status">passed</em>Recorder should start recording after a call to recorder.start()</span>
                     </li>
                 </ul>
             </li>

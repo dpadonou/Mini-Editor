@@ -36,8 +36,8 @@ public class CopyCommand implements CommandOriginator {
 	 */
 	@Override
 	public void execute() {
-		engine.copySelectedText();
 		undoManager.save(engine.save());
+		engine.copySelectedText();
 		recorder.save(this);
 		
 	}
