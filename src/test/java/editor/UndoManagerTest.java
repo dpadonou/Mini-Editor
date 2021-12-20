@@ -26,6 +26,8 @@ public class UndoManagerTest {
     Command pasteCommand;
     Command copyCommand;
     Command cutCommand;
+    Command redoCommand;
+    Command undoCommand;
     StringBuilder stringBuilder;
     Selection selection;
     EngineOriginator engine;
@@ -42,6 +44,8 @@ public class UndoManagerTest {
 
         engine = new EngineImpl(stringBuilder, selection);
         undoManager = new UndoManagerImpl(engine);
+        undoCommand = new UndoCommand(undoManager);
+        redoCommand = new RedoCommand(undoManager);
         recorder = new RecorderImpl();
         invoker = new InvokerImpl();
         selectionChangeCommand = new SelectionChangeCommand(engine, invoker, recorder, undoManager);
@@ -55,6 +59,8 @@ public class UndoManagerTest {
     @DisplayName("Calls to undo() should put the engine in it's last state")
     void oneCallToUndoShouldPutTheEngineInItSLastState() {
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("undo", undoCommand);
+        invoker.setCommand("redo", redoCommand);
 
         //Change the selection ounce
         invoker.setBeginIndex(60);
@@ -71,8 +77,8 @@ public class UndoManagerTest {
         assertEquals(200, selection.getEndIndex());
 
         //Undo the last command (selectionChangeCommand in this case)
-        undoManager.undo();
-        undoManager.undo();
+        invoker.undo();
+        invoker.undo();
         //The selection state might return to its previous state
         assertEquals(21, selection.getBeginIndex());
         assertEquals(104, selection.getEndIndex());
@@ -81,14 +87,18 @@ public class UndoManagerTest {
     @Test
     @DisplayName("If any command hadn't been triggered then undo and redo should raise an exception")
     void ifAnyCommandHadnTBeenTriggeredThenUndoAndRedoShouldRaiseAnException() {
-        assertThrows(CannotUndoException.class, () -> undoManager.undo());
-        assertThrows(CannotRedoException.class, () -> undoManager.redo());
+        invoker.setCommand("undo", undoCommand);
+        invoker.setCommand("redo", redoCommand);
+        assertThrows(CannotUndoException.class, () -> invoker.undo());
+        assertThrows(CannotRedoException.class, () -> invoker.redo());
     }
 
     @Test
     @DisplayName("redo or undo should raise en exception if there no more state to novigate to")
     void redoOrUndoShouldRaiseEnExceptionIfThereNoMoreStateToNovigateTo() {
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("undo", undoCommand);
+        invoker.setCommand("redo", redoCommand);
 
         //Change the selection ounce
         invoker.setBeginIndex(60);
@@ -105,23 +115,23 @@ public class UndoManagerTest {
         assertEquals(200, selection.getEndIndex());
 
         //Undo the last command (selectionChangeCommand in this case)
-        undoManager.undo();
-        undoManager.undo();
+        invoker.undo();
+        invoker.undo();
         //The selection state might return to its initial state
         assertEquals(21, selection.getBeginIndex());
         assertEquals(104, selection.getEndIndex());
 
         //Calling undo a third time (exception should raise)
-        assertThrows(CannotUndoException.class, () -> undoManager.undo());
+        assertThrows(CannotUndoException.class, () -> invoker.undo());
 
-        undoManager.redo();
-        undoManager.redo();
+        invoker.redo();
+        invoker.redo();
         //The selection state might return to its previous state
         assertEquals(60, selection.getBeginIndex());
         assertEquals(230, selection.getEndIndex());
 
         //No more redo possible
-        assertThrows(CannotRedoException.class, () -> undoManager.redo());
+        assertThrows(CannotRedoException.class, () -> invoker.redo());
     }
 
     @Test
@@ -129,6 +139,8 @@ public class UndoManagerTest {
     void tryingToUndoAndRedoClipboardState() {
         invoker.setCommand("copy", copyCommand);
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("undo", undoCommand);
+        invoker.setCommand("redo", redoCommand);
 
         invoker.copyText();////////////////////////////////////////////////////
         //Change clipboard content
@@ -152,7 +164,7 @@ public class UndoManagerTest {
 
         //First undo:
         //Go back to the latest saved state
-        undoManager.undo();
+        invoker.undo();
         assertEquals(105, selection.getBeginIndex());
         assertEquals(197, selection.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine.getClipboardContents());
@@ -160,7 +172,7 @@ public class UndoManagerTest {
         //Second undo
         //The beginIndex and the endIndex stays the same
         //But the cliboard content return to the state in which it was after the first copyCommand occurs
-        undoManager.undo();
+        invoker.undo();
         assertEquals(21, selection.getBeginIndex());
         assertEquals(104, selection.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine.getClipboardContents());
@@ -168,7 +180,7 @@ public class UndoManagerTest {
         //Third undo
         //The beginIndex and the endIndex returns to their initial state
         //The cliboard content stays in the state in which it was after the first copyCommand occurs
-        undoManager.undo();
+        invoker.undo();
         assertEquals(21, selection.getBeginIndex());
         assertEquals(104, selection.getEndIndex());
         //Return to initial state
@@ -177,13 +189,13 @@ public class UndoManagerTest {
         //Another undo
         //Anyother undo should raise an error
         //There is no more state to go back to
-        assertThrows(CannotUndoException.class, () -> undoManager.undo());
+        assertThrows(CannotUndoException.class, () -> invoker.undo());
 
         //The second REDO
         //The beginIndex and the endIndex should go back to 21 and 104
         //But the cliboard content return to the state in which it was after the last copyCommand occurs
-        undoManager.redo();
-        undoManager.redo();
+        invoker.redo();
+        invoker.redo();
         assertEquals(21, selection.getBeginIndex());
         assertEquals(104, selection.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine.getClipboardContents());
@@ -194,6 +206,8 @@ public class UndoManagerTest {
     void tryingToDoAndUndoClipboardBufferAndSelectionStateAtOunce() {
         invoker.setCommand("selection", selectionChangeCommand);
         invoker.setCommand("cut", cutCommand);
+        invoker.setCommand("undo", undoCommand);
+        invoker.setCommand("redo", redoCommand);
 
         invoker.cutText();////////////////////////////////////////////////////
 
@@ -232,7 +246,7 @@ public class UndoManagerTest {
         //Second undo
         //The beginIndex and the endIndex stays the same
         //But the cliboard content return to the state in which it was after the first copyCommand occurs
-        undoManager.undo();
+        invoker.undo();
         assertEquals(21, selection.getBeginIndex());
         assertEquals(104, selection.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine.getClipboardContents());
@@ -241,7 +255,7 @@ public class UndoManagerTest {
         //Third undo
         //The beginIndex and the endIndex returns to their initial state
         //The cliboard content stays in the state in which it was after the first copyCommand occurs
-        undoManager.undo();
+        invoker.undo();
         assertEquals(21, selection.getBeginIndex());
         assertEquals(104, selection.getEndIndex());
         assertEquals("", engine.getClipboardContents());
@@ -250,13 +264,13 @@ public class UndoManagerTest {
         //Another undo
         //Anyother undo should raise an error
         //There is no more state to go back to
-        assertThrows(CannotUndoException.class, () -> undoManager.undo());
+        assertThrows(CannotUndoException.class, () -> invoker.undo());
 
         //The Second REDO
         //The beginIndex and the endIndex should go back to 7 and 114
         //But the cliboard and the buffer content return to the state in which they were after the second Command occurs
-        undoManager.redo();
-        undoManager.redo();
+        invoker.redo();
+        invoker.redo();
         assertEquals(21, selection.getBeginIndex());
         assertEquals(104, selection.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine.getClipboardContents());

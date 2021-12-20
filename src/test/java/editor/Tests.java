@@ -32,6 +32,9 @@ public class Tests {
     Command pasteCommand;
     Command copyCommand;
     Command cutCommand;
+    Command redoCommand;
+    Command undoCommand;
+    Command replayCommand;
     StringBuilder stringBuilder1;
     Selection selection1;
     EngineOriginator engine1;
@@ -55,7 +58,10 @@ public class Tests {
 
         engine1 = new EngineImpl(stringBuilder1, selection1);
         undoManager = new UndoManagerImpl(engine1);
+        undoCommand = new UndoCommand(undoManager);
+        redoCommand = new RedoCommand(undoManager);
         recorder = new RecorderImpl();
+        replayCommand = new Replay(recorder);
         invoker = new InvokerImpl();
         selectionChangeCommand = new SelectionChangeCommand(engine1, invoker, recorder, undoManager);
         insertCommand = new InsertCommand(engine1, invoker, recorder, undoManager);
@@ -363,6 +369,7 @@ public class Tests {
     @DisplayName("Recorder shouldn't record if it's not explicitly started")
     void recorderShouldnTRecordIfItSNotExplicitlyStarted() {
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("replay", replayCommand);
 
         invoker.setBeginIndex(60);
         invoker.setEndIndex(230);
@@ -379,7 +386,7 @@ public class Tests {
         assertEquals(200, selection1.getEndIndex());
 
         //Trying to go back to the first selection begin and end index by calling recorder.replay()
-        recorder.replay();
+        invoker.replay();
         //Nothing hadn't changed
         assertEquals(130, selection1.getBeginIndex());
         assertEquals(200, selection1.getEndIndex());
@@ -389,6 +396,7 @@ public class Tests {
     @DisplayName("Recorder should start recording after a call to recorder.start()")
     void recorderShouldStartRecordingAfterACallToRecorderStart() {
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("replay", replayCommand);
 
         //Start recording
         recorder.start();
@@ -409,7 +417,7 @@ public class Tests {
         assertEquals(200, selection1.getEndIndex());
 
         //Trying to go back to the first selection begin and end index by calling recorder.replay()
-        recorder.replay();
+        invoker.replay();
         //The beginIndex and the endIndex had returned to their prévious value : 60 and 230
         assertEquals(60, selection1.getBeginIndex());
         assertEquals(230, selection1.getEndIndex());
@@ -421,6 +429,8 @@ public class Tests {
         invoker.setS("=== NOUVEAU TEXTE INSERER DANS LE BUFFER ===");
         invoker.setCommand("insert", insertCommand);
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("replay", replayCommand);
+
         //Vérification de l'état initial du buffer
         assertEquals(stringBuilder1.toString(), engine1.getBufferContents());
 
@@ -453,7 +463,7 @@ public class Tests {
         assertEquals(msg, engine1.getBufferContents());
 
         //Replay all insertion on the brand-new buffer
-        recorder.replay();
+        invoker.replay();
         // The two insertCommand has been made at begin: 103 and end: 114, because those are the last beginIndex and endIndex of the engine1
         // Which means all the commands (selectionChange > insertComand > selectionChange > insertCommand)
         // have been successfully replayed
@@ -470,6 +480,8 @@ public class Tests {
         invoker.setS("=== NOUVEAU TEXTE INSERER DANS LE BUFFER ===");
         invoker.setCommand("insert", insertCommand);
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("replay", replayCommand);
+
         //Vérification de l'état initial du buffer
         assertEquals(stringBuilder1.toString(), engine1.getBufferContents());
 
@@ -506,7 +518,7 @@ public class Tests {
         assertEquals(msg, engine1.getBufferContents());
 
         //Replay all insertion on the brand-new buffer
-        recorder.replay();
+        invoker.replay();
         /*
          * Only one insertCommand has been applied at begin: 103 and end: 114
          * Which means only this commands <b>(selectionChange > insertComand > selectionChange)</b>
@@ -523,6 +535,8 @@ public class Tests {
     @DisplayName("Calls to undo() should put the engine1 in it's last state")
     void oneCallToUndoShouldPutTheEngineInItSLastState() {
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("undo", undoCommand);
+        invoker.setCommand("redo", redoCommand);
 
         //Change the selection1 ounce
         invoker.setBeginIndex(60);
@@ -539,8 +553,8 @@ public class Tests {
         assertEquals(200, selection1.getEndIndex());
 
         //Undo the last command (selectionChangeCommand in this case)
-        undoManager.undo();
-        undoManager.undo();
+        invoker.undo();
+        invoker.undo();
         //The selection1 state might return to its previous state
         assertEquals(21, selection1.getBeginIndex());
         assertEquals(104, selection1.getEndIndex());
@@ -549,6 +563,8 @@ public class Tests {
     @Test
     @DisplayName("If any command hadn't been triggered then undo and redo should raise an exception")
     void ifAnyCommandHadnTBeenTriggeredThenUndoAndRedoShouldRaiseAnException() {
+        invoker.setCommand("undo", undoCommand);
+        invoker.setCommand("redo", redoCommand);
         assertThrows(CannotUndoException.class, () -> undoManager.undo());
         assertThrows(CannotRedoException.class, () -> undoManager.redo());
     }
@@ -557,6 +573,8 @@ public class Tests {
     @DisplayName("redo or undo should raise en exception if there no more state to novigate to")
     void redoOrUndoShouldRaiseEnExceptionIfThereNoMoreStateToNovigateTo() {
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("undo", undoCommand);
+        invoker.setCommand("redo", redoCommand);
 
         //Change the selection1 ounce
         invoker.setBeginIndex(60);
@@ -573,8 +591,8 @@ public class Tests {
         assertEquals(200, selection1.getEndIndex());
 
         //Undo the last command (selectionChangeCommand in this case)
-        undoManager.undo();
-        undoManager.undo();
+        invoker.undo();
+        invoker.undo();
         //The selection1 state might return to its initial state
         assertEquals(21, selection1.getBeginIndex());
         assertEquals(104, selection1.getEndIndex());
@@ -582,8 +600,8 @@ public class Tests {
         //Calling undo a third time (exception should raise)
         assertThrows(CannotUndoException.class, () -> undoManager.undo());
 
-        undoManager.redo();
-        undoManager.redo();
+        invoker.redo();
+        invoker.redo();
         //The selection1 state might return to its previous state
         assertEquals(60, selection1.getBeginIndex());
         assertEquals(230, selection1.getEndIndex());
@@ -597,6 +615,8 @@ public class Tests {
     void tryingToUndoAndRedoClipboardState() {
         invoker.setCommand("copy", copyCommand);
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("undo", undoCommand);
+        invoker.setCommand("redo", redoCommand);
 
         invoker.copyText();////////////////////////////////////////////////////
         //Change clipboard content
@@ -620,7 +640,7 @@ public class Tests {
 
         //First undo:
         //Go back to the latest saved state
-        undoManager.undo();
+        invoker.undo();
         assertEquals(105, selection1.getBeginIndex());
         assertEquals(197, selection1.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
@@ -628,7 +648,7 @@ public class Tests {
         //Second undo
         //The beginIndex and the endIndex stays the same
         //But the cliboard content return to the state in which it was after the first copyCommand occurs
-        undoManager.undo();
+        invoker.undo();
         assertEquals(21, selection1.getBeginIndex());
         assertEquals(104, selection1.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
@@ -636,7 +656,7 @@ public class Tests {
         //Third undo
         //The beginIndex and the endIndex returns to their initial state
         //The cliboard content stays in the state in which it was after the first copyCommand occurs
-        undoManager.undo();
+        invoker.undo();
         assertEquals(21, selection1.getBeginIndex());
         assertEquals(104, selection1.getEndIndex());
         //Return to initial state
@@ -650,8 +670,8 @@ public class Tests {
         //The second REDO
         //The beginIndex and the endIndex should go back to 21 and 104
         //But the cliboard content return to the state in which it was after the last copyCommand occurs
-        undoManager.redo();
-        undoManager.redo();
+        invoker.redo();
+        invoker.redo();
         assertEquals(21, selection1.getBeginIndex());
         assertEquals(104, selection1.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
@@ -662,6 +682,8 @@ public class Tests {
     void tryingToDoAndUndoClipboardBufferAndSelectionStateAtOunce() {
         invoker.setCommand("selection", selectionChangeCommand);
         invoker.setCommand("cut", cutCommand);
+        invoker.setCommand("undo", undoCommand);
+        invoker.setCommand("redo", redoCommand);
 
         invoker.cutText();////////////////////////////////////////////////////
 
@@ -691,7 +713,7 @@ public class Tests {
 
         //First undo:
         //Go back to the state  after the latest selectionChange
-        undoManager.undo();
+        invoker.undo();
         assertEquals(7, selection1.getBeginIndex());
         assertEquals(114, selection1.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
@@ -700,7 +722,7 @@ public class Tests {
         //Second undo
         //The beginIndex and the endIndex stays the same
         //But the cliboard content return to the state in which it was after the first copyCommand occurs
-        undoManager.undo();
+        invoker.undo();
         assertEquals(21, selection1.getBeginIndex());
         assertEquals(104, selection1.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());
@@ -709,7 +731,7 @@ public class Tests {
         //Third undo
         //The beginIndex and the endIndex returns to their initial state
         //The cliboard content stays in the state in which it was after the first copyCommand occurs
-        undoManager.undo();
+        invoker.undo();
         assertEquals(21, selection1.getBeginIndex());
         assertEquals(104, selection1.getEndIndex());
         assertEquals("", engine1.getClipboardContents());
@@ -723,8 +745,8 @@ public class Tests {
         //The Second REDO
         //The beginIndex and the endIndex should go back to 7 and 114
         //But the cliboard and the buffer content return to the state in which they were after the second Command occurs
-        undoManager.redo();
-        undoManager.redo();
+        invoker.redo();
+        invoker.redo();
         assertEquals(21, selection1.getBeginIndex());
         assertEquals(104, selection1.getEndIndex());
         assertEquals("the printing and typesetting industry. Lorem Ipsum has been the industry's standard", engine1.getClipboardContents());

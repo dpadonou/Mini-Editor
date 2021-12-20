@@ -23,6 +23,7 @@ public class InvokerTest {
     Command pasteCommand;
     Command copyCommand;
     Command cutCommand;
+    Command replayCommand;
     StringBuilder stringBuilder;
     Selection selection;
     EngineOriginator engine;
@@ -40,6 +41,7 @@ public class InvokerTest {
         engine = new EngineImpl(stringBuilder, selection);
         undoManager = new UndoManagerImpl(engine);
         recorder = new RecorderImpl();
+        replayCommand = new Replay(recorder);
         invoker = new InvokerImpl();
         selectionChangeCommand = new SelectionChangeCommand(engine, invoker, recorder, undoManager);
         insertCommand = new InsertCommand(engine, invoker, recorder, undoManager);
@@ -121,6 +123,7 @@ public class InvokerTest {
     @DisplayName("Recorder shouldn't record if it's not explicitly started")
     void recorderShouldnTRecordIfItSNotExplicitlyStarted() {
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("replay", replayCommand);
 
         invoker.setBeginIndex(60);
         invoker.setEndIndex(230);
@@ -137,7 +140,7 @@ public class InvokerTest {
         assertEquals(200, selection.getEndIndex());
 
         //Trying to go back to the first selection begin and end index by calling recorder.replay()
-        recorder.replay();
+        invoker.replay();
         //Nothing hadn't changed
         assertEquals(130, selection.getBeginIndex());
         assertEquals(200, selection.getEndIndex());
@@ -147,6 +150,7 @@ public class InvokerTest {
     @DisplayName("Recorder should start recording after a call to recorder.start()")
     void recorderShouldStartRecordingAfterACallToRecorderStart() {
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("replay", replayCommand);
 
         //Start recording
         recorder.start();
@@ -167,7 +171,7 @@ public class InvokerTest {
         assertEquals(200, selection.getEndIndex());
 
         //Trying to go back to the first selection begin and end index by calling recorder.replay()
-        recorder.replay();
+        invoker.replay();
         //The beginIndex and the endIndex had returned to their prévious value : 60 and 230
         assertEquals(60, selection.getBeginIndex());
         assertEquals(230, selection.getEndIndex());
@@ -179,6 +183,8 @@ public class InvokerTest {
         invoker.setS("=== NOUVEAU TEXTE INSERER DANS LE BUFFER ===");
         invoker.setCommand("insert", insertCommand);
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("replay", replayCommand);
+
         //Vérification de l'état initial du buffer
         assertEquals(stringBuilder.toString(), engine.getBufferContents());
 
@@ -211,7 +217,7 @@ public class InvokerTest {
         assertEquals(msg, engine.getBufferContents());
 
         //Replay all insertion on the brand-new buffer
-        recorder.replay();
+        invoker.replay();
         // The two insertCommand has been made at begin: 103 and end: 114, because those are the last beginIndex and endIndex of the engine
         // Which means all the commands (selectionChange > insertComand > selectionChange > insertCommand)
         // have been successfully replayed
@@ -228,6 +234,8 @@ public class InvokerTest {
         invoker.setS("=== NOUVEAU TEXTE INSERER DANS LE BUFFER ===");
         invoker.setCommand("insert", insertCommand);
         invoker.setCommand("selection", selectionChangeCommand);
+        invoker.setCommand("replay", replayCommand);
+
         //Vérification de l'état initial du buffer
         assertEquals(stringBuilder.toString(), engine.getBufferContents());
 
@@ -264,7 +272,7 @@ public class InvokerTest {
         assertEquals(msg, engine.getBufferContents());
 
         //Replay all insertion on the brand-new buffer
-        recorder.replay();
+        invoker.replay();
         /*
          * Only one insertCommand has been applied at begin: 103 and end: 114
          * Which means only this commands <b>(selectionChange > insertComand > selectionChange)</b>
@@ -276,6 +284,5 @@ public class InvokerTest {
         assertEquals(21, selection.getBeginIndex());
         assertEquals(104, selection.getEndIndex());
     }
-
 
 }
