@@ -1,25 +1,19 @@
-package main.test.java.istic.aco.editor.invoker;
+package istic.aco.editor.invoker;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import istic.aco.editor.Command.*;
+import istic.aco.editor.Engine;
+import istic.aco.editor.EngineImpl;
+import istic.aco.editor.Invoker.InvokerImpl;
+import istic.aco.editor.Recorder.Recorder;
+import istic.aco.editor.Recorder.RecorderImpl;
+import istic.aco.editor.Selection;
+import istic.aco.editor.SelectionImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import main.java.istic.aco.editor.Engine;
-import main.java.istic.aco.editor.EngineImpl;
-import main.java.istic.aco.editor.Selection;
-import main.java.istic.aco.editor.SelectionImpl;
-import main.java.istic.aco.editor.Command.CopyCommand;
-import main.java.istic.aco.editor.Command.CutCommand;
-import main.java.istic.aco.editor.Command.InsertCommand;
-import main.java.istic.aco.editor.Command.PasteCommand;
-import main.java.istic.aco.editor.Command.Replay;
-import main.java.istic.aco.editor.Command.SelectionChangeCommand;
-import main.java.istic.aco.editor.Invoker.InvokerImpl;
-import main.java.istic.aco.editor.Recorder.Recorder;
-import main.java.istic.aco.editor.Recorder.RecorderImpl;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class InvokerImplTest {
 

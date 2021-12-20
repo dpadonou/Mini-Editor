@@ -1,11 +1,9 @@
-package main.test.java.istic.aco.editor;
+package istic.aco.editor;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import main.java.istic.aco.editor.SelectionImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

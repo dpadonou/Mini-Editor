@@ -1,9 +1,9 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
+
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Recorder.Recorder;
 
 import java.util.Optional;
-
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Recorder.Recorder;
 
 /**
  * Concrete Command, Replay
@@ -46,7 +46,6 @@ public class Replay implements Command {
         } else {
             return true;
         }
-
     }
 
     @Override
@@ -57,8 +56,6 @@ public class Replay implements Command {
 
     @Override
     public void restore(Memento m) throws IllegalArgumentException {
-        // TODO Auto-generated method stub
-
     }
 
 }

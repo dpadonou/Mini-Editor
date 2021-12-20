@@ -1,4 +1,4 @@
-package main.java.istic.aco.editor.Memento;
+package istic.aco.editor.Memento;
 
 /**
  * Memento Interface

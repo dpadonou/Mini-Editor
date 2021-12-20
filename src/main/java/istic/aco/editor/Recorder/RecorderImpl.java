@@ -1,9 +1,9 @@
-package main.java.istic.aco.editor.Recorder;
+package istic.aco.editor.Recorder;
+
+import istic.aco.editor.Command.Command;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-
-import main.java.istic.aco.editor.Command.Command;
 
 public class RecorderImpl implements Recorder {
     private final Deque<CommandFormat> commands = new ArrayDeque<CommandFormat>();

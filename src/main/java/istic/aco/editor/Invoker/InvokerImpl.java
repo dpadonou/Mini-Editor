@@ -1,9 +1,9 @@
-package main.java.istic.aco.editor.Invoker;
+package istic.aco.editor.Invoker;
+
+import istic.aco.editor.Command.Command;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import main.java.istic.aco.editor.Command.Command;
 
 /**
  * Invoker interface implementation, InvokerImpl

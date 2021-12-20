@@ -1,12 +1,12 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
+
+import istic.aco.editor.Invoker.Invoker;
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Memento.SelectionChangeMemento;
+import istic.aco.editor.Recorder.Recorder;
+import istic.aco.editor.Selection;
 
 import java.util.Optional;
-
-import main.java.istic.aco.editor.Selection;
-import main.java.istic.aco.editor.Invoker.Invoker;
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Memento.SelectionChangeMemento;
-import main.java.istic.aco.editor.Recorder.Recorder;
 
 /**
  * Concrete Command, selectionChangeCommand
@@ -19,8 +19,8 @@ public class SelectionChangeCommand implements Command {
     private Selection selection;
     private Invoker inv;
     private Recorder recorder;
-    private int beginIndex;
-    private int endIndex;
+    private int beginIndex = 0;
+    private int endIndex = 0;
 
     /**
      * @param selection The receiver where are the functions
@@ -42,11 +42,16 @@ public class SelectionChangeCommand implements Command {
      */
     @Override
     public void execute() {
-        this.beginIndex = inv.getBeginIndex();
-        this.endIndex = inv.getEndIndex();
+        if (beginIndex == 0 && endIndex == 0) {
+            this.beginIndex = inv.getBeginIndex();
+            this.endIndex = inv.getEndIndex();
+            recorder.save(this);
+        }
         selection.setBeginIndex(this.beginIndex);
         selection.setEndIndex(this.endIndex);
-        recorder.save(this);
+        this.beginIndex = 0;
+        this.endIndex = 0;
+
     }
 
     @Override

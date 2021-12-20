@@ -1,6 +1,6 @@
-package main.java.istic.aco.editor.Invoker;
+package istic.aco.editor.Invoker;
 
-import main.java.istic.aco.editor.Command.Command;
+import istic.aco.editor.Command.Command;
 
 /**
  * Invoker interface

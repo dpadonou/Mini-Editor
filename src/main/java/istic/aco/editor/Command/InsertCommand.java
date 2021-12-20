@@ -1,12 +1,12 @@
-package main.java.istic.aco.editor.Command;
+package istic.aco.editor.Command;
+
+import istic.aco.editor.Engine;
+import istic.aco.editor.Invoker.Invoker;
+import istic.aco.editor.Memento.InsertMemento;
+import istic.aco.editor.Memento.Memento;
+import istic.aco.editor.Recorder.Recorder;
 
 import java.util.Optional;
-
-import main.java.istic.aco.editor.Engine;
-import main.java.istic.aco.editor.Invoker.Invoker;
-import main.java.istic.aco.editor.Memento.InsertMemento;
-import main.java.istic.aco.editor.Memento.Memento;
-import main.java.istic.aco.editor.Recorder.Recorder;
 
 /**
  * Concrete Command, insertCommand
@@ -18,7 +18,7 @@ public class InsertCommand implements Command {
     private Engine engine;
     private Invoker inv;
     private Recorder recorder;
-    private String s;
+    private String s = "";
 
     /**
      * @param engine   The Receiver where are the functions
@@ -40,9 +40,13 @@ public class InsertCommand implements Command {
      */
     @Override
     public void execute() {
-        this.s = inv.getS();
+        if (s.isEmpty()) {
+            this.s = inv.getS();
+            recorder.save(this);
+        }
         engine.insert(this.s);
-        recorder.save(this);
+        s = "";
+
     }
 
     @Override
