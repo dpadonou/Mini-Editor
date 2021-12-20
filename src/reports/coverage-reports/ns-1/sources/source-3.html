@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+    <title>Coverage Report > Engine</title>
+    <style type="text/css">
+        @import "../../css/coverage.css";
+        @import "../../css/highlight-idea.css";
+    </style>
+    <script src="../../js/highlight.pack.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div class="content">
+    <div class="breadCrumbs">
+        Current scope: <a href="../../index.html">all classes</a>
+        <span class="separator">|</span>
+        <a href="../index.html">istic.aco.editor</a>
+    </div>
+
+    <h1>Coverage Summary for Class: Engine (istic.aco.editor)</h1>
+
+    <table class="coverageStats">
+        <tr>
+            <th class="name">Class</th>
+        </tr>
+        <tr>
+            <td class="name">Engine</td>
+        </tr>
+
+    </table>
+
+    <br/>
+    <br/>
+
+
+    <pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package istic.aco.editor;
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;//import java.util.Optional;
+<i class="no-highlight">5</i>&nbsp;//import istic.aco.editor.Memento.Memento;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;/**
+<i class="no-highlight">8</i>&nbsp; * Engine Interface
+<i class="no-highlight">9</i>&nbsp; * @author Arnauld Djedjemel
+<i class="no-highlight">10</i>&nbsp; * @author Dieu-Donn? Padonou
+<i class="no-highlight">11</i>&nbsp; *
+<i class="no-highlight">12</i>&nbsp; */
+<i class="no-highlight">13</i>&nbsp;public interface Engine {
+<i class="no-highlight">14</i>&nbsp;	/**
+<i class="no-highlight">15</i>&nbsp;     * Provides access to the selection control object
+<i class="no-highlight">16</i>&nbsp;     * @return the selection object
+<i class="no-highlight">17</i>&nbsp;     */
+<i class="no-highlight">18</i>&nbsp;    Selection getSelection();
+<i class="no-highlight">19</i>&nbsp;    /**
+<i class="no-highlight">20</i>&nbsp;     * Provides the whole contents of the buffer, as a string
+<i class="no-highlight">21</i>&nbsp;     * @return a copy of the buffer&#39;s contents
+<i class="no-highlight">22</i>&nbsp;     */
+<i class="no-highlight">23</i>&nbsp;    String getBufferContents();
+<i class="no-highlight">24</i>&nbsp;    /**
+<i class="no-highlight">25</i>&nbsp;     * Provides the clipboard contents
+<i class="no-highlight">26</i>&nbsp;     * @return a copy of the clipboard&#39;s contents
+<i class="no-highlight">27</i>&nbsp;     */
+<i class="no-highlight">28</i>&nbsp;    String getClipboardContents();
+<i class="no-highlight">29</i>&nbsp;    /**
+<i class="no-highlight">30</i>&nbsp;     * Removes the text within the interval
+<i class="no-highlight">31</i>&nbsp;     * specified by the selection control object,
+<i class="no-highlight">32</i>&nbsp;     * from the buffer.
+<i class="no-highlight">33</i>&nbsp;     */
+<i class="no-highlight">34</i>&nbsp;    void cutSelectedText();
+<i class="no-highlight">35</i>&nbsp;    /**
+<i class="no-highlight">36</i>&nbsp;     * Copies the text within the interval
+<i class="no-highlight">37</i>&nbsp;     * specified by the selection control object
+<i class="no-highlight">38</i>&nbsp;     * into the clipboard.
+<i class="no-highlight">39</i>&nbsp;     */
+<i class="no-highlight">40</i>&nbsp;    void copySelectedText();
+<i class="no-highlight">41</i>&nbsp;    /**
+<i class="no-highlight">42</i>&nbsp;     * Replaces the text within the interval specified by the selection object with
+<i class="no-highlight">43</i>&nbsp;     * the contents of the clipboard.
+<i class="no-highlight">44</i>&nbsp;     */
+<i class="no-highlight">45</i>&nbsp;    void pasteClipboard();
+<i class="no-highlight">46</i>&nbsp;    /**
+<i class="no-highlight">47</i>&nbsp;     * Inserts a string in the buffer, which replaces the contents of the selection
+<i class="no-highlight">48</i>&nbsp;     * @param s the text to insert
+<i class="no-highlight">49</i>&nbsp;     * @throws IllegalArgumentException if the string is empty
+<i class="no-highlight">50</i>&nbsp;     */
+<i class="no-highlight">51</i>&nbsp;    void insert(String var1) throws IllegalArgumentException;
+<i class="no-highlight">52</i>&nbsp;    
+<i class="no-highlight">53</i>&nbsp;    /**
+<i class="no-highlight">54</i>&nbsp;     * Removes the contents of the selection in the buffer
+<i class="no-highlight">55</i>&nbsp;     */
+<i class="no-highlight">56</i>&nbsp;    void delete();
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;    /**
+<i class="no-highlight">59</i>&nbsp;     * Provides the engine buffer&#39;s.
+<i class="no-highlight">60</i>&nbsp;     * @return the engine buffer instance
+<i class="no-highlight">61</i>&nbsp;     */
+<i class="no-highlight">62</i>&nbsp;    StringBuilder getBuffer();
+<i class="no-highlight">63</i>&nbsp;   /**
+<i class="no-highlight">64</i>&nbsp;    * Set the engine buffer&#39;s.
+<i class="no-highlight">65</i>&nbsp;    * @param buffer
+<i class="no-highlight">66</i>&nbsp;    * @throws NullPointerException if the buffer is null
+<i class="no-highlight">67</i>&nbsp;    */
+<i class="no-highlight">68</i>&nbsp;    void setBuffer(StringBuilder buffer) throws NullPointerException;
+<i class="no-highlight">69</i>&nbsp;   /**
+<i class="no-highlight">70</i>&nbsp;    * Set the engine selection&#39;s.
+<i class="no-highlight">71</i>&nbsp;    * @param selection
+<i class="no-highlight">72</i>&nbsp;    * @throws IllegalArgumentException if the buffer selection&#39;s don&#39;t match
+<i class="no-highlight">73</i>&nbsp;    * @throws NullPointerException if the selection is null
+<i class="no-highlight">74</i>&nbsp;    */
+<i class="no-highlight">75</i>&nbsp;    void setSelection(Selection selection) throws IllegalArgumentException,NullPointerException;
+<i class="no-highlight">76</i>&nbsp;    
+<i class="no-highlight">77</i>&nbsp;    /**
+<i class="no-highlight">78</i>&nbsp;     * Create new Memento and save the command state
+<i class="no-highlight">79</i>&nbsp;     * @return the Memento who have the parameters
+<i class="no-highlight">80</i>&nbsp;     */
+<i class="no-highlight">81</i>&nbsp;    //public Optional&lt;Memento&gt; saveState();
+<i class="no-highlight">82</i>&nbsp;   
+<i class="no-highlight">83</i>&nbsp;    /**
+<i class="no-highlight">84</i>&nbsp;     * restore the old parameters
+<i class="no-highlight">85</i>&nbsp;     * @param m the memento who contains parameters to restore
+<i class="no-highlight">86</i>&nbsp;     * @throws IllegalArgumentException if the memento is null
+<i class="no-highlight">87</i>&nbsp;     */
+<i class="no-highlight">88</i>&nbsp;    //public void restore(Memento m) throws IllegalArgumentException;
+<i class="no-highlight">89</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+    (function () {
+        var msie = false, msie9 = false;
+        /*@cc_on
+          msie = true;
+          @if (@_jscript_version >= 9)
+            msie9 = true;
+          @end
+        @*/
+
+        if (!msie || msie && msie9) {
+            var codeBlock = document.getElementById('sourceCode');
+
+            if (codeBlock) {
+                hljs.highlightBlock(codeBlock);
+            }
+        }
+    })();
+</script>
+
+<div class="footer">
+
+    <div style="float:right;">generated on 2021-12-20 19:03</div>
+</div>
+</body>
+</html>
