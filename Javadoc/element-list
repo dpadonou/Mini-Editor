@@ -1,0 +1,7 @@
+main.java.istic.aco.editor
+main.java.istic.aco.editor.Command
+main.java.istic.aco.editor.exceptions
+main.java.istic.aco.editor.Invoker
+main.java.istic.aco.editor.Memento
+main.java.istic.aco.editor.Recorder
+test.java.editor
